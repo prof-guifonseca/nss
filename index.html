@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Sisteminha Sustentável - MVP v2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="logo">
+                    <h1>🌱 Nosso Sisteminha Sustentável</h1>
+                    <span class="version">MVP v2 - Conceito</span>
+                </div>
+                <nav class="nav">
+                    <button class="nav__item" data-section="home">Início</button>
+                    <button class="nav__item" data-section="kits">Loja de Kits</button>
+                    <button class="nav__item" data-section="marketplace">Marketplace</button>
+                    <button class="nav__item" data-section="mapa">Mapa</button>
+                    <button class="nav__item" data-section="guia">Guia Digital</button>
+                    <button class="nav__item" data-section="parcerias">Parcerias</button>
+                    <button class="nav__item" data-section="forum">Fórum</button>
+                    <button class="btn btn--primary" id="loginBtn">Entrar</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h2>Transformando Londrina em uma Cidade Sustentável</h2>
+                        <p>A partir do segundo semestre de 2025, implementaremos um ecossistema completo de produção de alimentos sustentáveis através da aquaponia urbana.</p>
+                        <div class="disclaimer">
+                            <strong>⚠️ Projeto Conceitual:</strong> Todas as informações apresentadas são projeções e potenciais futuros. Implementação prevista para o segundo semestre de 2025.
+                        </div>
+                        <button class="btn btn--primary btn--lg" id="cadastroInteresse">Cadastrar Interesse</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilares Principais -->
+            <div class="container py-16">
+                <h3>Nossos Três Pilares</h3>
+                <div class="pillars">
+                    <div class="card pillar">
+                        <div class="card__body">
+                            <h4>🛠️ Kits Físicos</h4>
+                            <p>Sistemas completos de aquaponia para diferentes necessidades e espaços urbanos.</p>
+                        </div>
+                    </div>
+                    <div class="card pillar">
+                        <div class="card__body">
+                            <h4>🛒 Marketplace Digital</h4>
+                            <p>Plataforma para comercialização e trocas de produtos orgânicos locais.</p>
+                        </div>
+                    </div>
+                    <div class="card pillar">
+                        <div class="card__body">
+                            <h4>📚 Capacitação Técnica</h4>
+                            <p>Treinamentos e suporte técnico para garantir o sucesso dos produtores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Como Funciona -->
+            <div class="container py-16">
+                <h3>Como Funcionará</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step__number">1</div>
+                        <div class="step__content">
+                            <h4>Escolha do Kit</h4>
+                            <p>Selecione o kit ideal para seu espaço e necessidades</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step__number">2</div>
+                        <div class="step__content">
+                            <h4>Instalação</h4>
+                            <p>Receba suporte técnico para instalação e configuração</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step__number">3</div>
+                        <div class="step__content">
+                            <h4>Produção</h4>
+                            <p>Inicie a produção de alimentos orgânicos em casa</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step__number">4</div>
+                        <div class="step__content">
+                            <h4>Comercialização</h4>
+                            <p>Venda ou troque seus produtos no marketplace</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kits Section -->
+        <section id="kits" class="section hidden">
+            <div class="container">
+                <h2>Loja de Kits</h2>
+                <div class="disclaimer mb-8">
+                    <strong>💡 Preços Estimados:</strong> Valores projetados para implementação em 2025, sujeitos a alterações.
+                </div>
+                
+                <div class="kits-grid" id="kitsGrid">
+                    <!-- Kits will be populated by JavaScript -->
+                </div>
+
+                <div class="financing-info mt-8">
+                    <h3>💰 Sistema de Financiamento Cruzado</h3>
+                    <p>Modelo colaborativo onde produtores experientes apoiam novos participantes através de um sistema de cotas e mentoria.</p>
+                </div>
+
+                <div class="calculator mt-8">
+                    <h3>Calculadora de Investimento</h3>
+                    <div class="calculator__form">
+                        <select class="form-control" id="kitSelector">
+                            <option value="">Selecione um kit</option>
+                        </select>
+                        <input type="number" class="form-control" id="familySize" placeholder="Tamanho da família">
+                        <button class="btn btn--primary" id="calculateBtn">Calcular</button>
+                    </div>
+                    <div class="calculator__result" id="calculatorResult"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketplace Section -->
+        <section id="marketplace" class="section hidden">
+            <div class="container">
+                <h2>Marketplace</h2>
+                <div class="disclaimer mb-8">
+                    <strong>🔮 Projeção:</strong> Produtos e preços estimados baseados em potencial de mercado para 2025+.
+                </div>
+
+                <div class="marketplace-search">
+                    <input type="text" class="form-control" placeholder="Buscar produtos...">
+                    <select class="form-control">
+                        <option value="">Todas as categorias</option>
+                        <option value="hortalicas">Hortaliças</option>
+                        <option value="frutas">Frutas</option>
+                        <option value="proteinas">Proteínas</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="Localização em Londrina">
+                </div>
+
+                <div class="marketplace-categories">
+                    <h3>Categorias de Produtos</h3>
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Categories will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="green-currency mt-8">
+                    <h3>🪙 Sistema de Moeda Verde</h3>
+                    <p>Facilitador de trocas e permutas entre produtores, incentivando a economia circular local.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa Section -->
+        <section id="mapa" class="section hidden">
+            <div class="container">
+                <h2>Mapa Colaborativo</h2>
+                <div class="disclaimer mb-8">
+                    <strong>🗺️ Mapa Conceitual:</strong> Visualização projetada dos espaços produtivos em Londrina.
+                </div>
+
+                <div class="map-filters">
+                    <h3>Filtros</h3>
+                    <div class="filters">
+                        <label><input type="checkbox" value="aquaponia"> Aquaponia</label>
+                        <label><input type="checkbox" value="compostagem"> Compostagem</label>
+                        <label><input type="checkbox" value="hortas"> Hortas Urbanas</label>
+                        <label><input type="checkbox" value="escolas"> Escolas</label>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <h3>🗺️ Mapa Interativo de Londrina</h3>
+                        <p>Aqui será exibido o mapa colaborativo com os espaços produtivos cadastrados</p>
+                        <div class="map-legend">
+                            <div class="legend-item">🏠 Residencial</div>
+                            <div class="legend-item">🏫 Escolar</div>
+                            <div class="legend-item">🏢 Comunitário</div>
+                            <div class="legend-item">🌱 Produtor Experiente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guia Digital Section -->
+        <section id="guia" class="section hidden">
+            <div class="container">
+                <h2>Guia Digital</h2>
+                <div class="disclaimer mb-8">
+                    <strong>📖 Conteúdo Planejado:</strong> Materiais educativos em desenvolvimento para lançamento em 2025.
+                </div>
+
+                <div class="guide-steps" id="guideSteps">
+                    <!-- Steps will be populated by JavaScript -->
+                </div>
+
+                <div class="progress-tracker mt-8">
+                    <h3>Acompanhe seu Progresso</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p>0% concluído</p>
+                </div>
+
+                <div class="resource-calculator mt-8">
+                    <h3>Calculadora de Recursos</h3>
+                    <div class="form-group">
+                        <label class="form-label">Área disponível (m²)</label>
+                        <input type="number" class="form-control" id="areaInput">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Orçamento disponível (R$)</label>
+                        <input type="number" class="form-control" id="budgetInput">
+                    </div>
+                    <button class="btn btn--primary" id="resourceCalcBtn">Calcular Recursos</button>
+                    <div class="resource-result" id="resourceResult"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parcerias Section -->
+        <section id="parcerias" class="section hidden">
+            <div class="container">
+                <h2>Parcerias Potenciais</h2>
+                <div class="disclaimer mb-8">
+                    <strong>🤝 Perspectivas:</strong> Instituições com potencial para parcerias futuras, ainda em fase de prospecção.
+                </div>
+
+                <div class="potential-partners">
+                    <h3>Instituições de Interesse</h3>
+                    <div class="partners-grid" id="partnersGrid">
+                        <!-- Partners will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="partnership-form mt-8">
+                    <h3>Proposta de Parceria</h3>
+                    <form id="partnershipForm">
+                        <div class="form-group">
+                            <label class="form-label">Nome da Instituição</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Parceria</label>
+                            <select class="form-control" required>
+                                <option value="">Selecione</option>
+                                <option value="academica">Acadêmica</option>
+                                <option value="governamental">Governamental</option>
+                                <option value="empresarial">Empresarial</option>
+                                <option value="ong">ONG/Terceiro Setor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Descrição da Proposta</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Enviar Proposta</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forum Section -->
+        <section id="forum" class="section hidden">
+            <div class="container">
+                <h2>Fórum Comunitário</h2>
+                <div class="disclaimer mb-8">
+                    <strong>💬 Comunidade Futura:</strong> Espaço para troca de experiências, planejado para ativação em 2025.
+                </div>
+
+                <div class="forum-categories">
+                    <div class="category-card" data-category="piscicultura">
+                        <h3>🐟 Piscicultura</h3>
+                        <p>Discussões sobre criação de peixes</p>
+                        <span class="post-count">Futuras discussões</span>
+                    </div>
+                    <div class="category-card" data-category="compostagem">
+                        <h3>🌱 Compostagem</h3>
+                        <p>Técnicas de compostagem orgânica</p>
+                        <span class="post-count">Futuras discussões</span>
+                    </div>
+                    <div class="category-card" data-category="trocas">
+                        <h3>🔄 Trocas</h3>
+                        <p>Organização de trocas de produtos</p>
+                        <span class="post-count">Futuras discussões</span>
+                    </div>
+                    <div class="category-card" data-category="duvidas">
+                        <h3>❓ Dúvidas Gerais</h3>
+                        <p>Ajuda e esclarecimentos</p>
+                        <span class="post-count">Futuras discussões</span>
+                    </div>
+                </div>
+
+                <div class="forum-future">
+                    <h3>Em Breve</h3>
+                    <ul>
+                        <li>Sistema de postagens e respostas</li>
+                        <li>Perfis de usuários especializados</li>
+                        <li>Sistema de gamificação</li>
+                        <li>Moderação comunitária</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section hidden">
+            <div class="container">
+                <h2>Dashboard Pessoal</h2>
+                <div class="disclaimer mb-8">
+                    <strong>📊 Painel Futuro:</strong> Funcionalidades de monitoramento pessoal para usuários cadastrados.
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>📈 Produção Mensal</h3>
+                        <p>Registro de sua produção de alimentos</p>
+                        <div class="metric">Aguardando dados...</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>💰 Vendas/Trocas</h3>
+                        <p>Histórico de transações no marketplace</p>
+                        <div class="metric">Pronto para 2025</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🌱 Indicadores Sustentáveis</h3>
+                        <p>Impacto ambiental positivo gerado</p>
+                        <div class="metric">Em desenvolvimento</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>📅 Calendário</h3>
+                        <p>Programação de atividades</p>
+                        <div class="metric">Planejamento 2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cadastre seu Interesse</h2>
+            <div class="disclaimer mb-8">
+                <strong>📝 Pré-cadastro:</strong> Manifeste interesse para participar do projeto a partir de 2025.
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Interesse</label>
+                    <select class="form-control" required>
+                        <option value="">Selecione</option>
+                        <option value="produtor">Quero ser Produtor</option>
+                        <option value="consumidor">Quero ser Consumidor</option>
+                        <option value="parceiro">Parceria Institucional</option>
+                        <option value="investidor">Interesse em Investir</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Região de Londrina</label>
+                    <input type="text" class="form-control" placeholder="Ex: Centro, Zona Sul, etc.">
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Cadastrar Interesse</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
