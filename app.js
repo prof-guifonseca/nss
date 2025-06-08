@@ -1,489 +1,504 @@
-// App Data
+// Data from JSON
 const appData = {
-  kits: [
+  "modulos_fase1": [
     {
-      nome: "Kit Básico Familiar", 
-      preco: 500,
-      area: "150m²",
-      familia: "até 3 pessoas",
-      componentes: ["Tanque 1000L", "Bomba d'água", "Sistema irrigação básico", "Manual completo"]
+      "nome": "Horta Vertical/Horizontal Intensiva", 
+      "prioridade": "Altíssima",
+      "cor": "#2E7D32",
+      "justificativa": "Produto de alto impacto, fácil manejo, retorno rápido, culturalmente aceito",
+      "beneficios": ["Retorno em 30-60 dias", "Aceitação cultural universal", "Baixa complexidade técnica", "Alimentação diária da família"],
+      "materiais": ["Garrafas PET", "Paletes", "Terra adubada", "Sementes", "Ferramentas básicas"],
+      "investimento": "R$ 50-150",
+      "tempo_implementacao": "1-2 semanas"
     },
     {
-      nome: "Kit Intermediário",
-      preco: 1200, 
-      area: "300m²",
-      familia: "até 5 pessoas",
-      componentes: ["Tanque 2000L", "Automação com sensores", "Sistema compostagem", "Kit ferramentas"]
+      "nome": "Galinhas Poedeiras",
+      "prioridade": "Altíssima", 
+      "cor": "#2E7D32",
+      "justificativa": "Relação produção x manejo excelente; aceitação cultural muito alta",
+      "beneficios": ["2-3 ovos por dia com 3 galinhas", "Esterco para adubo", "Controle de insetos", "Baixa manutenção"],
+      "materiais": ["Madeira/paletes", "Tela", "Bebedouros", "Comedouros", "Galinhas poedeiras"],
+      "investimento": "R$ 200-400",
+      "tempo_implementacao": "1 semana"
     },
     {
-      nome: "Kit Avançado Maker",
-      preco: 2500,
-      area: "500m²", 
-      familia: "até 7 pessoas",
-      componentes: ["Sistema IoT completo", "Monitoramento remoto", "Painel solar", "Estação meteorológica"]
+      "nome": "Compostagem",
+      "prioridade": "Altíssima",
+      "cor": "#2E7D32", 
+      "justificativa": "Fechamento de ciclo, redução de resíduos, baixo custo",
+      "beneficios": ["Adubo orgânico gratuito", "Reduz 50-60% do lixo doméstico", "Ciclo sustentável", "Melhora fertilidade do solo"],
+      "materiais": ["Baldes", "Materiais secos", "Restos orgânicos", "Ferramentas"],
+      "investimento": "R$ 30-80",
+      "tempo_implementacao": "2-3 dias"
     },
     {
-      nome: "Kit Escolar",
-      preco: 800,
-      area: "200m²",
-      familia: "institucional", 
-      componentes: ["Material pedagógico", "Treinamento professores", "Sistema básico", "Acompanhamento técnico"]
+      "nome": "Minhocário",
+      "prioridade": "Alta",
+      "cor": "#66BB6A",
+      "justificativa": "Produz húmus e proteína para galinhas; otimiza fertilidade da horta", 
+      "beneficios": ["Húmus de alta qualidade", "Biofertilizante líquido", "Proteína para aves", "Decomposição acelerada"],
+      "materiais": ["Caixas empilhadas", "Minhocas californianas", "Substrato", "Torneirinha"],
+      "investimento": "R$ 80-150",
+      "tempo_implementacao": "3-5 dias"
     }
   ],
-  produtosMarketplace: [
+  "modulos_fase2": [
     {
-      categoria: "Hortaliças",
-      exemplos: ["Alface", "Tomate", "Cenoura", "Beterraba"]
+      "nome": "Piscicultura com Biofiltro Natural",
+      "prioridade": "Moderada",
+      "cor": "#FFC107",
+      "justificativa": "Opcional; indicado para famílias capacitadas, com espaço, água e energia",
+      "beneficios": ["Proteína de peixe", "Água nutritiva para horta", "Economia de água", "Sistema integrado"],
+      "materiais": ["Tanque/lona", "Bomba", "Filtros naturais", "Alevinos", "Ração"],
+      "investimento": "R$ 800-1500",
+      "tempo_implementacao": "2-3 semanas"
     },
     {
-      categoria: "Frutas", 
-      exemplos: ["Morango", "Limão", "Maracujá", "Pitanga"]
+      "nome": "Energia Solar Modular",
+      "prioridade": "Baixa (Parceria Recomendada)",
+      "cor": "#FF9800",
+      "justificativa": "Valor pedagógico e sustentável, mas custo elevado para famílias vulneráveis",
+      "beneficios": ["Independência energética", "Sustentabilidade", "Redução de custos", "Backup para sistema"],
+      "materiais": ["Painéis solares", "Baterias", "Controlador", "Inversor", "Cabeamento"],
+      "investimento": "R$ 2000-4000",
+      "tempo_implementacao": "1-2 dias"
     },
     {
-      categoria: "Proteínas",
-      exemplos: ["Ovos caipira", "Peixe tilápia", "Frango caipira"]
+      "nome": "Frangos de Corte",
+      "prioridade": "Alta Viabilidade",
+      "cor": "#66BB6A",
+      "justificativa": "Culturalmente aceito; gera carne adequada ao perfil de consumo do público-alvo",
+      "beneficios": ["Carne para consumo", "Aproveitamento de infraestrutura", "Ciclo de 70 dias", "Mercado local"],
+      "materiais": ["Piquete móvel", "Pintinhos", "Ração", "Bebedouros", "Comedouros"],
+      "investimento": "R$ 150-300",
+      "tempo_implementacao": "3-5 dias"
     }
   ],
-  etapasGuia: [
-    "1. Planejamento do espaço",
-    "2. Construção do tanque", 
-    "3. Sistema de irrigação",
-    "4. Plantio das hortaliças",
-    "5. Introdução dos peixes",
-    "6. Criação de animais"
+  "parceiros": [
+    {
+      "categoria": "Institucionais",
+      "organizacoes": ["Embrapa", "Ministério do Desenvolvimento Agrário", "Prefeitura de Curitiba", "IFPR", "UTFPR"]
+    },
+    {
+      "categoria": "Técnicos", 
+      "organizacoes": ["UFPR", "PUC-PR", "EMATER-PR", "IAPAR", "Cooperativas locais"]
+    },
+    {
+      "categoria": "Financeiros",
+      "organizacoes": ["Bancos cooperativos", "Fintechs rurais", "Programas governamentais", "ONGs"]
+    },
+    {
+      "categoria": "Comerciais",
+      "organizacoes": ["Fornecedores de insumos", "Mercados locais", "Feiras orgânicas", "Cooperativas de consumo"]
+    }
   ],
-  parceriasPotenciais: [
-    "Universidade Estadual de Londrina (UEL)",
-    "Embrapa",
-    "Prefeitura de Londrina", 
-    "ONGs locais",
-    "Laboratórios Maker"
+  "cursos_disponiveis": [
+    {
+      "nome": "Fundamentos da Agricultura Urbana",
+      "duracao": "20 horas",
+      "modalidade": "EAD",
+      "certificacao": "Sim"
+    },
+    {
+      "nome": "Implementação do Sisteminha - Fase 1", 
+      "duracao": "15 horas",
+      "modalidade": "Híbrido",
+      "certificacao": "Sim"
+    },
+    {
+      "nome": "Manejo Ecológico de Pragas",
+      "duracao": "10 horas", 
+      "modalidade": "EAD",
+      "certificacao": "Não"
+    },
+    {
+      "nome": "Compostagem e Minhocário Doméstico",
+      "duracao": "8 horas",
+      "modalidade": "Presencial",
+      "certificacao": "Sim"
+    }
   ]
 };
 
-// Global variables for modal elements
-let loginModal;
-let closeModalBtn;
-let loginBtn;
-let cadastroInteresseBtn;
+// DOM Elements
+const themeToggle = document.getElementById('theme-toggle');
+const navToggle = document.getElementById('nav-toggle');
+const modal = document.getElementById('modal');
+const modalBody = document.getElementById('modal-body');
+const modalClose = document.querySelector('.modal__close');
+const modulosGrid = document.getElementById('modulos-grid');
+const parceirosGrid = document.getElementById('parceiros-grid');
+const cursosList = document.getElementById('cursos-list');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
-// Navigation functionality
-function showSection(sectionId) {
-  // Hide all sections
-  const sections = document.querySelectorAll('.section');
-  sections.forEach(section => {
-    section.classList.add('hidden');
-  });
-  
-  // Show selected section
-  const targetSection = document.getElementById(sectionId);
-  if (targetSection) {
-    targetSection.classList.remove('hidden');
-  }
-  
-  // Update active nav item
-  const navItems = document.querySelectorAll('.nav__item');
-  navItems.forEach(item => {
-    item.classList.remove('active');
-  });
-  
-  const activeNav = document.querySelector(`[data-section="${sectionId}"]`);
-  if (activeNav) {
-    activeNav.classList.add('active');
-  }
+// Initialize app
+document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
+    loadModulos();
+    loadParceiros();
+    loadCursos();
+    initializeEventListeners();
+});
+
+// Theme Management
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-color-scheme', savedTheme);
+    updateThemeIcon(savedTheme);
 }
 
-// Modal functionality
-function openModal() {
-  if (loginModal) {
-    loginModal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-  }
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-color-scheme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-color-scheme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
 }
 
-function closeModalHandler() {
-  if (loginModal) {
-    loginModal.classList.add('hidden');
-    document.body.style.overflow = ''; // Restore scrolling
-  }
+function updateThemeIcon(theme) {
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
 
-// Initialize navigation and modal
-function initializeNavigation() {
-  const navItems = document.querySelectorAll('.nav__item');
-  
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const section = item.getAttribute('data-section');
-      showSection(section);
+// Load Módulos
+function loadModulos() {
+    const allModulos = [...appData.modulos_fase1, ...appData.modulos_fase2];
+    
+    modulosGrid.innerHTML = '';
+    
+    allModulos.forEach((modulo, index) => {
+        const fase = index < appData.modulos_fase1.length ? 'fase1' : 'fase2';
+        const moduloCard = createModuloCard(modulo, fase);
+        modulosGrid.appendChild(moduloCard);
     });
-  });
 }
 
-function initializeModal() {
-  loginModal = document.getElementById('loginModal');
-  closeModalBtn = document.querySelector('.close');
-  loginBtn = document.getElementById('loginBtn');
-  cadastroInteresseBtn = document.getElementById('cadastroInteresse');
-  
-  if (loginBtn) {
-    loginBtn.addEventListener('click', openModal);
-  }
-  
-  if (cadastroInteresseBtn) {
-    cadastroInteresseBtn.addEventListener('click', openModal);
-  }
-  
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModalHandler);
-  }
-  
-  // Close modal when clicking outside
-  if (loginModal) {
-    loginModal.addEventListener('click', (e) => {
-      if (e.target === loginModal) {
-        closeModalHandler();
-      }
-    });
-  }
-  
-  // Close modal with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModalHandler();
-    }
-  });
-}
-
-// Populate Kits
-function populateKits() {
-  const kitsGrid = document.getElementById('kitsGrid');
-  const kitSelector = document.getElementById('kitSelector');
-  
-  if (!kitsGrid || !kitSelector) return;
-  
-  kitsGrid.innerHTML = '';
-  kitSelector.innerHTML = '<option value="">Selecione um kit</option>';
-  
-  appData.kits.forEach((kit, index) => {
-    // Create kit card
-    const kitCard = document.createElement('div');
-    kitCard.className = 'kit-card';
-    kitCard.innerHTML = `
-      <div class="kit-card__header">
-        <h3 class="kit-card__name">${kit.nome}</h3>
-        <div class="kit-card__price">R$ ${kit.preco.toLocaleString()}</div>
-      </div>
-      <div class="kit-card__specs">
-        <div class="kit-card__spec">
-          <span>Área recomendada:</span>
-          <span>${kit.area}</span>
+function createModuloCard(modulo, fase) {
+    const card = document.createElement('div');
+    card.className = `modulo-card fade-in-up ${fase}`;
+    card.setAttribute('data-fase', fase);
+    
+    const priorityClass = getPriorityClass(modulo.prioridade);
+    
+    card.innerHTML = `
+        <div class="modulo-card__header">
+            <div class="modulo-card__priority ${priorityClass}">${modulo.prioridade}</div>
+            <h3 class="modulo-card__title">${modulo.nome}</h3>
+            <p class="modulo-card__description">${modulo.justificativa}</p>
         </div>
-        <div class="kit-card__spec">
-          <span>Atende:</span>
-          <span>${kit.familia}</span>
+        <div class="modulo-card__body">
+            <div class="modulo-card__meta">
+                <div class="meta-item">
+                    <span class="meta-item__value">${modulo.investimento}</span>
+                    <span class="meta-item__label">Investimento</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-item__value">${modulo.tempo_implementacao}</span>
+                    <span class="meta-item__label">Implementação</span>
+                </div>
+            </div>
+            <button class="btn btn--primary btn--full-width" onclick="openModuloModal('${modulo.nome}')">
+                Ver Detalhes
+            </button>
         </div>
-      </div>
-      <div class="kit-card__components">
-        <h4>Componentes Incluídos:</h4>
-        <ul class="component-list">
-          ${kit.componentes.map(comp => `<li>${comp}</li>`).join('')}
-        </ul>
-      </div>
-      <button class="btn btn--primary btn--full-width" onclick="selectKit(${index})">
-        Manifestar Interesse
-      </button>
-    `;
-    kitsGrid.appendChild(kitCard);
-    
-    // Add to selector
-    const option = document.createElement('option');
-    option.value = index;
-    option.textContent = kit.nome;
-    kitSelector.appendChild(option);
-  });
-}
-
-function selectKit(kitIndex) {
-  const kit = appData.kits[kitIndex];
-  showNotification(`Interesse registrado para ${kit.nome}! Entraremos em contato quando o projeto for lançado em 2025.`, 'success');
-}
-
-// Populate Marketplace Categories
-function populateMarketplace() {
-  const categoriesGrid = document.getElementById('categoriesGrid');
-  if (!categoriesGrid) return;
-  
-  categoriesGrid.innerHTML = '';
-  
-  appData.produtosMarketplace.forEach(categoria => {
-    const categoryCard = document.createElement('div');
-    categoryCard.className = 'category-card';
-    categoryCard.innerHTML = `
-      <h4>${categoria.categoria}</h4>
-      <p>Produtos orgânicos locais</p>
-      <div class="product-examples">
-        Exemplos: ${categoria.exemplos.join(', ')}
-      </div>
     `;
     
-    categoryCard.addEventListener('click', () => {
-      showNotification(`Categoria "${categoria.categoria}" estará disponível no marketplace em 2025.`, 'info');
+    return card;
+}
+
+function getPriorityClass(prioridade) {
+    const priorityMap = {
+        'Altíssima': 'priority-altissima',
+        'Alta': 'priority-alta',
+        'Alta Viabilidade': 'priority-alta',
+        'Moderada': 'priority-moderada',
+        'Baixa (Parceria Recomendada)': 'priority-baixa'
+    };
+    return priorityMap[prioridade] || 'priority-baixa';
+}
+
+// Load Parceiros
+function loadParceiros() {
+    parceirosGrid.innerHTML = '';
+    
+    appData.parceiros.forEach(categoria => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'parceiro-category fade-in-up';
+        
+        categoryDiv.innerHTML = `
+            <h3>${categoria.categoria}</h3>
+            <div class="parceiros-list">
+                ${categoria.organizacoes.map(org => 
+                    `<span class="parceiro-tag">${org}</span>`
+                ).join('')}
+            </div>
+        `;
+        
+        parceirosGrid.appendChild(categoryDiv);
     });
-    
-    categoriesGrid.appendChild(categoryCard);
-  });
 }
 
-// Populate Guide Steps
-function populateGuide() {
-  const guideSteps = document.getElementById('guideSteps');
-  if (!guideSteps) return;
-  
-  guideSteps.innerHTML = '';
-  
-  appData.etapasGuia.forEach((etapa, index) => {
-    const stepCard = document.createElement('div');
-    stepCard.className = 'guide-step';
-    stepCard.innerHTML = `
-      <h4>${etapa}</h4>
-      <p>Conteúdo detalhado disponível a partir de 2025</p>
-      <div class="status status--info">Em desenvolvimento</div>
-    `;
+// Load Cursos
+function loadCursos() {
+    cursosList.innerHTML = '';
     
-    stepCard.addEventListener('click', () => {
-      showNotification(`Etapa "${etapa}" será disponibilizada no guia digital completo em 2025.`, 'info');
+    appData.cursos_disponiveis.forEach(curso => {
+        const cursoDiv = document.createElement('div');
+        cursoDiv.className = 'curso-item fade-in-up';
+        
+        cursoDiv.innerHTML = `
+            <h4>${curso.nome}</h4>
+            <div class="curso-meta">
+                <span>⏱️ ${curso.duracao}</span>
+                <span>📍 ${curso.modalidade}</span>
+                <span>🎓 ${curso.certificacao === 'Sim' ? 'Com certificação' : 'Sem certificação'}</span>
+            </div>
+            <div class="status status--warning">Em desenvolvimento</div>
+        `;
+        
+        cursosList.appendChild(cursoDiv);
     });
-    
-    guideSteps.appendChild(stepCard);
-  });
 }
 
-// Populate Partners
-function populatePartners() {
-  const partnersGrid = document.getElementById('partnersGrid');
-  if (!partnersGrid) return;
-  
-  partnersGrid.innerHTML = '';
-  
-  appData.parceriasPotenciais.forEach(parceiro => {
-    const partnerCard = document.createElement('div');
-    partnerCard.className = 'partner-card';
-    partnerCard.innerHTML = `
-      <h4>${parceiro}</h4>
-      <p>Instituição com potencial para parceria</p>
-      <div class="status status--warning">Em prospecção</div>
+// Modal Management
+function openModuloModal(moduloNome) {
+    const allModulos = [...appData.modulos_fase1, ...appData.modulos_fase2];
+    const modulo = allModulos.find(m => m.nome === moduloNome);
+    
+    if (!modulo) return;
+    
+    modalBody.innerHTML = `
+        <h3>${modulo.nome}</h3>
+        
+        <div class="modal__section">
+            <h4>Justificativa Técnica</h4>
+            <p>${modulo.justificativa}</p>
+        </div>
+        
+        <div class="modal__meta">
+            <div class="modal__meta-item">
+                <span class="modal__meta-value">${modulo.investimento}</span>
+                <span class="modal__meta-label">Investimento Inicial</span>
+            </div>
+            <div class="modal__meta-item">
+                <span class="modal__meta-value">${modulo.tempo_implementacao}</span>
+                <span class="modal__meta-label">Tempo de Implementação</span>
+            </div>
+            <div class="modal__meta-item">
+                <span class="modal__meta-value">${modulo.prioridade}</span>
+                <span class="modal__meta-label">Prioridade</span>
+            </div>
+        </div>
+        
+        <div class="modal__section">
+            <h4>Principais Benefícios</h4>
+            <ul class="modal__list">
+                ${modulo.beneficios.map(beneficio => `<li>✅ ${beneficio}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <div class="modal__section">
+            <h4>Materiais Necessários</h4>
+            <ul class="modal__list">
+                ${modulo.materiais.map(material => `<li>📦 ${material}</li>`).join('')}
+            </ul>
+        </div>
+        
+        <div class="modal__section">
+            <button class="btn btn--primary btn--lg">Adicionar ao Plano</button>
+            <button class="btn btn--outline btn--lg">Ver no Marketplace</button>
+        </div>
     `;
-    partnersGrid.appendChild(partnerCard);
-  });
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
-// Investment Calculator
-function setupCalculator() {
-  const calculateBtn = document.getElementById('calculateBtn');
-  const calculatorResult = document.getElementById('calculatorResult');
-  
-  if (!calculateBtn || !calculatorResult) return;
-  
-  calculateBtn.addEventListener('click', () => {
-    const kitSelector = document.getElementById('kitSelector');
-    const familySize = document.getElementById('familySize');
-    
-    const selectedKitIndex = kitSelector.value;
-    const familySizeValue = parseInt(familySize.value);
-    
-    if (!selectedKitIndex || !familySizeValue) {
-      calculatorResult.innerHTML = '<div class="status status--warning">Por favor, preencha todos os campos.</div>';
-      return;
-    }
-    
-    const selectedKit = appData.kits[selectedKitIndex];
-    const monthlyReturn = Math.round(selectedKit.preco * 0.15); // 15% estimado
-    const paybackMonths = Math.round(selectedKit.preco / monthlyReturn);
-    
-    calculatorResult.innerHTML = `
-      <h4>Projeção de Investimento - ${selectedKit.nome}</h4>
-      <div class="calculation-details">
-        <p><strong>Investimento inicial:</strong> R$ ${selectedKit.preco.toLocaleString()}</p>
-        <p><strong>Economia mensal estimada:</strong> R$ ${monthlyReturn.toLocaleString()}</p>
-        <p><strong>Retorno estimado:</strong> ${paybackMonths} meses</p>
-        <p><strong>Área necessária:</strong> ${selectedKit.area}</p>
-        <p><strong>Adequado para:</strong> ${selectedKit.familia}</p>
-      </div>
-      <div class="disclaimer" style="margin-top: 16px;">
-        <strong>⚠️ Projeção:</strong> Valores estimados baseados em potencial de mercado para 2025+.
-      </div>
-    `;
-  });
+function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
-// Resource Calculator
-function setupResourceCalculator() {
-  const resourceCalcBtn = document.getElementById('resourceCalcBtn');
-  const resourceResult = document.getElementById('resourceResult');
-  
-  if (!resourceCalcBtn || !resourceResult) return;
-  
-  resourceCalcBtn.addEventListener('click', () => {
-    const areaInput = document.getElementById('areaInput');
-    const budgetInput = document.getElementById('budgetInput');
+// Filter Management
+function filterModulos(phase) {
+    const cards = document.querySelectorAll('.modulo-card');
     
-    const area = parseFloat(areaInput.value);
-    const budget = parseFloat(budgetInput.value);
-    
-    if (!area || !budget) {
-      resourceResult.innerHTML = '<div class="status status--warning">Por favor, preencha área e orçamento disponíveis.</div>';
-      return;
-    }
-    
-    // Find suitable kit based on area and budget
-    let recommendedKit = null;
-    
-    for (let kit of appData.kits) {
-      const kitArea = parseInt(kit.area.replace('m²', ''));
-      if (area >= kitArea && budget >= kit.preco) {
-        if (!recommendedKit || kit.preco > recommendedKit.preco) {
-          recommendedKit = kit;
+    cards.forEach(card => {
+        if (phase === 'all' || card.getAttribute('data-fase') === phase) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
         }
-      }
-    }
+    });
     
-    if (recommendedKit) {
-      resourceResult.innerHTML = `
-        <h4>Recomendação Baseada em Recursos</h4>
-        <p><strong>Kit recomendado:</strong> ${recommendedKit.nome}</p>
-        <p><strong>Investimento:</strong> R$ ${recommendedKit.preco.toLocaleString()}</p>
-        <p><strong>Sobra no orçamento:</strong> R$ ${(budget - recommendedKit.preco).toLocaleString()}</p>
-        <p><strong>Área utilizada:</strong> ${recommendedKit.area} de ${area}m² disponíveis</p>
-        <div class="status status--success">Recursos suficientes!</div>
-      `;
+    // Update active filter button
+    filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-phase') === phase) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Navigation Management
+function toggleMobileNav() {
+    const navMenu = document.querySelector('.nav__menu');
+    navMenu.classList.toggle('active');
+}
+
+// Event Listeners
+function initializeEventListeners() {
+    // Theme toggle
+    themeToggle?.addEventListener('click', toggleTheme);
+    
+    // Mobile navigation
+    navToggle?.addEventListener('click', toggleMobileNav);
+    
+    // Modal close
+    modalClose?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    // Escape key to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    // Filter buttons
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const phase = btn.getAttribute('data-phase');
+            filterModulos(phase);
+        });
+    });
+    
+    // Newsletter form
+    const newsletterForm = document.querySelector('.newsletter__form');
+    newsletterForm?.addEventListener('submit', handleNewsletterSubmit);
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.nav__link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerHeight = 80;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Hero action buttons
+    const heroExploreBtn = document.querySelector('.hero__actions .btn--primary');
+    heroExploreBtn?.addEventListener('click', () => {
+        const modulosSection = document.getElementById('modulos');
+        const headerHeight = 80;
+        const targetPosition = modulosSection.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Scroll animations
+    initializeScrollAnimations();
+}
+
+function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    const emailInput = e.target.querySelector('input[type="email"]');
+    const email = emailInput.value;
+    
+    if (email) {
+        // Simulate form submission
+        const submitBtn = e.target.querySelector('button');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'Inscrevendo...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+            submitBtn.textContent = 'Inscrito! ✓';
+            emailInput.value = '';
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }, 1000);
+    }
+}
+
+// Scroll Animations
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements that should animate on scroll
+    document.querySelectorAll('.pillar, .phase, .modulo-card, .category-card, .topic-preview, .parceiro-category, .curso-item, .feature-item').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Header scroll effect
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 253, 0.98)';
     } else {
-      resourceResult.innerHTML = `
-        <h4>Recursos Insuficientes</h4>
-        <p>Com os recursos informados, recomendamos aguardar o lançamento em 2025 para conhecer opções de financiamento.</p>
-        <p><strong>Kit mais acessível:</strong> ${appData.kits[0].nome} (R$ ${appData.kits[0].preco.toLocaleString()})</p>
-        <div class="status status--warning">Orçamento insuficiente</div>
-      `;
+        header.style.background = 'rgba(255, 255, 253, 0.95)';
     }
-  });
-}
+});
 
-// Form Handlers
-function setupForms() {
-  // Login Form
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showNotification('Interesse cadastrado com sucesso! Entraremos em contato quando o projeto for lançado no segundo semestre de 2025.', 'success');
-      closeModalHandler();
-      loginForm.reset();
-    });
-  }
-  
-  // Partnership Form
-  const partnershipForm = document.getElementById('partnershipForm');
-  if (partnershipForm) {
-    partnershipForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showNotification('Proposta de parceria enviada! Analisaremos e retornaremos em breve.', 'success');
-      partnershipForm.reset();
-    });
-  }
-}
+// Global modal function (accessible from HTML onclick)
+window.openModuloModal = openModuloModal;
 
-// Map Filters
-function setupMapFilters() {
-  const filterCheckboxes = document.querySelectorAll('.filters input[type="checkbox"]');
-  
-  filterCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      const checkedFilters = Array.from(filterCheckboxes)
-        .filter(cb => cb.checked)
-        .map(cb => cb.value);
-      
-      if (checkedFilters.length > 0) {
-        showNotification(`Filtros aplicados: ${checkedFilters.join(', ')}. Mapa interativo disponível em 2025.`, 'info');
-      }
-    });
-  });
-}
+// Error handling
+window.addEventListener('error', (e) => {
+    console.error('Application error:', e);
+});
 
-// Forum Categories
-function setupForum() {
-  const categoryCards = document.querySelectorAll('.category-card[data-category]');
-  
-  categoryCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const category = card.getAttribute('data-category');
-      showNotification(`A categoria "${category}" estará disponível quando o fórum for ativado em 2025.`, 'info');
-    });
-  });
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-  // Remove existing notifications
-  const existingNotifications = document.querySelectorAll('.notification');
-  existingNotifications.forEach(notif => notif.remove());
-  
-  const notification = document.createElement('div');
-  notification.className = `status status--${type} notification`;
-  notification.style.position = 'fixed';
-  notification.style.top = '20px';
-  notification.style.right = '20px';
-  notification.style.zIndex = '9999';
-  notification.style.maxWidth = '300px';
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    if (document.body.contains(notification)) {
-      document.body.removeChild(notification);
+// Mobile responsive navigation
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        const navMenu = document.querySelector('.nav__menu');
+        navMenu?.classList.remove('active');
     }
-  }, 5000);
-}
+});
 
-// Progress Tracker (simulation)
-function updateProgress() {
-  const progressFill = document.querySelector('.progress-fill');
-  const progressText = document.querySelector('.progress-tracker p');
-  
-  if (progressFill && progressText) {
-    // Simulate some progress for demo
-    const progress = 0; // Will be dynamic based on user actions
-    progressFill.style.width = `${progress}%`;
-    progressText.textContent = `${progress}% concluído`;
-  }
-}
+// Loading state management
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove loading class from body if it exists
+    document.body.classList.remove('loading');
+    
+    // Add loaded class for animations
+    document.body.classList.add('loaded');
+});
 
-// Initialize all components
-function init() {
-  // Set home as default section
-  showSection('home');
-  
-  // Initialize navigation and modal
-  initializeNavigation();
-  initializeModal();
-  
-  // Populate data
-  populateKits();
-  populateMarketplace();
-  populateGuide();
-  populatePartners();
-  
-  // Setup interactive elements
-  setupCalculator();
-  setupResourceCalculator();
-  setupForms();
-  setupMapFilters();
-  setupForum();
-  updateProgress();
-  
-  console.log('Nosso Sisteminha Sustentável MVP v2 inicializado');
-  console.log('Projeto conceitual - Implementação prevista para segundo semestre de 2025');
+// Service Worker registration (for future PWA features)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Service worker can be registered here in the future
+    });
 }
-
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', init);
