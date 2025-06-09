@@ -330,8 +330,8 @@ this.scene.add(bokashiGroup);
 createZone3Elements() {
     // ZONA 3: Piscicultura Integrada (40m²)
     
-    const centerX = 7.5;
-    const centerZ = 7.5;
+    const baseX = 4.5; // MAIS À ESQUERDA
+    const baseZ = 8;   // posição central na zona 3
 
     // Tanque Principal (circular elevado)
     const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
@@ -341,7 +341,7 @@ createZone3Elements() {
         opacity: 0.7
     });
     const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(centerX, 1.1, centerZ);
+    tank.position.set(baseX, 1.1, baseZ);
     tank.castShadow = true;
     tank.userData = {
         name: "Tanque Principal",
@@ -358,14 +358,14 @@ createZone3Elements() {
         opacity: 0.8
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(centerX, 1.65, centerZ);
+    water.position.set(baseX, 1.65, baseZ);
     this.scene.add(water);
 
-    // Sistema Biofiltro — ACOPLADO na lateral direita do tanque
+    // Sistema Biofiltro — ACOPLADO NA ESQUERDA do tanque
     const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
     const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
     const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(centerX - 1.25 - 0.35, 0.75, centerZ); // lado esquerdo (para ficar como no print)
+    biofilter.position.set(baseX - 1.25 - 0.35, 0.75, baseZ); // ACOPLADO À ESQUERDA
     biofilter.castShadow = true;
     biofilter.userData = {
         name: "Sistema Biofiltro",
@@ -374,11 +374,11 @@ createZone3Elements() {
     this.scene.add(biofilter);
     this.interactiveObjects.push(biofilter);
 
-    // Tanque de Reserva
+    // Tanque de Reserva — À DIREITA do tanque principal
     const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
     const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
     const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(centerX + 2.5, 0.4, centerZ);
+    reserve.position.set(baseX + 2.5, 0.4, baseZ);
     reserve.castShadow = true;
     reserve.userData = {
         name: "Tanque Reserva",
@@ -387,11 +387,11 @@ createZone3Elements() {
     this.scene.add(reserve);
     this.interactiveObjects.push(reserve);
 
-    // Sistema de Captação de Chuva — telhado acima do Tanque Reserva
+    // Sistema de Captação de Chuva — telhado sobre o tanque reserva
     const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
     const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
     const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-    roofCatch.position.set(centerX + 2.5, 2.5, centerZ);
+    roofCatch.position.set(baseX + 2.5, 2.5, baseZ); // acima do tanque reserva
     roofCatch.userData = {
         name: "Captação de Chuva",
         description: "Telhado para coleta de água da chuva direcionada ao sistema"
