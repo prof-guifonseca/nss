@@ -401,11 +401,11 @@ this.scene.add(bokashiGroup);
         const signMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
         const postMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
 
-        const signs = [
-            { x: 1, z: 0.5, name: "Minhocário" },
-            { x: 6.5, z: 2.5, name: "Horta Vertical" },
-            { x: 2, z: 7, name: "Tanque de Tilápias" }
-        ];
+const signs = [
+    { x: 1, z: 0.5, name: "Minhocário" },
+    { x: 6.5, z: 2.5, name: "Horta Vertical" },
+    { x: 2, z: 7, name: "Tanque de Tilápias" }
+];
 
         signs.forEach(sign => {
             // Poste da placa
