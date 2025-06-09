@@ -407,26 +407,32 @@ const signs = [
     { x: 4, z: 9, name: "Tanque de Tilápias" }
 ];
 
-        signs.forEach(sign => {
-            // Poste da placa
-            const postGeometry = new THREE.CylinderGeometry(0.03, 0.03, 1.5);
-            const post = new THREE.Mesh(postGeometry, postMaterial);
-            post.position.set(sign.x, 0.75, sign.z);
-            this.scene.add(post);
+    signs.forEach(sign => {
+        // Poste da placa
+        const postGeometry = new THREE.CylinderGeometry(0.03, 0.03, 1.5);
+        const post = new THREE.Mesh(postGeometry, postMaterial);
+        post.position.set(sign.x, 0.75, sign.z);
+        this.scene.add(post);
 
-            // Placa
-            const signGeometry = new THREE.BoxGeometry(0.8, 0.3, 0.05);
-            const signBoard = new THREE.Mesh(signGeometry, signMaterial);
-            signBoard.position.set(sign.x, 1.3, sign.z);
-            signBoard.userData = {
-                name: `Placa: ${sign.name}`,
-                description: `Placa educativa indicando ${sign.name}`
-            };
-            this.scene.add(signBoard);
-            this.interactiveObjects.push(signBoard);
-        });
-    }
+        // Placa
+        const signGeometry = new THREE.BoxGeometry(0.8, 0.3, 0.05);
+        const signBoard = new THREE.Mesh(signGeometry, signMaterial);
+        signBoard.position.set(sign.x, 1.3, sign.z);
 
+        // Ajusta rotação da Horta Vertical
+        if (sign.name === "Horta Vertical") {
+            signBoard.rotation.y = Math.PI / 2; // 90 graus em radianos
+        }
+
+        signBoard.userData = {
+            name: `Placa: ${sign.name}`,
+            description: `Placa educativa indicando ${sign.name}`
+        };
+        this.scene.add(signBoard);
+        this.interactiveObjects.push(signBoard);
+    });
+}
+    
     setupEventListeners() {
         // Mouse events
         if (this.renderer && this.renderer.domElement) {
