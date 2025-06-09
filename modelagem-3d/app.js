@@ -338,7 +338,7 @@ createZone3Elements() {
         opacity: 0.7
     });
     const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(6, 1.1, 8);
+    tank.position.set(5.5, 1.1, 8.5); // RECUA um pouco no Z, para não invadir a estrada
     tank.castShadow = true;
     tank.userData = {
         name: "Tanque Principal",
@@ -355,27 +355,14 @@ createZone3Elements() {
         opacity: 0.8
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(6, 1.65, 8);
+    water.position.set(5.5, 1.65, 8.5);
     this.scene.add(water);
 
-    // Tanque de Reserva
-    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
-    const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
-    const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(3.5, 0.4, 8);
-    reserve.castShadow = true;
-    reserve.userData = {
-        name: "Tanque Reserva",
-        description: "Tanque auxiliar de decantação e reserva de água tratada"
-    };
-    this.scene.add(reserve);
-    this.interactiveObjects.push(reserve);
-
-    // Sistema Biofiltro — lado do Tanque Reserva
+    // Sistema Biofiltro — ACOPLADO na lateral direita do tanque
     const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
     const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
     const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(2.2, 0.75, 8);
+    biofilter.position.set(5.5 + 1.25 + 0.35, 0.75, 8.5); // POSIÇÃO correta acoplada ao lado do tanque
     biofilter.castShadow = true;
     biofilter.userData = {
         name: "Sistema Biofiltro",
@@ -384,11 +371,24 @@ createZone3Elements() {
     this.scene.add(biofilter);
     this.interactiveObjects.push(biofilter);
 
+    // Tanque de Reserva
+    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
+    const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
+    const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
+    reserve.position.set(3.5, 0.4, 8.5);
+    reserve.castShadow = true;
+    reserve.userData = {
+        name: "Tanque Reserva",
+        description: "Tanque auxiliar de decantação e reserva de água tratada"
+    };
+    this.scene.add(reserve);
+    this.interactiveObjects.push(reserve);
+
     // Sistema de Captação de Chuva — telhado acima do Tanque Reserva
     const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
     const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
     const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-    roofCatch.position.set(3.5, 2.5, 8); // diretamente acima do tanque de reserva
+    roofCatch.position.set(3.5, 2.5, 8.5); // centralizado no tanque reserva
     roofCatch.userData = {
         name: "Captação de Chuva",
         description: "Telhado para coleta de água da chuva direcionada ao sistema"
