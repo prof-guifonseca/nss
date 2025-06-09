@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sisteminha Sustentável 3D - 150m²</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1>Sisteminha Sustentável 3D</h1>
+                <p>Modelo interativo de 150m² para segurança alimentar e geração de renda</p>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- 3D Scene Container -->
+            <div class="scene-container">
+                <canvas id="threejs-canvas"></canvas>
+                
+                <!-- Loading indicator -->
+                <div id="loading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando modelo 3D...</p>
+                </div>
+
+                <!-- Controls overlay -->
+                <div class="controls-overlay">
+                    <div class="view-controls">
+                        <button class="btn btn--sm btn--secondary" id="reset-view">Vista Geral</button>
+                        <button class="btn btn--sm btn--secondary" id="top-view">Vista Superior</button>
+                    </div>
+                </div>
+
+                <!-- Tooltip -->
+                <div id="tooltip" class="tooltip hidden">
+                    <h4 id="tooltip-title"></h4>
+                    <p id="tooltip-description"></p>
+                </div>
+            </div>
+
+            <!-- Side Panel -->
+            <aside class="side-panel">
+                <div class="panel-header">
+                    <h2>Zonas do Sistema</h2>
+                    <p>Clique para focar em cada zona</p>
+                </div>
+
+                <div class="zones-list">
+                    <!-- Zona 1 -->
+                    <div class="zone-card" data-zone="0">
+                        <div class="zone-header">
+                            <h3>Zona 1: Produção de Insumos + Horta</h3>
+                            <span class="zone-area">50m²</span>
+                        </div>
+                        <div class="zone-content">
+                            <p>Sistema de compostagem, minhocário, hortas horizontal e vertical</p>
+                            <ul class="element-list">
+                                <li>Minhocário Vertical</li>
+                                <li>Composteira 3 Compartimentos</li>
+                                <li>Sistema Bokashi</li>
+                                <li>Horta Horizontal</li>
+                                <li>Horta Vertical</li>
+                                <li>Sistema de Irrigação</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn--primary btn--sm zone-focus-btn">Focar Zona</button>
+                    </div>
+
+                    <!-- Zona 2 -->
+                    <div class="zone-card" data-zone="1">
+                        <div class="zone-header">
+                            <h3>Zona 2: Galinheiro + Energia Solar</h3>
+                            <span class="zone-area">40m²</span>
+                        </div>
+                        <div class="zone-content">
+                            <p>Galinheiro agroecológico com energia solar integrada</p>
+                            <ul class="element-list">
+                                <li>Galinheiro Principal</li>
+                                <li>Piquete Externo</li>
+                                <li>Sistema Solar</li>
+                                <li>Bebedouros e Comedouros</li>
+                                <li>Caixa de Ovos</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn--primary btn--sm zone-focus-btn">Focar Zona</button>
+                    </div>
+
+                    <!-- Zona 3 -->
+                    <div class="zone-card" data-zone="2">
+                        <div class="zone-header">
+                            <h3>Zona 3: Piscicultura Integrada</h3>
+                            <span class="zone-area">40m²</span>
+                        </div>
+                        <div class="zone-content">
+                            <p>Sistema de piscicultura com tratamento biológico da água</p>
+                            <ul class="element-list">
+                                <li>Tanque Principal</li>
+                                <li>Sistema Biofiltro</li>
+                                <li>Sistema Oxigenação</li>
+                                <li>Tanque Reserva</li>
+                                <li>Captação de Chuva</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn--primary btn--sm zone-focus-btn">Focar Zona</button>
+                    </div>
+                </div>
+
+                <!-- Info Panel -->
+                <div class="info-panel">
+                    <h3>Informações Técnicas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Área Total:</strong>
+                            <span>150m² (15m × 10m)</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Capacidade:</strong>
+                            <span>12-15 galinhas poedeiras</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Tanque:</strong>
+                            <span>1000-3000 litros</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Energia:</strong>
+                            <span>Painel solar</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>Sistema sustentável para comunidades periféricas urbanas</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Three.js with reliable CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Simple OrbitControls implementation if external one fails
+        if (typeof THREE !== 'undefined' && !THREE.OrbitControls) {
+            THREE.OrbitControls = function(camera, domElement) {
+                this.camera = camera;
+                this.domElement = domElement;
+                this.target = new THREE.Vector3();
+                this.enableDamping = true;
+                this.dampingFactor = 0.05;
+                this.minDistance = 5;
+                this.maxDistance = 50;
+                this.maxPolarAngle = Math.PI / 2;
+                
+                let isMouseDown = false;
+                let lastMouseX = 0;
+                let lastMouseY = 0;
+                let spherical = new THREE.Spherical();
+                let sphericalDelta = new THREE.Spherical();
+                
+                this.update = function() {
+                    const offset = new THREE.Vector3();
+                    offset.copy(this.camera.position).sub(this.target);
+                    spherical.setFromVector3(offset);
+                    
+                    spherical.theta += sphericalDelta.theta;
+                    spherical.phi += sphericalDelta.phi;
+                    spherical.phi = Math.max(0.01, Math.min(this.maxPolarAngle, spherical.phi));
+                    spherical.radius = Math.max(this.minDistance, Math.min(this.maxDistance, spherical.radius));
+                    
+                    offset.setFromSpherical(spherical);
+                    this.camera.position.copy(this.target).add(offset);
+                    this.camera.lookAt(this.target);
+                    
+                    if (this.enableDamping) {
+                        sphericalDelta.theta *= (1 - this.dampingFactor);
+                        sphericalDelta.phi *= (1 - this.dampingFactor);
+                    }
+                };
+                
+                domElement.addEventListener('mousedown', (e) => {
+                    isMouseDown = true;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                });
+                
+                domElement.addEventListener('mousemove', (e) => {
+                    if (isMouseDown) {
+                        const deltaX = e.clientX - lastMouseX;
+                        const deltaY = e.clientY - lastMouseY;
+                        
+                        sphericalDelta.theta -= deltaX * 0.01;
+                        sphericalDelta.phi += deltaY * 0.01;
+                        
+                        lastMouseX = e.clientX;
+                        lastMouseY = e.clientY;
+                    }
+                });
+                
+                domElement.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                });
+                
+                domElement.addEventListener('wheel', (e) => {
+                    spherical.radius += e.deltaY * 0.01;
+                    spherical.radius = Math.max(this.minDistance, Math.min(this.maxDistance, spherical.radius));
+                    e.preventDefault();
+                });
+            };
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
