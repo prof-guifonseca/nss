@@ -1,0 +1,440 @@
+{
+  "terreno": {
+    "largura": 15,
+    "comprimento": 10,
+    "area_total": 150
+  },
+  "zonas": [
+    {
+      "nome": "Produção de Insumos + Horta",
+      "area": 50,
+      "posicao": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dimensoes": {
+        "largura": 7,
+        "comprimento": 7.1
+      },
+      "elementos": [
+        {
+          "nome": "Minhocário Vertical",
+          "tipo": "sistema_modular",
+          "posicao": {
+            "x": 1,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 1.2,
+            "comprimento": 0.8,
+            "altura": 1.5
+          },
+          "descricao": "Sistema modular de caixas empilháveis pretas"
+        },
+        {
+          "nome": "Composteira 3 Compartimentos",
+          "tipo": "madeira_reaproveitada",
+          "posicao": {
+            "x": 3,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 2.4,
+            "comprimento": 0.8,
+            "altura": 1.0
+          },
+          "descricao": "Madeira reaproveitada com tampa e cobertura"
+        },
+        {
+          "nome": "Sistema Bokashi",
+          "tipo": "bombonas_plasticas",
+          "posicao": {
+            "x": 5.5,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 1.2,
+            "comprimento": 0.6,
+            "altura": 1.2
+          },
+          "descricao": "2-3 bombonas azuis/pretas para fermentação"
+        },
+        {
+          "nome": "Multiplicação EM",
+          "tipo": "tanque_plastico",
+          "posicao": {
+            "x": 1,
+            "y": 0,
+            "z": 3
+          },
+          "dimensoes": {
+            "largura": 1.0,
+            "comprimento": 0.6,
+            "altura": 0.8
+          },
+          "descricao": "Tanque para micro-organismos eficientes"
+        },
+        {
+          "nome": "Horta Horizontal",
+          "tipo": "canteiros_elevados",
+          "posicao": {
+            "x": 3,
+            "y": 0,
+            "z": 3
+          },
+          "dimensoes": {
+            "largura": 3,
+            "comprimento": 3,
+            "altura": 0.3
+          },
+          "descricao": "Canteiros elevados de madeira/blocos"
+        },
+        {
+          "nome": "Horta Vertical",
+          "tipo": "garrafas_pet",
+          "posicao": {
+            "x": 6.5,
+            "y": 0,
+            "z": 3
+          },
+          "dimensoes": {
+            "largura": 0.3,
+            "comprimento": 3,
+            "altura": 2.0
+          },
+          "descricao": "Parede vertical com garrafas PET"
+        },
+        {
+          "nome": "Sistema Irrigação",
+          "tipo": "gotejamento",
+          "posicao": {
+            "x": 2,
+            "y": 0,
+            "z": 5.5
+          },
+          "dimensoes": {
+            "largura": 3,
+            "comprimento": 0.2,
+            "altura": 0.1
+          },
+          "descricao": "Sistema de irrigação por gotejamento"
+        },
+        {
+          "nome": "Abrigo Ferramentas",
+          "tipo": "armario_simples",
+          "posicao": {
+            "x": 5.5,
+            "y": 0,
+            "z": 5.5
+          },
+          "dimensoes": {
+            "largura": 1.2,
+            "comprimento": 0.6,
+            "altura": 2.0
+          },
+          "descricao": "Pequeno armário para ferramentas"
+        }
+      ]
+    },
+    {
+      "nome": "Galinheiro Agroecológico + Energia Solar",
+      "area": 40,
+      "posicao": {
+        "x": 8,
+        "y": 0,
+        "z": 0
+      },
+      "dimensoes": {
+        "largura": 5,
+        "comprimento": 8
+      },
+      "elementos": [
+        {
+          "nome": "Galinheiro Principal",
+          "tipo": "estrutura_madeira_bambu",
+          "posicao": {
+            "x": 8.5,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 3,
+            "comprimento": 4,
+            "altura": 2.5
+          },
+          "descricao": "Estrutura de madeira/bambu com telhado metálico"
+        },
+        {
+          "nome": "Área Coberta",
+          "tipo": "abrigo_aves",
+          "posicao": {
+            "x": 8.5,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 1.5,
+            "comprimento": 4,
+            "altura": 2.5
+          },
+          "descricao": "Área coberta dentro do galinheiro"
+        },
+        {
+          "nome": "Piquete Externo",
+          "tipo": "area_cercada",
+          "posicao": {
+            "x": 10,
+            "y": 0,
+            "z": 1
+          },
+          "dimensoes": {
+            "largura": 2.5,
+            "comprimento": 4,
+            "altura": 1.8
+          },
+          "descricao": "Área externa cercada com vegetação"
+        },
+        {
+          "nome": "Sistema Solar",
+          "tipo": "painel_solar",
+          "posicao": {
+            "x": 9,
+            "y": 3,
+            "z": 2.5
+          },
+          "dimensoes": {
+            "largura": 1.6,
+            "comprimento": 1.0,
+            "altura": 0.1
+          },
+          "descricao": "1-2 painéis solares no telhado/poste"
+        },
+        {
+          "nome": "Bebedouros Automáticos",
+          "tipo": "sistema_agua",
+          "posicao": {
+            "x": 9,
+            "y": 0,
+            "z": 1.5
+          },
+          "dimensoes": {
+            "largura": 0.3,
+            "comprimento": 0.3,
+            "altura": 0.4
+          },
+          "descricao": "Bebedouros automáticos visíveis"
+        },
+        {
+          "nome": "Comedouros",
+          "tipo": "alimentacao",
+          "posicao": {
+            "x": 10,
+            "y": 0,
+            "z": 1.5
+          },
+          "dimensoes": {
+            "largura": 0.4,
+            "comprimento": 0.3,
+            "altura": 0.3
+          },
+          "descricao": "Comedouros para as aves"
+        },
+        {
+          "nome": "Caixa de Ovos",
+          "tipo": "armazenamento",
+          "posicao": {
+            "x": 11.5,
+            "y": 0,
+            "z": 2
+          },
+          "dimensoes": {
+            "largura": 0.6,
+            "comprimento": 0.4,
+            "altura": 0.8
+          },
+          "descricao": "Caixa para armazenar ovos"
+        }
+      ]
+    },
+    {
+      "nome": "Piscicultura Integrada",
+      "area": 40,
+      "posicao": {
+        "x": 0,
+        "y": 0,
+        "z": 6
+      },
+      "dimensoes": {
+        "largura": 8,
+        "comprimento": 5
+      },
+      "elementos": [
+        {
+          "nome": "Tanque Principal",
+          "tipo": "tanque_elevado",
+          "posicao": {
+            "x": 2,
+            "y": 0.5,
+            "z": 7.5
+          },
+          "dimensoes": {
+            "largura": 2.5,
+            "comprimento": 2.5,
+            "altura": 1.2
+          },
+          "descricao": "Tanque 1000-3000L com geomembrana"
+        },
+        {
+          "nome": "Sistema Biofiltro",
+          "tipo": "filtro_substrato",
+          "posicao": {
+            "x": 5,
+            "y": 0,
+            "z": 7.5
+          },
+          "dimensoes": {
+            "largura": 0.6,
+            "comprimento": 0.6,
+            "altura": 1.5
+          },
+          "descricao": "Cano com brita + carvão + areia"
+        },
+        {
+          "nome": "Sistema Oxigenação",
+          "tipo": "bomba_cascata",
+          "posicao": {
+            "x": 4.5,
+            "y": 0,
+            "z": 8.5
+          },
+          "dimensoes": {
+            "largura": 0.4,
+            "comprimento": 0.4,
+            "altura": 0.6
+          },
+          "descricao": "Bomba para movimentar água"
+        },
+        {
+          "nome": "Tanque Reserva",
+          "tipo": "decantacao",
+          "posicao": {
+            "x": 1,
+            "y": 0,
+            "z": 9
+          },
+          "dimensoes": {
+            "largura": 1.5,
+            "comprimento": 1.5,
+            "altura": 0.8
+          },
+          "descricao": "Tanque auxiliar de decantação"
+        },
+        {
+          "nome": "Captação Chuva",
+          "tipo": "sistema_coleta",
+          "posicao": {
+            "x": 5.5,
+            "y": 2.5,
+            "z": 9
+          },
+          "dimensões": {
+            "largura": 2,
+            "comprimento": 1.5,
+            "altura": 0.2
+          },
+          "descricao": "Telhado para coleta de água"
+        },
+        {
+          "nome": "Área Manutenção",
+          "tipo": "espaco_ferramentas",
+          "posicao": {
+            "x": 6.5,
+            "y": 0,
+            "z": 8
+          },
+          "dimensoes": {
+            "largura": 1,
+            "comprimento": 1,
+            "altura": 1.8
+          },
+          "descricao": "Espaço para manutenção"
+        }
+      ]
+    }
+  ],
+  "elementos_complementares": [
+    {
+      "nome": "Caminhos",
+      "tipo": "piso_permeavel",
+      "posicoes": [
+        {
+          "x": 7,
+          "y": 0,
+          "z": 0,
+          "largura": 1,
+          "comprimento": 10
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "z": 5.5,
+          "largura": 15,
+          "comprimento": 1
+        }
+      ],
+      "descricao": "Cascalho/brita interligando zonas"
+    },
+    {
+      "nome": "Cercado",
+      "tipo": "cerca_madeira_bambu",
+      "posicao": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dimensoes": {
+        "largura": 15,
+        "comprimento": 10,
+        "altura": 1.8
+      },
+      "descricao": "Cercado parcial do terreno"
+    },
+    {
+      "nome": "Placas Educativas",
+      "tipo": "informativas",
+      "posicoes": [
+        {
+          "x": 1,
+          "y": 0,
+          "z": 0.5,
+          "nome": "Minhocário"
+        },
+        {
+          "x": 6.5,
+          "y": 0,
+          "z": 2.5,
+          "nome": "Horta Vertical"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "z": 7,
+          "nome": "Tanque de Tilápias"
+        }
+      ],
+      "descricao": "Placas informativas nos pontos principais"
+    }
+  ],
+  "especificacoes_tecnicas": {
+    "estilo": "realista comunitário",
+    "materiais": "reaproveitamento, baixo custo",
+    "capacidade": "12-15 galinhas poedeiras",
+    "tanque_volume": "1000-3000 litros",
+    "minhocario_tipo": "vertical modular",
+    "energia": "painel solar pequeno"
+  }
+}
