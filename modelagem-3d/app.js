@@ -329,9 +329,9 @@ this.scene.add(bokashiGroup);
 
 createZone3Elements() {
     // ZONA 3: Piscicultura Integrada (40m²)
-    
-    const baseX = 4.5; // MAIS À ESQUERDA
-    const baseZ = 8;   // posição central na zona 3
+
+    const baseX = 3.5; // MAIS À ESQUERDA
+    const baseZ = 7.5; // MAIS PARA CIMA (afasta do caminho horizontal)
 
     // Tanque Principal (circular elevado)
     const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
