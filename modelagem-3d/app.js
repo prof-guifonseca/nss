@@ -362,7 +362,7 @@ this.scene.add(bokashiGroup);
         const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
         const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
         const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-        biofilter.position.set(5, 0.75, 7.5);
+        biofilter.position.set(3.5, 0.75, 9);
         biofilter.castShadow = true;
         biofilter.userData = {
             name: "Sistema Biofiltro",
