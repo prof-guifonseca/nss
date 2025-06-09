@@ -329,6 +329,9 @@ this.scene.add(bokashiGroup);
 
 createZone3Elements() {
     // ZONA 3: Piscicultura Integrada (40m²)
+    
+    const centerX = 7.5;
+    const centerZ = 7.5;
 
     // Tanque Principal (circular elevado)
     const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
@@ -338,7 +341,7 @@ createZone3Elements() {
         opacity: 0.7
     });
     const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(5.5, 1.1, 8.5); // RECUA um pouco no Z, para não invadir a estrada
+    tank.position.set(centerX, 1.1, centerZ);
     tank.castShadow = true;
     tank.userData = {
         name: "Tanque Principal",
@@ -355,14 +358,14 @@ createZone3Elements() {
         opacity: 0.8
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(5.5, 1.65, 8.5);
+    water.position.set(centerX, 1.65, centerZ);
     this.scene.add(water);
 
     // Sistema Biofiltro — ACOPLADO na lateral direita do tanque
     const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
     const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
     const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(5.5 + 1.25 + 0.35, 0.75, 8.5); // POSIÇÃO correta acoplada ao lado do tanque
+    biofilter.position.set(centerX - 1.25 - 0.35, 0.75, centerZ); // lado esquerdo (para ficar como no print)
     biofilter.castShadow = true;
     biofilter.userData = {
         name: "Sistema Biofiltro",
@@ -375,7 +378,7 @@ createZone3Elements() {
     const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
     const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
     const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(3.5, 0.4, 8.5);
+    reserve.position.set(centerX + 2.5, 0.4, centerZ);
     reserve.castShadow = true;
     reserve.userData = {
         name: "Tanque Reserva",
@@ -388,7 +391,7 @@ createZone3Elements() {
     const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
     const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
     const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-    roofCatch.position.set(3.5, 2.5, 8.5); // centralizado no tanque reserva
+    roofCatch.position.set(centerX + 2.5, 2.5, centerZ);
     roofCatch.userData = {
         name: "Captação de Chuva",
         description: "Telhado para coleta de água da chuva direcionada ao sistema"
