@@ -214,25 +214,33 @@ class SisteminhaApp {
         this.scene.add(composter);
         this.interactiveObjects.push(composter);
 
-        // Sistema Bokashi (bombonas azuis/pretas)
-        const bokashiGroup = new THREE.Group();
-        for (let i = 0; i < 3; i++) {
-            const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
-            const barrelMaterial = new THREE.MeshLambertMaterial({ 
-                color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
-            });
-            const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
-            barrelMesh.position.set(i * 0.4, 0.6, 0);
-            barrelMesh.castShadow = true;
-            bokashiGroup.add(barrelMesh);
-        }
-        bokashiGroup.position.set(5.5, 0, 1);
-        bokashiGroup.userData = {
-            name: "Sistema Bokashi",
-            description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
-        };
-        this.scene.add(bokashiGroup);
-        this.interactiveObjects.push(bokashiGroup);
+// Sistema Bokashi (bombonas azuis/pretas)
+const bokashiGroup = new THREE.Group();
+for (let i = 0; i < 3; i++) {
+    const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
+    const barrelMaterial = new THREE.MeshLambertMaterial({ 
+        color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
+    });
+    const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
+    barrelMesh.position.set(i * 0.4, 0.6, 0);
+    barrelMesh.castShadow = true;
+
+    // >>> Adiciona userData em cada barrelMesh:
+    barrelMesh.userData = {
+        name: "Sistema Bokashi",
+        description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
+    };
+
+    bokashiGroup.add(barrelMesh);
+}
+bokashiGroup.position.set(5.5, 0, 1);
+bokashiGroup.userData = {
+    name: "Sistema Bokashi",
+    description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
+};
+this.scene.add(bokashiGroup);
+this.interactiveObjects.push(bokashiGroup);
+
 
         // Horta Horizontal (canteiros elevados)
         const gardenGeometry = new THREE.BoxGeometry(3, 0.3, 3);
