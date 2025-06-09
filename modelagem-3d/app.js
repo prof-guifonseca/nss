@@ -222,17 +222,34 @@ for (let i = 0; i < 3; i++) {
         color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
     });
     const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
-    barrelMesh.position.set(i * 0.4, 0.6, 0);  // LINHA COM PROBLEMA (posição Z = 0 para todos)
+    barrelMesh.position.set(i * 0.4, 0.6, 0);
     barrelMesh.castShadow = true;
+
+    // Adiciona userData individualmente em cada barril
+    barrelMesh.userData = {
+        name: "Sistema Bokashi",
+        description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
+    };
+
+    // Adiciona cada barril individualmente aos objetos interativos
+    this.interactiveObjects.push(barrelMesh);
+
+    // Adiciona o barril no grupo (para organização visual)
     bokashiGroup.add(barrelMesh);
 }
+
+// Define a posição do grupo todo
 bokashiGroup.position.set(5.5, 0, 1);
+
+// Opcional: manter userData no grupo (não interfere, pode deixar)
 bokashiGroup.userData = {
     name: "Sistema Bokashi",
     description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
 };
+
+// Adiciona o grupo à cena
 this.scene.add(bokashiGroup);
-this.interactiveObjects.push(bokashiGroup);
+
 
         // Horta Horizontal (canteiros elevados)
         const gardenGeometry = new THREE.BoxGeometry(3, 0.3, 3);
