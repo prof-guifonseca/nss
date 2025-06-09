@@ -327,75 +327,75 @@ this.scene.add(bokashiGroup);
         this.scene.add(post);
     }
 
-    createZone3Elements() {
-        // ZONA 3: Piscicultura Integrada (40m²)
-        
-        // Tanque Principal (circular elevado)
-        const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
-        const tankMaterial = new THREE.MeshLambertMaterial({ 
-            color: 0x4682B4,
-            transparent: true,
-            opacity: 0.7
-        });
-        const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-        tank.position.set(2, 1.1, 7.5);
-        tank.castShadow = true;
-        tank.userData = {
-            name: "Tanque Principal",
-            description: "Tanque 1000-3000L com geomembrana para criação de tilápias"
-        };
-        this.scene.add(tank);
-        this.interactiveObjects.push(tank);
+createZone3Elements() {
+    // ZONA 3: Piscicultura Integrada (40m²)
 
-        // Superfície da água
-        const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.05, 16);
-        const waterMaterial = new THREE.MeshLambertMaterial({ 
-            color: 0x1E90FF,
-            transparent: true,
-            opacity: 0.8
-        });
-        const water = new THREE.Mesh(waterGeometry, waterMaterial);
-        water.position.set(2, 1.65, 7.5);
-        this.scene.add(water);
+    // Tanque Principal (circular elevado)
+    const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
+    const tankMaterial = new THREE.MeshLambertMaterial({ 
+        color: 0x4682B4,
+        transparent: true,
+        opacity: 0.7
+    });
+    const tank = new THREE.Mesh(tankGeometry, tankMaterial);
+    tank.position.set(6, 1.1, 8);
+    tank.castShadow = true;
+    tank.userData = {
+        name: "Tanque Principal",
+        description: "Tanque 1000-3000L com geomembrana para criação de tilápias"
+    };
+    this.scene.add(tank);
+    this.interactiveObjects.push(tank);
 
-        // Sistema Biofiltro
-        const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
-        const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
-        const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-        biofilter.position.set(3.5, 0.75, 9);
-        biofilter.castShadow = true;
-        biofilter.userData = {
-            name: "Sistema Biofiltro",
-            description: "Filtro com brita + carvão + areia para filtração biológica da água"
-        };
-        this.scene.add(biofilter);
-        this.interactiveObjects.push(biofilter);
+    // Superfície da água
+    const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.05, 16);
+    const waterMaterial = new THREE.MeshLambertMaterial({ 
+        color: 0x1E90FF,
+        transparent: true,
+        opacity: 0.8
+    });
+    const water = new THREE.Mesh(waterGeometry, waterMaterial);
+    water.position.set(6, 1.65, 8);
+    this.scene.add(water);
 
-        // Tanque de Reserva
-        const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
-        const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
-        const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-        reserve.position.set(1, 0.4, 9);
-        reserve.castShadow = true;
-        reserve.userData = {
-            name: "Tanque Reserva",
-            description: "Tanque auxiliar de decantação e reserva de água tratada"
-        };
-        this.scene.add(reserve);
-        this.interactiveObjects.push(reserve);
+    // Tanque de Reserva
+    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
+    const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
+    const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
+    reserve.position.set(3.5, 0.4, 8);
+    reserve.castShadow = true;
+    reserve.userData = {
+        name: "Tanque Reserva",
+        description: "Tanque auxiliar de decantação e reserva de água tratada"
+    };
+    this.scene.add(reserve);
+    this.interactiveObjects.push(reserve);
 
-        // Sistema de Captação de Chuva
-        const roofCatchGeometry = new THREE.BoxGeometry(2, 0.2, 1.5);
-        const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
-        const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-        roofCatch.position.set(5.5, 2.5, 9);
-        roofCatch.userData = {
-            name: "Captação de Chuva",
-            description: "Telhado para coleta de água da chuva direcionada ao sistema"
-        };
-        this.scene.add(roofCatch);
-        this.interactiveObjects.push(roofCatch);
-    }
+    // Sistema Biofiltro — lado do Tanque Reserva
+    const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
+    const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
+    const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
+    biofilter.position.set(2.2, 0.75, 8);
+    biofilter.castShadow = true;
+    biofilter.userData = {
+        name: "Sistema Biofiltro",
+        description: "Filtro com brita + carvão + areia para filtração biológica da água"
+    };
+    this.scene.add(biofilter);
+    this.interactiveObjects.push(biofilter);
+
+    // Sistema de Captação de Chuva — telhado acima do Tanque Reserva
+    const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
+    const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
+    const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
+    roofCatch.position.set(3.5, 2.5, 8); // diretamente acima do tanque de reserva
+    roofCatch.userData = {
+        name: "Captação de Chuva",
+        description: "Telhado para coleta de água da chuva direcionada ao sistema"
+    };
+    this.scene.add(roofCatch);
+    this.interactiveObjects.push(roofCatch);
+}
 
     createEducationalSigns() {
         const signMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
