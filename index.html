@@ -3,299 +3,524 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sisteminha Sustentável 2.0 - Produção Sustentável para Todos</title>
+    <title>Nosso Sisteminha Sustentável | Agricultura Urbana Sustentável</title>
+    <meta name="description" content="Sistema integrado de produção sustentável para zonas urbanas e periféricas do Paraná. Horta urbana, galinhas poedeiras, piscicultura e energia solar.">
+    <meta name="keywords" content="sisteminha sustentável, horta urbana, produção sustentável urbana, galinhas poedeiras, piscicultura urbana, ODS, agricultura familiar">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <nav class="nav container">
-            <div class="nav__brand">
-                <h2>🌱 Sisteminha 2.0</h2>
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <h1>🌱 Nosso Sisteminha Sustentável</h1>
+                </div>
+                <nav class="nav">
+                    <button class="nav__toggle" id="navToggle">☰</button>
+                    <ul class="nav__menu" id="navMenu">
+                        <li><a href="#home" class="nav__link">Início</a></li>
+                        <li><a href="#about" class="nav__link">O que é</a></li>
+                        <li><a href="#phases" class="nav__link">Como Funciona</a></li>
+                        <li><a href="#components" class="nav__link">Componentes</a></li>
+                        <li><a href="#guides" class="nav__link">Guias</a></li>
+                        <li><a href="#exchange" class="nav__link">Trocas</a></li>
+                        <li><a href="#contact" class="nav__link">Contato</a></li>
+                        <li><a href="#panel" class="nav__link btn btn--primary btn--sm">Painel</a></li>
+                    </ul>
+                </nav>
             </div>
-            <ul class="nav__menu">
-                <li><a href="#home" class="nav__link">Início</a></li>
-                <li><a href="#modulos" class="nav__link">Módulos</a></li>
-                <li><a href="#marketplace" class="nav__link">Marketplace</a></li>
-                <li><a href="#capacitacao" class="nav__link">Capacitação</a></li>
-                <li><a href="#forum" class="nav__link">Fórum</a></li>
-                <li><a href="#parceiros" class="nav__link">Parceiros</a></li>
-            </ul>
-            <div class="nav__actions">
-                <button class="btn btn--primary">Começar Agora</button>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">🌙</button>
-            </div>
-            <button class="nav__toggle" id="nav-toggle">☰</button>
-        </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Home Section -->
     <section id="home" class="hero">
-        <div class="hero__content container">
-            <div class="hero__text">
-                <h1 class="hero__title">Sisteminha Sustentável 2.0</h1>
-                <p class="hero__subtitle">Transforme sua casa em um sistema produtivo sustentável com módulos científicamente comprovados</p>
-                <div class="hero__stats">
-                    <div class="stat">
-                        <span class="stat__number">98%</span>
-                        <span class="stat__label">Taxa de Sucesso</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat__number">7</span>
-                        <span class="stat__label">Módulos Disponíveis</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat__number">R$ 50</span>
-                        <span class="stat__label">Investimento Inicial</span>
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__text">
+                    <h2 class="hero__title">Transforme seu espaço urbano em um sistema sustentável de produção</h2>
+                    <p class="hero__description">
+                        Adaptação crítica do Sisteminha Embrapa para zonas urbanas e periféricas do Paraná. 
+                        Um sistema integrado que combina horta, galinhas, peixes e energia solar para promover 
+                        segurança alimentar e renda complementar.
+                    </p>
+                    <div class="hero__buttons">
+                        <a href="#phases" class="btn btn--primary btn--lg">Conheça as Fases</a>
+                        <a href="#components" class="btn btn--secondary btn--lg">Ver Componentes</a>
                     </div>
                 </div>
-                <div class="hero__actions">
-                    <button class="btn btn--primary btn--lg">Explorar Módulos</button>
-                    <button class="btn btn--outline btn--lg">Ver Vídeo</button>
-                </div>
-            </div>
-            <div class="hero__image">
-                <div class="hero__placeholder">
-                    <span>🏡🌱</span>
-                    <p>Sistema Integrado de Produção Sustentável</p>
+                <div class="hero__image">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749487823/gpt4o_images/gjmg6dkjgpfvfa2cvksr.png" alt="Ilustração do Sisteminha Sustentável completo integrado" class="hero__img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pilares Section -->
-    <section class="pillars">
+    <!-- Phases Overview -->
+    <section class="phases-overview">
         <div class="container">
-            <h2 class="section__title">Três Pilares Fundamentais</h2>
-            <div class="pillars__grid">
-                <div class="pillar">
-                    <div class="pillar__icon">🧩</div>
-                    <h3>Componentes Físicos</h3>
-                    <p>Módulos integrados e cientificamente validados para produção doméstica sustentável</p>
+            <h2 class="section__title">As 3 Fases do Sisteminha</h2>
+            <div class="phases-grid">
+                <div class="phase-card">
+                    <div class="phase-card__number">1</div>
+                    <h3>Produção de insumos e horta</h3>
+                    <p>Minhocário, compostagem, EM, Bokashi e horta vertical/horizontal adaptável para espaços de 10m² a 100m²</p>
+                    <a href="#phase1" class="btn btn--outline">Saiba mais</a>
                 </div>
-                <div class="pillar">
-                    <div class="pillar__icon">🛒</div>
-                    <h3>Marketplace</h3>
-                    <p>Plataforma completa para aquisição de materiais e componentes especializados</p>
+                <div class="phase-card">
+                    <div class="phase-card__number">2</div>
+                    <h3>Galinheiro agroecológico + Energia solar</h3>
+                    <p>Criação de galinhas poedeiras com ração sustentável e painéis solares para autonomia energética</p>
+                    <a href="#phase2" class="btn btn--outline">Saiba mais</a>
                 </div>
-                <div class="pillar">
-                    <div class="pillar__icon">🎓</div>
-                    <h3>Capacitação Técnica</h3>
-                    <p>Formação continuada com certificação e suporte especializado</p>
+                <div class="phase-card">
+                    <div class="phase-card__number">3</div>
+                    <h3>Piscicultura integrada</h3>
+                    <p>Sistema simplificado de criação de tilápias com alimentação sustentável e resíduos controlados</p>
+                    <a href="#phase3" class="btn btn--outline">Saiba mais</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Fases Section -->
-    <section class="phases">
+    <!-- ODS Section -->
+    <section class="ods-section">
         <div class="container">
-            <h2 class="section__title">Implementação em Duas Fases</h2>
-            <div class="phases__content">
-                <div class="phase">
-                    <div class="phase__badge phase__badge--essential">FASE 1</div>
-                    <h3>Núcleo Essencial</h3>
-                    <p>Módulos fundamentais com retorno garantido e baixo investimento inicial</p>
-                    <ul class="phase__features">
-                        <li>✅ Investimento: R$ 360-780</li>
-                        <li>✅ Retorno: 30-60 dias</li>
-                        <li>✅ Prioridade altíssima e alta</li>
-                        <li>✅ Baixa complexidade técnica</li>
+            <h2 class="section__title">Contribuindo para os Objetivos de Desenvolvimento Sustentável</h2>
+            <div class="ods-grid">
+                <div class="ods-card">
+                    <div class="ods-card__icon">🎯</div>
+                    <h3>ODS 1 - Erradicação da Pobreza</h3>
+                    <p>Geração de renda complementar através da venda de produtos excedentes e redução de gastos com alimentação</p>
+                </div>
+                <div class="ods-card">
+                    <div class="ods-card__icon">🥬</div>
+                    <h3>ODS 2 - Segurança Alimentar</h3>
+                    <p>Produção diversificada de alimentos nutritivos diretamente no ambiente urbano</p>
+                </div>
+                <div class="ods-card">
+                    <div class="ods-card__icon">♻️</div>
+                    <h3>ODS 12 - Consumo Sustentável</h3>
+                    <p>Aproveitamento de resíduos orgânicos e redução do desperdício alimentar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about__content">
+                <div class="about__text">
+                    <h2 class="section__title">O que é o Sisteminha Sustentável</h2>
+                    <p>O Nosso Sisteminha Sustentável é uma adaptação crítica do Sisteminha Embrapa, especialmente desenvolvido para atender as necessidades das zonas urbanas e periféricas do Paraná.</p>
+                    
+                    <h3>Princípios Orientadores</h3>
+                    <ul class="about__principles">
+                        <li>✅ Adaptabilidade para pequenos espaços urbanos</li>
+                        <li>✅ Baixo custo de implementação</li>
+                        <li>✅ Uso sustentável de recursos</li>
+                        <li>✅ Integração de sistemas produtivos</li>
+                        <li>✅ Fortalecimento comunitário</li>
+                        <li>✅ Educação ambiental</li>
+                    </ul>
+
+                    <h3>Diferenças com o Sisteminha Embrapa Original</h3>
+                    <ul class="about__differences">
+                        <li>🏙️ Adaptado para zonas urbanas e periféricas</li>
+                        <li>📏 Dimensionado para espaços de 10m² a 100m²</li>
+                        <li>🔋 Integração com energia solar</li>
+                        <li>🐟 Foco em piscicultura urbana simplificada</li>
+                        <li>🚫 Eliminação de coelhos e codornas</li>
+                        <li>🔄 Sistema de trocas comunitárias</li>
                     </ul>
                 </div>
-                <div class="phase">
-                    <div class="phase__badge phase__badge--expandable">FASE 2</div>
-                    <h3>Expansão Escalável</h3>
-                    <p>Módulos opcionais para famílias com maior capacitação e recursos</p>
-                    <ul class="phase__features">
-                        <li>⚡ Investimento: R$ 2.950-5.800</li>
-                        <li>⚡ Retorno: 3-12 meses</li>
-                        <li>⚡ Prioridade moderada e baixa</li>
-                        <li>⚡ Complexidade técnica elevada</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Módulos Section -->
-    <section id="modulos" class="modulos">
+    <!-- Phases Detail Section -->
+    <section id="phases" class="phases-section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Módulos do Sistema</h2>
-                <div class="modulos__filters">
-                    <button class="filter-btn active" data-phase="all">Todos</button>
-                    <button class="filter-btn" data-phase="fase1">Fase 1</button>
-                    <button class="filter-btn" data-phase="fase2">Fase 2</button>
-                </div>
-            </div>
+            <h2 class="section__title">Como Funciona - Detalhamento das Fases</h2>
             
-            <div class="modulos__grid" id="modulos-grid">
-                <!-- Módulos serão inseridos dinamicamente via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Marketplace Section -->
-    <section id="marketplace" class="marketplace">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Marketplace</h2>
-                <div class="development-banner">
-                    <span class="development-icon">🚧</span>
-                    <p>Esta seção está em desenvolvimento. Em breve teremos uma plataforma completa para aquisição de componentes, materiais e kits especializados para cada módulo do sistema.</p>
-                </div>
-            </div>
-            
-            <div class="marketplace__preview">
-                <div class="marketplace__categories">
-                    <div class="category-card">
-                        <div class="category-card__icon">🌱</div>
-                        <h3>Horta & Jardim</h3>
-                        <p>Sementes, substratos, ferramentas</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-card__icon">🐓</div>
-                        <h3>Avicultura</h3>
-                        <p>Galinhas, equipamentos, ração</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-card__icon">♻️</div>
-                        <h3>Compostagem</h3>
-                        <p>Baldes, minhocas, acessórios</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-card__icon">🐟</div>
-                        <h3>Aquicultura</h3>  
-                        <p>Tanques, filtros, alevinos</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-card__icon">☀️</div>
-                        <h3>Energia Solar</h3>
-                        <p>Painéis, baterias, inversores</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-card__icon">📦</div>
-                        <h3>Kits Completos</h3>
-                        <p>Pacotes por módulo</p>
-                        <span class="status status--warning">Em breve</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Capacitação Section -->
-    <section id="capacitacao" class="capacitacao">
-        <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Capacitação Técnica</h2>
-                <div class="development-banner">
-                    <span class="development-icon">🚧</span>
-                    <p>Esta seção está em desenvolvimento. Em breve ofereceremos cursos online, webinários, certificações e material didático completo para implementação e manejo dos sistemas.</p>
-                </div>
-            </div>
-            
-            <div class="capacitacao__preview">
-                <div class="capacitacao__content">
-                    <div class="capacitacao__left">
-                        <h3>Cursos Planejados</h3>
-                        <div class="cursos-list" id="cursos-list">
-                            <!-- Cursos serão inseridos dinamicamente -->
+            <!-- Phase 1 -->
+            <div id="phase1" class="phase-detail">
+                <div class="phase-detail__content">
+                    <div class="phase-detail__text">
+                        <div class="phase-detail__header">
+                            <span class="phase-detail__number">Fase 1</span>
+                            <h3>Produção de insumos e horta</h3>
+                        </div>
+                        <div class="phase-detail__description">
+                            <h4>Componentes:</h4>
+                            <ul>
+                                <li><strong>Minhocário:</strong> Sistema de compostagem com minhocas californianas</li>
+                                <li><strong>Compostagem:</strong> Transformação de resíduos orgânicos em adubo</li>
+                                <li><strong>EM (micro-organismos eficientes):</strong> Aplicação específica para horta e compostagem</li>
+                                <li><strong>Bokashi:</strong> Adubo orgânico fermentado</li>
+                                <li><strong>Horta vertical e horizontal:</strong> Adaptável para espaços de 10m² a 100m²</li>
+                            </ul>
+                            <p class="phase-detail__note">Esta fase estabelece a base do sistema, criando os insumos necessários para as próximas etapas.</p>
                         </div>
                     </div>
-                    <div class="capacitacao__right">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">📚</div>
-                                <h4>Biblioteca Digital</h4>
-                                <p>Guias práticos e materiais técnicos</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎥</div>
-                                <h4>Webinários</h4>
-                                <p>Lives com especialistas e mentores</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎯</div>
-                                <h4>Certificações</h4>
-                                <p>Reconhecimento oficial das competências</p>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">❓</div>
-                                <h4>Suporte Técnico</h4>
-                                <p>Atendimento especializado</p>
-                            </div>
+                    <div class="phase-detail__image">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1749487892/gpt4o_images/fdq7zugqwja8pblyo0bx.png" alt="Ilustração da Fase 1 - Produção de insumos e horta">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div id="phase2" class="phase-detail phase-detail--reverse">
+                <div class="phase-detail__content">
+                    <div class="phase-detail__image">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1749487980/gpt4o_images/hdqfy0mk6vwrmec05trs.png" alt="Ilustração da Fase 2 - Galinheiro agroecológico + Energia solar">
+                    </div>
+                    <div class="phase-detail__text">
+                        <div class="phase-detail__header">
+                            <span class="phase-detail__number">Fase 2</span>
+                            <h3>Galinheiro agroecológico + Energia solar</h3>
+                        </div>
+                        <div class="phase-detail__description">
+                            <h4>Componentes:</h4>
+                            <ul>
+                                <li><strong>Galinhas poedeiras e de corte:</strong> Foco principal em poedeiras</li>
+                                <li><strong>Painéis solares:</strong> Para autonomia energética parcial ou total</li>
+                            </ul>
+                            <p class="phase-detail__note"><strong>Observação:</strong> Ração complementada com Bokashi e restos da horta + resíduos domésticos controlados. A compostagem é mantida para aproveitar os dejetos das aves.</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Phase 3 -->
+            <div id="phase3" class="phase-detail">
+                <div class="phase-detail__content">
+                    <div class="phase-detail__text">
+                        <div class="phase-detail__header">
+                            <span class="phase-detail__number">Fase 3</span>
+                            <h3>Piscicultura integrada (Tilápias)</h3>
+                        </div>
+                        <div class="phase-detail__description">
+                            <h4>Características:</h4>
+                            <ul>
+                                <li><strong>Sistema simplificado e adaptável:</strong> Adequado para ambientes urbanos</li>
+                                <li><strong>Alimentação sustentável:</strong> Resíduos orgânicos controlados</li>
+                                <li><strong>Estratégias sustentáveis:</strong> Integração com as demais fases</li>
+                            </ul>
+                            <p class="phase-detail__note">A piscicultura completa o ciclo produtivo, aproveitando nutrientes das fases anteriores e fornecendo proteína de alta qualidade.</p>
+                        </div>
+                    </div>
+                    <div class="phase-detail__image">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1749488031/gpt4o_images/zhcldkot0ijrbqhhdlq7.png" alt="Ilustração da Fase 3 - Piscicultura integrada (Tilápias)">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Fórum Section -->
-    <section id="forum" class="forum">
+    <!-- Components/Marketplace Section -->
+    <section id="components" class="components-section">
         <div class="container">
-            <div class="section__header">
-                <h2 class="section__title">Fórum da Comunidade</h2>
-                <div class="development-banner">
-                    <span class="development-icon">🚧</span>
-                    <p>Esta seção está em desenvolvimento. Em breve teremos um espaço completo para troca de experiências, dúvidas, compartilhamento de fotos e mentoria entre participantes.</p>
-                </div>
-            </div>
+            <h2 class="section__title">Componentes - Marketplace</h2>
+            <p class="section__subtitle">Adquira os componentes necessários para implementar seu Sisteminha Sustentável</p>
             
-            <div class="forum__preview">
-                <div class="forum__topics">
-                    <div class="topic-preview">
-                        <div class="topic-icon">💬</div>
-                        <h4>Discussões Gerais</h4>
-                        <p>Compartilhe experiências e tire dúvidas</p>
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-card__image">🗂️</div>
+                    <h3>Composteira Doméstica</h3>
+                    <p>Composteira de 3 caixas para apartamentos e casas</p>
+                    <div class="component-card__price">R$ 180,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🪱</div>
+                    <h3>Kit Minhocário</h3>
+                    <p>Kit completo com minhocas californianas e substrato</p>
+                    <div class="component-card__price">R$ 150,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🧪</div>
+                    <h3>EM - Micro-organismos Eficientes</h3>
+                    <p>Solução concentrada de microorganismos para horta</p>
+                    <div class="component-card__price">R$ 45,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🌾</div>
+                    <h3>Bokashi Pronto</h3>
+                    <p>Adubo orgânico fermentado pronto para uso</p>
+                    <div class="component-card__price">R$ 35,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🌿</div>
+                    <h3>Estrutura Horta Vertical</h3>
+                    <p>Sistema vertical para cultivo em pequenos espaços</p>
+                    <div class="component-card__price">R$ 380,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🐔</div>
+                    <h3>Kit Galinheiro Urbano</h3>
+                    <p>Estrutura completa para criação de galinhas em ambiente urbano</p>
+                    <div class="component-card__price">R$ 850,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">☀️</div>
+                    <h3>Painel Solar Básico 100W</h3>
+                    <p>Painel fotovoltaico para autonomia energética parcial</p>
+                    <div class="component-card__price">R$ 320,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-card__image">🐟</div>
+                    <h3>Kit Piscicultura Urbana</h3>
+                    <p>Sistema básico para criação de tilápias em ambiente urbano</p>
+                    <div class="component-card__price">R$ 480,00</div>
+                    <button class="btn btn--primary btn--full-width">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section id="guides" class="guides-section">
+        <div class="container">
+            <h2 class="section__title">Guias Didáticos</h2>
+            <p class="section__subtitle">Materiais completos para implementação do seu Sisteminha</p>
+            
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-card__icon">📖</div>
+                    <h3>Guia da Horta Urbana Sustentável</h3>
+                    <p>Manual completo de cultivo em pequenos espaços</p>
+                    <div class="guide-card__status status status--success">Disponível</div>
+                    <div class="guide-card__actions">
+                        <button class="btn btn--primary">Baixar PDF</button>
+                        <button class="btn btn--outline">Ver Online</button>
                     </div>
-                    <div class="topic-preview">
-                        <div class="topic-icon">📸</div>
-                        <h4>Galeria de Projetos</h4>
-                        <p>Mostre seus resultados e inspire outros</p>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card__icon">🐔</div>
+                    <h3>Guia de Galinhas Poedeiras</h3>
+                    <p>Criação agroecológica de galinhas em ambiente urbano</p>
+                    <div class="guide-card__status status status--success">Disponível</div>
+                    <div class="guide-card__actions">
+                        <button class="btn btn--primary">Baixar PDF</button>
+                        <button class="btn btn--outline">Ver Online</button>
                     </div>
-                    <div class="topic-preview">
-                        <div class="topic-icon">🤝</div>
-                        <h4>Mentoria P2P</h4>
-                        <p>Conecte-se com experientes do sistema</p>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card__icon">🐟</div>
+                    <h3>Guia de Piscicultura Urbana</h3>
+                    <p>Sistema integrado de criação de tilápias</p>
+                    <div class="guide-card__status status status--warning">Em desenvolvimento</div>
+                    <div class="guide-card__actions">
+                        <button class="btn btn--secondary" disabled>Em breve</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Parceiros Section -->
-    <section id="parceiros" class="parceiros">
+    <!-- Exchange System -->
+    <section id="exchange" class="exchange-section">
         <div class="container">
-            <h2 class="section__title">Nossos Parceiros</h2>
-            <div class="parceiros__grid" id="parceiros-grid">
-                <!-- Parceiros serão inseridos dinamicamente -->
-            </div>
-            <div class="parceiros__cta">
-                <h3>Quer se tornar um parceiro?</h3>
-                <p>Junte-se a nós na construção de um futuro mais sustentável</p>
-                <button class="btn btn--primary">Seja um Parceiro</button>
+            <h2 class="section__title">Sistema de Trocas</h2>
+            <p class="section__subtitle">Conecte-se com outros produtores e troque experiências e produtos</p>
+            
+            <div class="exchange-content">
+                <div class="exchange-form-section">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Cadastrar Item para Troca</h3>
+                            <form class="exchange-form">
+                                <div class="form-group">
+                                    <label class="form-label">Nome do Item</label>
+                                    <input type="text" class="form-control" placeholder="Ex: Mudas de tomate">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Categoria</label>
+                                    <select class="form-control">
+                                        <option>Mudas e Sementes</option>
+                                        <option>Produtos da Horta</option>
+                                        <option>Ovos</option>
+                                        <option>Adubo e Compostagem</option>
+                                        <option>Equipamentos</option>
+                                        <option>Outros</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Descrição</label>
+                                    <textarea class="form-control" rows="3" placeholder="Descreva seu item..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Localização</label>
+                                    <input type="text" class="form-control" placeholder="Bairro, Cidade">
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Cadastrar Item</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchange-items-section">
+                    <div class="exchange-search">
+                        <input type="text" class="form-control" placeholder="Buscar itens...">
+                        <select class="form-control">
+                            <option>Todas as categorias</option>
+                            <option>Mudas e Sementes</option>
+                            <option>Produtos da Horta</option>
+                            <option>Ovos</option>
+                            <option>Adubo e Compostagem</option>
+                        </select>
+                    </div>
+
+                    <div class="exchange-items">
+                        <div class="exchange-item">
+                            <h4>Mudas de Manjericão</h4>
+                            <p>Mudas orgânicas de manjericão roxo, prontas para plantio.</p>
+                            <div class="exchange-item__location">📍 Curitiba - Centro</div>
+                            <button class="btn btn--outline btn--sm">Entrar em contato</button>
+                        </div>
+
+                        <div class="exchange-item">
+                            <h4>Ovos Caipiras</h4>
+                            <p>Ovos frescos de galinhas criadas no sistema agroecológico.</p>
+                            <div class="exchange-item__location">📍 Londrina - Zona Norte</div>
+                            <button class="btn btn--outline btn--sm">Entrar em contato</button>
+                        </div>
+
+                        <div class="exchange-item">
+                            <h4>Húmus de Minhoca</h4>
+                            <p>Adubo orgânico de alta qualidade, produzido em minhocário caseiro.</p>
+                            <div class="exchange-item__location">📍 Maringá - Vila Esperança</div>
+                            <button class="btn btn--outline btn--sm">Entrar em contato</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter">
+    <!-- Panel Section -->
+    <section id="panel" class="panel-section">
         <div class="container">
-            <div class="newsletter__content">
-                <h3>Fique por dentro das novidades</h3>
-                <p>Receba atualizações sobre novos módulos, cursos e funcionalidades</p>
-                <form class="newsletter__form">
-                    <input type="email" class="form-control" placeholder="Seu melhor e-mail" required>
-                    <button type="submit" class="btn btn--primary">Inscrever-se</button>
-                </form>
+            <h2 class="section__title">Painel de Controle</h2>
+            <p class="section__subtitle">Área exclusiva para parceiros e replicadores</p>
+            
+            <div class="panel-login">
+                <div class="card">
+                    <div class="card__body">
+                        <h3>Login</h3>
+                        <form class="login-form">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="seu@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Senha</label>
+                                <input type="password" class="form-control" placeholder="Sua senha">
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Entrar</button>
+                        </form>
+                        <div class="panel-info">
+                            <p><strong>Acesso exclusivo para:</strong></p>
+                            <ul>
+                                <li>Parceiros institucionais</li>
+                                <li>Replicadores certificados</li>
+                                <li>Educadores do projeto</li>
+                            </ul>
+                            <p>Para solicitar acesso, entre em contato conosco.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section__title">Contato</h2>
+            <div class="contact-content">
+                <div class="contact-form-section">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Fale Conosco</h3>
+                            <form class="contact-form">
+                                <div class="form-group">
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" class="form-control" placeholder="Seu nome completo">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" placeholder="seu@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Assunto</label>
+                                    <select class="form-control">
+                                        <option>Informações sobre o projeto</option>
+                                        <option>Parcerias institucionais</option>
+                                        <option>Suporte técnico</option>
+                                        <option>Dúvidas sobre componentes</option>
+                                        <option>Outros</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Mensagem</label>
+                                    <textarea class="form-control" rows="5" placeholder="Sua mensagem..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Enviar Mensagem</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-info-section">
+                    <div class="contact-info">
+                        <h3>Informações de Contato</h3>
+                        <div class="contact-item">
+                            <strong>Email:</strong> contato@sisteminhasustentavel.org.br
+                        </div>
+                        <div class="contact-item">
+                            <strong>WhatsApp:</strong> (41) 99999-9999
+                        </div>
+                        <div class="contact-item">
+                            <strong>Endereço:</strong> Paraná, Brasil
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <h4>Redes Sociais</h4>
+                        <div class="social-buttons">
+                            <a href="#" target="_blank" class="btn btn--outline">Facebook</a>
+                            <a href="#" target="_blank" class="btn btn--outline">Instagram</a>
+                            <a href="#" target="_blank" class="btn btn--outline">YouTube</a>
+                        </div>
+                    </div>
+
+                    <div class="newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Receba novidades e dicas sobre agricultura sustentável</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="form-control" placeholder="Seu email">
+                            <button type="submit" class="btn btn--primary">Inscrever</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -305,49 +530,41 @@
         <div class="container">
             <div class="footer__content">
                 <div class="footer__section">
-                    <h4>🌱 Sisteminha 2.0</h4>
-                    <p>Democratizando a produção sustentável através da ciência e tecnologia acessível.</p>
+                    <h4>🌱 Nosso Sisteminha Sustentável</h4>
+                    <p>Transformando espaços urbanos em sistemas produtivos sustentáveis</p>
                 </div>
                 <div class="footer__section">
-                    <h5>Navegação</h5>
+                    <h4>Links Rápidos</h4>
                     <ul class="footer__links">
-                        <li><a href="#modulos">Módulos</a></li>
-                        <li><a href="#marketplace">Marketplace</a></li>
-                        <li><a href="#capacitacao">Capacitação</a></li>
-                        <li><a href="#forum">Fórum</a></li>
+                        <li><a href="#about">O que é</a></li>
+                        <li><a href="#phases">Como Funciona</a></li>
+                        <li><a href="#components">Componentes</a></li>
+                        <li><a href="#guides">Guias</a></li>
                     </ul>
                 </div>
                 <div class="footer__section">
-                    <h5>Suporte</h5>
+                    <h4>Público-Alvo</h4>
                     <ul class="footer__links">
-                        <li><a href="#">Central de Ajuda</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Documentação</a></li>
+                        <li>Famílias vulneráveis</li>
+                        <li>Educadores</li>
+                        <li>Prefeituras</li>
+                        <li>Movimentos sociais</li>
                     </ul>
                 </div>
                 <div class="footer__section">
-                    <h5>Contato</h5>
-                    <p>📧 contato@sisteminha.org</p>
-                    <p>📱 (41) 9999-9999</p>
-                    <p>📍 Curitiba, PR - Brasil</p>
+                    <h4>ODS</h4>
+                    <ul class="footer__links">
+                        <li>ODS 1 - Erradicação da Pobreza</li>
+                        <li>ODS 2 - Segurança Alimentar</li>
+                        <li>ODS 12 - Consumo Sustentável</li>
+                    </ul>
                 </div>
             </div>
             <div class="footer__bottom">
-                <p>&copy; 2025 Sisteminha Sustentável 2.0. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Nosso Sisteminha Sustentável. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal__content">
-            <button class="modal__close">&times;</button>
-            <div id="modal-body" class="modal__body">
-                <!-- Conteúdo do modal será inserido dinamicamente -->
-            </div>
-        </div>
-    </div>
 
     <script src="app.js"></script>
 </body>
