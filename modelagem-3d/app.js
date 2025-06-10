@@ -200,7 +200,7 @@ createWireScreen() {
     const terrainHeight = 10;
     const screenHeight = 1.8;
     const gridSpacing = 0.3;
-    const offset = 0.05; // pequeno afastamento dos postes para não sobrepor visualmente
+    const offset = 0.05;
 
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -208,101 +208,124 @@ createWireScreen() {
         opacity: 0.5
     });
 
-    const createGridMesh = (width, height) => {
+    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
+
+    const createGridMesh = (width, height, openRanges = [], axis = 'x') => {
         const gridGeometry = new THREE.BufferGeometry();
         const vertices = [];
 
-        // Linhas verticais
         for (let x = -width / 2; x <= width / 2; x += gridSpacing) {
-            vertices.push(x, 0, 0);
-            vertices.push(x, height, 0);
+            const worldX = x + width / 2;
+            const isInOpenRange = openRanges.some(range => worldX >= range[0] && worldX <= range[1]);
+
+            if (!isInOpenRange) {
+                vertices.push(x, 0, 0);
+                vertices.push(x, height, 0);
+            }
         }
 
-        // Linhas horizontais
         for (let y = 0; y <= height; y += gridSpacing) {
             vertices.push(-width / 2, y, 0);
             vertices.push(width / 2, y, 0);
         }
 
         gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
         return new THREE.LineSegments(gridGeometry, screenMaterial);
     };
 
-    // Frente (Z = 0)
-    const front = createGridMesh(terrainWidth, screenHeight);
-    front.position.set(terrainWidth / 2, 0, 0 + offset); // Y = 0 → colado no chão
+    // ====== PORTA FRONTAL: abertura X=4.5 a 6 ======
+    const frontOpenRange = [4.5, 6];
+
+    const front = createGridMesh(terrainWidth, screenHeight, [frontOpenRange]);
+    front.position.set(terrainWidth / 2, 0, 0 + offset);
     this.scene.add(front);
 
-    // Trás (Z = terrainHeight)
+    // POSTES nas extremidades da porta frontal
+    const postPositionsFront = [frontOpenRange[0], frontOpenRange[1]];
+    postPositionsFront.forEach(x => {
+        const post = new THREE.Mesh(postGeometry, fenceMaterial);
+        post.position.set(x, 0.9, 0 + offset);
+        post.castShadow = true;
+        this.scene.add(post);
+    });
+
+    // ====== RESTANTE ====
+
+    // Trás
     const back = createGridMesh(terrainWidth, screenHeight);
     back.position.set(terrainWidth / 2, 0, terrainHeight - offset);
     this.scene.add(back);
 
-    // Esquerda (X = 0), parede em Z
+    // Esquerda
     const left = createGridMesh(terrainHeight, screenHeight);
     left.position.set(0 + offset, 0, terrainHeight / 2);
     left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
-    // Direita (X = terrainWidth), parede em Z
+    // Direita
     const right = createGridMesh(terrainHeight, screenHeight);
     right.position.set(terrainWidth - offset, 0, terrainHeight / 2);
     right.rotation.y = Math.PI / 2;
     this.scene.add(right);
 }
 
-createVerticalDivisionFence(xPosition = 7) {
-    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
-
+createVerticalDivisionFence(xPosition = 7.5) {
+    const screenHeight = 1.8;
+    const gridSpacing = 0.3;
     const terrainHeight = 10;
+    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
+    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
 
-    // POSTS APENAS NAS PONTAS
-    const postPositionsZ = [0, terrainHeight]; // só no início e fim
-
-    postPositionsZ.forEach(z => {
+    // POSTS nas pontas
+    [0, terrainHeight].forEach(z => {
         const post = new THREE.Mesh(postGeometry, fenceMaterial);
         post.position.set(xPosition, 0.9, z);
         post.castShadow = true;
         this.scene.add(post);
     });
 
-    // Cria a tela entre as pontas
-    const screenHeight = 1.8;
+    // ====== Porta para o galinheiro: abertura Z=2 a 4 ======
+    const openRange = [2, 4];
+
+    const gridGeometry = new THREE.BufferGeometry();
+    const vertices = [];
+
+    for (let z = -terrainHeight / 2; z <= terrainHeight / 2; z += gridSpacing) {
+        const worldZ = z + terrainHeight / 2;
+        const isInOpenRange = worldZ >= openRange[0] && worldZ <= openRange[1];
+
+        if (!isInOpenRange) {
+            vertices.push(0, 0, z);
+            vertices.push(0, screenHeight, z);
+        }
+    }
+
+    for (let y = 0; y <= screenHeight; y += gridSpacing) {
+        vertices.push(0, y, -terrainHeight / 2);
+        vertices.push(0, y, terrainHeight / 2);
+    }
+
+    gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
         transparent: true,
         opacity: 0.5
     });
 
-    const gridSpacing = 0.3;
-    const gridGeometry = new THREE.BufferGeometry();
-    const vertices = [];
-
-    const height = screenHeight;
-    const width = terrainHeight;
-
-    // Linhas verticais (em Z)
-    for (let z = -width / 2; z <= width / 2; z += gridSpacing) {
-        vertices.push(0, 0, z);
-        vertices.push(0, height, z);
-    }
-
-    // Linhas horizontais (em Y)
-    for (let y = 0; y <= height; y += gridSpacing) {
-        vertices.push(0, y, -width / 2);
-        vertices.push(0, y, width / 2);
-    }
-
-    gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
     const screen = new THREE.LineSegments(gridGeometry, screenMaterial);
-
-    // Posiciona no eixo X desejado
     screen.position.set(xPosition, 0, terrainHeight / 2);
-
     this.scene.add(screen);
+
+    // POSTES nas extremidades da porta do galinheiro
+    const postPositionsDoor = [openRange[0], openRange[1]];
+    postPositionsDoor.forEach(zWorld => {
+        const post = new THREE.Mesh(postGeometry, fenceMaterial);
+        post.position.set(xPosition, 0.9, zWorld);
+        post.castShadow = true;
+        this.scene.add(post);
+    });
 }
 
     createZone1Elements() {
