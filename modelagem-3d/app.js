@@ -160,23 +160,26 @@ createTerrain() {
 }
 
 
-    createPaths() {
-        const pathMaterial = new THREE.MeshLambertMaterial({ color: 0xD2B48C });
-        
-        // Horizontal path
-        const pathHorizontal = new THREE.PlaneGeometry(15, 1);
-        const pathH = new THREE.Mesh(pathHorizontal, pathMaterial);
-        pathH.rotation.x = -Math.PI / 2;
-        pathH.position.set(7.5, 0.01, 5.5);
-        this.scene.add(pathH);
+  createPaths() {
+    const pathMaterial = new THREE.MeshLambertMaterial({ color: 0xD2B48C });
 
-        // Vertical path
-        const pathVertical = new THREE.PlaneGeometry(1, 10);
-        const pathV = new THREE.Mesh(pathVertical, pathMaterial);
-        pathV.rotation.x = -Math.PI / 2;
-        pathV.position.set(7, 0.01, 5);
-        this.scene.add(pathV);
-    }
+    // Horizontal path — mantém normal
+    const pathHorizontal = new THREE.PlaneGeometry(15, 1);
+    const pathH = new THREE.Mesh(pathHorizontal, pathMaterial);
+    pathH.rotation.x = -Math.PI / 2;
+    pathH.position.set(7.5, 0.01, 5.5);
+    this.scene.add(pathH);
+
+    // Vertical path — dividido em DOIS blocos
+    // Primeiro bloco (de Z=0 até Z=5)
+    const pathVertical1 = new THREE.PlaneGeometry(1, 5);
+    const pathV1 = new THREE.Mesh(pathVertical1, pathMaterial);
+    pathV1.rotation.x = -Math.PI / 2;
+    pathV1.position.set(7, 0.01, 2.5); // centro do primeiro bloco em Z=2.5
+    this.scene.add(pathV1);
+
+    // NÃO adiciona o bloco superior → isso suprime a estrada na área do galinheiro (Z>5)
+}
 
     createFence() {
         const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
