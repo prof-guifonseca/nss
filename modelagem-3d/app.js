@@ -341,92 +341,87 @@ createVerticalDivisionFence(xPosition = 7) {
     this.scene.add(postRight);
 }
     
-    createZone1Elements() {
-        // ZONA 1: Produção de Insumos + Horta (50m²)
-        
-        // Minhocário Vertical (caixas pretas empilháveis)
-        const minhocarioGeometry = new THREE.BoxGeometry(1.2, 1.5, 0.8);
-        const minhocarioMaterial = new THREE.MeshLambertMaterial({ color: 0x2F2F2F });
-        const minhocario = new THREE.Mesh(minhocarioGeometry, minhocarioMaterial);
-        minhocario.position.set(1, 0.75, 1);
-        minhocario.castShadow = true;
-        minhocario.userData = {
-            name: "Minhocário Vertical",
-            description: "Sistema modular de caixas empilháveis pretas para compostagem com minhocas"
+createZone1Elements() {
+    // ZONA 1: Produção de Insumos + Horta (50m²)
+
+    // Minhocário Vertical (caixas pretas empilháveis)
+    const minhocarioGeometry = new THREE.BoxGeometry(1.2, 1.5, 0.8);
+    const minhocarioMaterial = new THREE.MeshLambertMaterial({ color: 0x2F2F2F });
+    const minhocario = new THREE.Mesh(minhocarioGeometry, minhocarioMaterial);
+    minhocario.position.set(1, 0.75, 1);
+    minhocario.castShadow = true;
+    minhocario.userData = {
+        name: "Minhocário Vertical",
+        description: "Sistema modular de caixas empilháveis pretas para compostagem com minhocas"
+    };
+    this.scene.add(minhocario);
+    this.interactiveObjects.push(minhocario);
+
+    // Composteira 3 Compartimentos (madeira)
+    const composterGeometry = new THREE.BoxGeometry(2.4, 1.0, 0.8);
+    const composterMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const composter = new THREE.Mesh(composterGeometry, composterMaterial);
+    composter.position.set(3, 0.5, 1);
+    composter.castShadow = true;
+    composter.userData = {
+        name: "Composteira 3 Compartimentos",
+        description: "Madeira reaproveitada com tampa e cobertura contra chuva"
+    };
+    this.scene.add(composter);
+    this.interactiveObjects.push(composter);
+
+    // Sistema Bokashi (bombonas azuis/pretas) - encostado na composteira
+    const bokashiGroup = new THREE.Group();
+    for (let i = 0; i < 3; i++) {
+        const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
+        const barrelMaterial = new THREE.MeshLambertMaterial({ 
+            color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
+        });
+        const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
+        barrelMesh.position.set(i * 0.4, 0.6, 0);
+        barrelMesh.castShadow = true;
+
+        barrelMesh.userData = {
+            name: "Sistema Bokashi",
+            description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
         };
-        this.scene.add(minhocario);
-        this.interactiveObjects.push(minhocario);
 
-        // Composteira 3 Compartimentos (madeira)
-        const composterGeometry = new THREE.BoxGeometry(2.4, 1.0, 0.8);
-        const composterMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-        const composter = new THREE.Mesh(composterGeometry, composterMaterial);
-        composter.position.set(3, 0.5, 1);
-        composter.castShadow = true;
-        composter.userData = {
-            name: "Composteira 3 Compartimentos",
-            description: "Madeira reaproveitada com tampa e cobertura contra chuva"
-        };
-        this.scene.add(composter);
-        this.interactiveObjects.push(composter);
+        this.interactiveObjects.push(barrelMesh);
+        bokashiGroup.add(barrelMesh);
+    }
 
-// Sistema Bokashi (bombonas azuis/pretas)
-const bokashiGroup = new THREE.Group();
-for (let i = 0; i < 3; i++) {
-    const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
-    const barrelMaterial = new THREE.MeshLambertMaterial({ 
-        color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
-    });
-    const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
-    barrelMesh.position.set(i * 0.4, 0.6, 0);
-    barrelMesh.castShadow = true;
-
-    // Adiciona userData individualmente em cada barril
-    barrelMesh.userData = {
+    // Posição ajustada para ficar junto da composteira
+    bokashiGroup.position.set(4.5, 0, 1);
+    bokashiGroup.userData = {
         name: "Sistema Bokashi",
         description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
     };
+    this.scene.add(bokashiGroup);
 
-    this.interactiveObjects.push(barrelMesh);
-    bokashiGroup.add(barrelMesh);
+    // Horta Horizontal (canteiros elevados) - ampliada
+    const gardenGeometry = new THREE.BoxGeometry(5.5, 0.3, 3);
+    const gardenMaterial = new THREE.MeshLambertMaterial({ color: 0x228B22 });
+    const garden = new THREE.Mesh(gardenGeometry, gardenMaterial);
+    garden.position.set(2.75, 0.15, 3.5);
+    garden.userData = {
+        name: "Horta Horizontal",
+        description: "Canteiros elevados de madeira/blocos para cultivo de hortaliças"
+    };
+    this.scene.add(garden);
+    this.interactiveObjects.push(garden);
+
+    // Horta Vertical (garrafas PET) - colada no alambrado
+    const verticalGardenGeometry = new THREE.BoxGeometry(0.3, 2.0, 3);
+    const verticalGardenMaterial = new THREE.MeshLambertMaterial({ color: 0x32CD32 });
+    const verticalGarden = new THREE.Mesh(verticalGardenGeometry, verticalGardenMaterial);
+    verticalGarden.position.set(0.3, 1, 3.5); // junto do alambrado esquerdo
+    verticalGarden.userData = {
+        name: "Horta Vertical",
+        description: "Parede vertical com garrafas PET para aproveitamento de espaço"
+    };
+    this.scene.add(verticalGarden);
+    this.interactiveObjects.push(verticalGarden);
 }
-
-// Define a posição do grupo todo (AJUSTADO!)
-bokashiGroup.position.set(4.5, 0, 1); // ---> Mais próximo da Composteira (antes era 5.5)
-
-// Mantém userData no grupo (ok)
-bokashiGroup.userData = {
-    name: "Sistema Bokashi",
-    description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
-};
-
-// Adiciona o grupo à cena
-this.scene.add(bokashiGroup);
-
-        // Horta Horizontal (canteiros elevados)
-        const gardenGeometry = new THREE.BoxGeometry(3, 0.3, 3);
-        const gardenMaterial = new THREE.MeshLambertMaterial({ color: 0x228B22 });
-        const garden = new THREE.Mesh(gardenGeometry, gardenMaterial);
-        garden.position.set(3, 0.15, 3.5);
-        garden.userData = {
-            name: "Horta Horizontal",
-            description: "Canteiros elevados de madeira/blocos para cultivo de hortaliças"
-        };
-        this.scene.add(garden);
-        this.interactiveObjects.push(garden);
-
-        // Horta Vertical (garrafas PET)
-        const verticalGardenGeometry = new THREE.BoxGeometry(0.3, 2.0, 3);
-        const verticalGardenMaterial = new THREE.MeshLambertMaterial({ color: 0x32CD32 });
-        const verticalGarden = new THREE.Mesh(verticalGardenGeometry, verticalGardenMaterial);
-        verticalGarden.position.set(6.5, 1, 3.5);
-        verticalGarden.userData = {
-            name: "Horta Vertical",
-            description: "Parede vertical com garrafas PET para aproveitamento de espaço"
-        };
-        this.scene.add(verticalGarden);
-        this.interactiveObjects.push(verticalGarden);
-    }
 
     createZone2Elements() {
         // ZONA 2: Galinheiro + Energia Solar (40m²)
