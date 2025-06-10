@@ -33,21 +33,25 @@ class SisteminhaApp {
             return;
         }
         
-        try {
-            this.setupScene();
-            this.setupLighting();
-            this.setupControls();
-            this.createTerrain();
-            this.createSystemElements();
-            this.setupEventListeners();
-            this.animate();
-            this.hideLoading();
-            console.log('3D Scene initialized successfully');
-        } catch (error) {
-            console.error('Error initializing 3D scene:', error);
-            this.showError('Erro ao inicializar cena 3D');
-        }
-    }
+try {
+    this.setupScene();
+    this.setupLighting();
+    this.setupControls();
+    this.createTerrain();
+    this.createSystemElements();
+
+    // Adiciona a cerca divisória entre ZONA 1+3 e ZONA 2
+    this.createVerticalDivisionFence(7.5 + 0.05); // ajuste fino para não colidir com os postes
+
+    this.setupEventListeners();
+    this.animate();
+    this.hideLoading();
+    console.log('3D Scene initialized successfully');
+} catch (error) {
+    console.error('Error initializing 3D scene:', error);
+    this.showError('Erro ao inicializar cena 3D');
+}
+
 
     setupScene() {
         // Scene
@@ -119,34 +123,32 @@ class SisteminhaApp {
         }
     }
 
-    createTerrain() {
-        // Ground (15m x 10m)
-        const groundGeometry = new THREE.PlaneGeometry(15, 10);
-        const groundMaterial = new THREE.MeshLambertMaterial({ 
-            color: 0x8FBC8F,
-            transparent: true,
-            opacity: 0.9
-        });
-        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-        ground.rotation.x = -Math.PI / 2;
-        ground.receiveShadow = true;
-        ground.position.set(7.5, 0, 5);
-        this.scene.add(ground);
+createTerrain() {
+    // Ground (15m x 10m)
+    const groundGeometry = new THREE.PlaneGeometry(15, 10);
+    const groundMaterial = new THREE.MeshLambertMaterial({ 
+        color: 0x8FBC8F,
+        transparent: true,
+        opacity: 0.9
+    });
+    const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    ground.position.set(7.5, 0, 5);
+    this.scene.add(ground);
 
-        // Paths
-        this.createPaths();
-        
-        // Simple fence posts
-        this.createFence();
+    // Paths
+    this.createPaths();
 
-        // Wire screen (tela de arame)
-        this.createWireScreen();
+    // Simple fence posts
+    this.createFence();
 
-        // Tela divisória ZONA 1+3 vs ZONA 2
-        this.createVerticalDivisionFence(7);
+    // Wire screen (tela de arame)
+    this.createWireScreen();
 
-        console.log('Terrain created');
-    }
+    console.log('Terrain created');
+}
+
 
     createPaths() {
         const pathMaterial = new THREE.MeshLambertMaterial({ color: 0xD2B48C });
