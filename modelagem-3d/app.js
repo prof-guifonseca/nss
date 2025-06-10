@@ -394,14 +394,15 @@ createZone3Elements() {
     const baseZ = 7.5; // MAIS PARA CIMA (afasta do caminho horizontal)
 
     // Tanque Principal (circular elevado)
-    const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, 1.2, 16);
+    const tankHeight = 1.2;
+    const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, tankHeight, 16);
     const tankMaterial = new THREE.MeshLambertMaterial({ 
         color: 0x4682B4,
         transparent: true,
         opacity: 0.7
     });
     const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(baseX, 1.1, baseZ);
+    tank.position.set(baseX, tankHeight / 2, baseZ); // base no chão
     tank.castShadow = true;
     tank.userData = {
         name: "Tanque Principal",
@@ -411,21 +412,24 @@ createZone3Elements() {
     this.interactiveObjects.push(tank);
 
     // Superfície da água
-    const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.05, 16);
+    const waterHeight = 0.05;
+    const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, waterHeight, 16);
     const waterMaterial = new THREE.MeshLambertMaterial({ 
         color: 0x1E90FF,
         transparent: true,
         opacity: 0.8
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(baseX, 1.65, baseZ);
+    // Coloca a superfície da água no topo do tanque
+    water.position.set(baseX, tankHeight - (waterHeight / 2), baseZ);
     this.scene.add(water);
 
     // Sistema Biofiltro — ACOPLADO NA ESQUERDA do tanque
-    const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.5, 8);
+    const biofilterHeight = 1.5;
+    const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, biofilterHeight, 8);
     const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
     const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(baseX - 1.25 - 0.35, 0.75, baseZ); // ACOPLADO À ESQUERDA
+    biofilter.position.set(baseX - 1.25 - 0.35, biofilterHeight / 2, baseZ); // base no chão
     biofilter.castShadow = true;
     biofilter.userData = {
         name: "Sistema Biofiltro",
@@ -435,10 +439,11 @@ createZone3Elements() {
     this.interactiveObjects.push(biofilter);
 
     // Tanque de Reserva — À DIREITA do tanque principal
-    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, 0.8, 12);
+    const reserveHeight = 0.8;
+    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, reserveHeight, 12);
     const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
     const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(baseX + 2.5, 0.4, baseZ);
+    reserve.position.set(baseX + 2.5, reserveHeight / 2, baseZ); // base no chão
     reserve.castShadow = true;
     reserve.userData = {
         name: "Tanque Reserva",
@@ -451,7 +456,8 @@ createZone3Elements() {
     const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
     const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
     const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-    roofCatch.position.set(baseX + 2.5, 2.5, baseZ); // acima do tanque reserva
+    // Posiciona o telhado ACIMA do tanque reserva
+    roofCatch.position.set(baseX + 2.5, reserveHeight + 1.2, baseZ); // altura ajustada
     roofCatch.userData = {
         name: "Captação de Chuva",
         description: "Telhado para coleta de água da chuva direcionada ao sistema"
