@@ -59,7 +59,6 @@ createSystemElements() {
     this.createZone1Elements();
     this.createZone2Elements();
     this.createZone3Elements();
-    this.createEducationalSigns();
     console.log('System elements created');
 }
 
@@ -584,33 +583,6 @@ createZone3Elements(baseZ = 8.0) {
     this.scene.add(roofCatch);
     this.interactiveObjects.push(roofCatch);
 }
-
-    createEducationalSigns() {
-        const signMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-        const postMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-
-const signs = [
-    { x: 0.5, z: 1.5, name: "Minhocário" },
-    { x: 6.5, z: 5.5, name: "Horta Vertical" },
-    { x: 4, z: 9, name: "Tanque de Tilápias" }
-];
-
-    signs.forEach(sign => {
-        // Poste da placa
-        const postGeometry = new THREE.CylinderGeometry(0.03, 0.03, 1.5);
-        const post = new THREE.Mesh(postGeometry, postMaterial);
-        post.position.set(sign.x, 0.75, sign.z);
-        this.scene.add(post);
-
-        // Placa
-        const signGeometry = new THREE.BoxGeometry(0.8, 0.3, 0.05);
-        const signBoard = new THREE.Mesh(signGeometry, signMaterial);
-        signBoard.position.set(sign.x, 1.3, sign.z);
-
-        // Ajusta rotação da Horta Vertical
-        if (sign.name === "Horta Vertical") {
-            signBoard.rotation.y = Math.PI / 2; // 90 graus em radianos
-        }
 
         signBoard.userData = {
             name: `Placa: ${sign.name}`,
