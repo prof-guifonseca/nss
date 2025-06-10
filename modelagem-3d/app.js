@@ -505,21 +505,17 @@ createZone2Elements() {
     this.scene.add(post);
 }
 
-createZone3Layout(config) {
-    // Usa valores padrão caso não sejam passados no config
-    const {
-        tankX = 10.5,
-        tankZ = 6.5,
-        lineZ = 5.0,
-        clarifierOffsetX = -1.5,
-        biofilterOffsetX = 0.0,
-        pumpOffsetX = +1.5
-    } = config;
+createZone3Elements() {
+    const tankX = 10.5;  // posição X do tanque
+    const tankZ = 6.5;   // posição Z do tanque
 
-    // ======= DIMENSÕES FIXAS =======
+    const lineZ = 5.0;   // Z da linha dos componentes
+
+    const clarifierX = tankX - 1.5; // clarificador à esquerda
+    const biofilterX = tankX;       // biofiltro centralizado
+    const pumpX = tankX + 1.5;      // bomba à direita
+
     const tankD = 2.5, clarifierD = 1.5, biofilterD = 1.0, pumpH = 0.5;
-
-    // ======= CRIAÇÃO DOS ELEMENTOS =======
 
     // Tanque principal
     const tank = new THREE.Mesh(
@@ -539,7 +535,7 @@ createZone3Layout(config) {
       new THREE.CylinderGeometry(clarifierD/2, clarifierD/2, 0.8, 16),
       new THREE.MeshLambertMaterial({ color: 0x87CEEB, transparent: true, opacity: 0.6 })
     );
-    clarifier.position.set(tankX + clarifierOffsetX, 0.4, lineZ);
+    clarifier.position.set(clarifierX, 0.4, lineZ);
     clarifier.userData = {
         name: "Clarificador (Decantador)",
         description: "Remove sólidos em suspensão antes da filtragem biológica."
@@ -552,7 +548,7 @@ createZone3Layout(config) {
       new THREE.CylinderGeometry(biofilterD/2, biofilterD/2, 1.2, 12),
       new THREE.MeshLambertMaterial({ color: 0x556B2F })
     );
-    biof.position.set(tankX + biofilterOffsetX, 0.6, lineZ);
+    biof.position.set(biofilterX, 0.6, lineZ);
     biof.userData = {
         name: "Biofiltro",
         description: "Filtro biológico com mídias filtrantes (bactérias nitrificantes)."
@@ -565,7 +561,7 @@ createZone3Layout(config) {
       new THREE.CylinderGeometry(0.3, 0.3, pumpH, 12),
       new THREE.MeshLambertMaterial({ color: 0x333333 })
     );
-    pump.position.set(tankX + pumpOffsetX, pumpH/2, lineZ);
+    pump.position.set(pumpX, pumpH/2, lineZ);
     pump.userData = {
         name: "Bomba de Circulação",
         description: "Bomba de água que conecta e circula entre os módulos."
@@ -573,7 +569,6 @@ createZone3Layout(config) {
     this.scene.add(pump);
     this.interactiveObjects.push(pump);
 }
-
 
     setupEventListeners() {
         // Mouse events
