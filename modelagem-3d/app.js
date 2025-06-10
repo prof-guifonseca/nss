@@ -391,7 +391,7 @@ createZone3Elements() {
     // ZONA 3: Piscicultura Integrada (40m²)
 
     const baseX = 3.5; // MAIS À ESQUERDA
-    const baseZ = 7.5; // MAIS PARA CIMA (afasta do caminho horizontal)
+    const baseZ = 9.0; // AJUSTADO → MAIS PRÓXIMO DO ALAMBRADO (evita invadir o caminho)
 
     // Tanque Principal (circular elevado)
     const tankHeight = 1.2;
