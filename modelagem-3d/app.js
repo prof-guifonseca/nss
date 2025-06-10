@@ -387,11 +387,11 @@ this.scene.add(bokashiGroup);
         this.scene.add(post);
     }
 
-createZone3Elements() {
+createZone3Elements(baseZ = 8.0) {
     // ZONA 3: Piscicultura Integrada (40m²)
+    // baseZ → passado como parâmetro → define posição central Z dos elementos
 
     const baseX = 3.5; // MAIS À ESQUERDA
-    const baseZ = 9.0; // AJUSTADO → MAIS PRÓXIMO DO ALAMBRADO (evita invadir o caminho)
 
     // Tanque Principal (circular elevado)
     const tankHeight = 1.2;
