@@ -370,7 +370,7 @@ createZone1Elements() {
     this.scene.add(composter);
     this.interactiveObjects.push(composter);
 
-    // Sistema Bokashi (bombonas azuis/pretas) - encostado na composteira
+    // Sistema Bokashi (bombonas azuis/pretas) - colado à composteira
     const bokashiGroup = new THREE.Group();
     for (let i = 0; i < 3; i++) {
         const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
@@ -381,6 +381,7 @@ createZone1Elements() {
         barrelMesh.position.set(i * 0.4, 0.6, 0);
         barrelMesh.castShadow = true;
 
+        // UserData para cada barril
         barrelMesh.userData = {
             name: "Sistema Bokashi",
             description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
@@ -390,7 +391,7 @@ createZone1Elements() {
         bokashiGroup.add(barrelMesh);
     }
 
-    // Posição ajustada para ficar junto da composteira
+    // Colado à composteira (um pouco à direita dela)
     bokashiGroup.position.set(4.5, 0, 1);
     bokashiGroup.userData = {
         name: "Sistema Bokashi",
@@ -398,11 +399,14 @@ createZone1Elements() {
     };
     this.scene.add(bokashiGroup);
 
-    // Horta Horizontal (canteiros elevados) - ampliada
-    const gardenGeometry = new THREE.BoxGeometry(5.5, 0.3, 3);
+    // Horta Horizontal (canteiros elevados) - com corredor + expandida
+    const gardenGeometry = new THREE.BoxGeometry(5.2, 0.3, 3); // largura levemente reduzida para abrir corredor
     const gardenMaterial = new THREE.MeshLambertMaterial({ color: 0x228B22 });
     const garden = new THREE.Mesh(gardenGeometry, gardenMaterial);
-    garden.position.set(2.75, 0.15, 3.5);
+
+    // Deslocada para a direita, deixando ~0.3m de corredor entre horta vertical e horta horizontal
+    garden.position.set(3.2, 0.15, 3.5);
+
     garden.userData = {
         name: "Horta Horizontal",
         description: "Canteiros elevados de madeira/blocos para cultivo de hortaliças"
@@ -410,11 +414,14 @@ createZone1Elements() {
     this.scene.add(garden);
     this.interactiveObjects.push(garden);
 
-    // Horta Vertical (garrafas PET) - colada no alambrado
+    // Horta Vertical (garrafas PET) - aproveitando o alambrado
     const verticalGardenGeometry = new THREE.BoxGeometry(0.3, 2.0, 3);
     const verticalGardenMaterial = new THREE.MeshLambertMaterial({ color: 0x32CD32 });
     const verticalGarden = new THREE.Mesh(verticalGardenGeometry, verticalGardenMaterial);
-    verticalGarden.position.set(0.3, 1, 3.5); // junto do alambrado esquerdo
+
+    // Posição bem colada no alambrado (X quase zero), Z ajustado para alinhar com a horta horizontal
+    verticalGarden.position.set(0.15, 1, 3.5);
+
     verticalGarden.userData = {
         name: "Horta Vertical",
         description: "Parede vertical com garrafas PET para aproveitamento de espaço"
