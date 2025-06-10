@@ -185,7 +185,7 @@ createWireScreen() {
     const terrainHeight = 10;
     const screenHeight = 1.8;
     const gridSpacing = 0.3;
-    const offset = 0.05; // recuo para não sobrepor o poste
+    const offset = 0.05;
 
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -198,15 +198,15 @@ createWireScreen() {
         const vertices = [];
 
         // Linhas verticais
-        for (let x = 0; x <= width; x += gridSpacing) {
+        for (let x = -width / 2; x <= width / 2; x += gridSpacing) {
             vertices.push(x, 0, 0);
             vertices.push(x, height, 0);
         }
 
         // Linhas horizontais
         for (let y = 0; y <= height; y += gridSpacing) {
-            vertices.push(0, y, 0);
-            vertices.push(width, y, 0);
+            vertices.push(-width / 2, y, 0);
+            vertices.push(width / 2, y, 0);
         }
 
         gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
@@ -216,32 +216,23 @@ createWireScreen() {
 
     // Frente (Z = 0)
     const front = createGridMesh(terrainWidth, screenHeight);
-    front.position.set(0, 0, 0); // origem no canto
-    front.position.set(0, 0, 0 + offset); // aplicar offset
-    front.position.x += 0; // tela já começa em X = 0
-    front.position.y += screenHeight / 2;
+    front.position.set(terrainWidth / 2, screenHeight / 2, 0 + offset);
     this.scene.add(front);
 
     // Trás (Z = terrainHeight)
     const back = createGridMesh(terrainWidth, screenHeight);
-    back.position.set(0, 0, terrainHeight - offset);
-    back.position.x += 0;
-    back.position.y += screenHeight / 2;
+    back.position.set(terrainWidth / 2, screenHeight / 2, terrainHeight - offset);
     this.scene.add(back);
 
-    // Esquerda (X = 0), parede em Z, com rotação em Y
+    // Esquerda (X = 0), parede em Z
     const left = createGridMesh(terrainHeight, screenHeight);
-    left.position.set(0 + offset, 0, 0);
-    left.position.z += 0;
-    left.position.y += screenHeight / 2;
+    left.position.set(0 + offset, screenHeight / 2, terrainHeight / 2);
     left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
-    // Direita (X = terrainWidth)
+    // Direita (X = terrainWidth), parede em Z
     const right = createGridMesh(terrainHeight, screenHeight);
-    right.position.set(terrainWidth - offset, 0, 0);
-    right.position.z += 0;
-    right.position.y += screenHeight / 2;
+    right.position.set(terrainWidth - offset, screenHeight / 2, terrainHeight / 2);
     right.rotation.y = Math.PI / 2;
     this.scene.add(right);
 }
