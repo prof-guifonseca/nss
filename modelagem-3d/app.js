@@ -257,17 +257,18 @@ createVerticalDivisionFence(xPosition = 7) {
     const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
 
     const terrainHeight = 10;
-    const postSpacing = 1.5;
 
-    // Cria os postes ao longo de Z
-    for (let z = 0; z <= terrainHeight; z += postSpacing) {
+    // POSTS APENAS NAS PONTAS
+    const postPositionsZ = [0, terrainHeight]; // só no início e fim
+
+    postPositionsZ.forEach(z => {
         const post = new THREE.Mesh(postGeometry, fenceMaterial);
         post.position.set(xPosition, 0.9, z);
         post.castShadow = true;
         this.scene.add(post);
-    }
+    });
 
-    // Cria a tela
+    // Cria a tela entre as pontas
     const screenHeight = 1.8;
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -280,7 +281,7 @@ createVerticalDivisionFence(xPosition = 7) {
     const vertices = [];
 
     const height = screenHeight;
-    const width = terrainHeight; // no eixo Z
+    const width = terrainHeight;
 
     // Linhas verticais (em Z)
     for (let z = -width / 2; z <= width / 2; z += gridSpacing) {
