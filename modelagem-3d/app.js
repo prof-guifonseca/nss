@@ -439,74 +439,102 @@ this.scene.add(bokashiGroup);
 }
 
 createZone2Elements() {
-    // ZONA 2: Galinheiro + Energia Solar (40m²)
-    
-    // Galinheiro Principal — ROTACIONADO
-    const coopGeometry = new THREE.BoxGeometry(4, 2.5, 3); // INVERTEMOS largura e profundidade
+    // ZONA 2: Galinheiro + Energia Solar (repensado)
+
+    // --- Galinheiro principal
+    const coopGeometry = new THREE.BoxGeometry(4, 2.5, 3);
     const coopMaterial = new THREE.MeshLambertMaterial({ color: 0xDEB887 });
     const coop = new THREE.Mesh(coopGeometry, coopMaterial);
-
-    // Encostado no alambrado de cima → Z = 8.5
     coop.position.set(10, 1.25, 8.5);
-
-    // Rotacionado para que a frente fique para baixo
     coop.rotation.y = Math.PI;
-
     coop.castShadow = true;
     coop.userData = {
         name: "Galinheiro Principal",
-        description: "Estrutura de madeira/bambu com telhado metálico para 12-15 galinhas poedeiras"
+        description: "Estrutura de madeira/bambu com poleiros internos e porta frontal para 12-15 galinhas."
     };
     this.scene.add(coop);
     this.interactiveObjects.push(coop);
 
-    // Telhado — ROTACIONADO
-    const roofGeometry = new THREE.BoxGeometry(4.5, 0.15, 3.5); // invertido
+    // --- Telhado
+    const roofGeometry = new THREE.BoxGeometry(4.5, 0.15, 3.5);
     const roofMaterial = new THREE.MeshLambertMaterial({ color: 0x708090 });
     const roof = new THREE.Mesh(roofGeometry, roofMaterial);
-
-    // Mesmo centro do galinheiro
     roof.position.set(10, 2.6, 8.5);
-    roof.rotation.y = Math.PI; // igual ao galinheiro
-
+    roof.rotation.y = Math.PI;
     roof.castShadow = true;
     this.scene.add(roof);
 
-    // Piquete Externo (cerca) — posicionado na lateral direita do galinheiro
-    const fenceGeometry = new THREE.BoxGeometry(0.05, 1.8, 3); // altura = 1.8, profundidade nova = 3
+    // --- Porta frontal
+    const doorGeometry = new THREE.BoxGeometry(1.0, 1.5, 0.05);
+    const doorMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513, transparent: true, opacity: 0.7 });
+    const door = new THREE.Mesh(doorGeometry, doorMaterial);
+    // Porta na frente (lado inferior do galinheiro)
+    door.position.set(10, 0.75, 8.5 - 1.525); // frente
+    door.castShadow = true;
+    door.userData = {
+        name: "Porta do Galinheiro",
+        description: "Porta frontal ripada com acesso ao interior do galinheiro."
+    };
+    this.scene.add(door);
+    this.interactiveObjects.push(door);
+
+    // --- "Salto" (rampa de acesso)
+    const rampGeometry = new THREE.BoxGeometry(1.0, 0.1, 1.5);
+    const rampMaterial = new THREE.MeshLambertMaterial({ color: 0xA0522D });
+    const ramp = new THREE.Mesh(rampGeometry, rampMaterial);
+    // Inclinação leve
+    ramp.rotation.x = -Math.PI / 8;
+    ramp.position.set(10, 0.1, 8.5 - 2.3); // na frente da porta
+    ramp.castShadow = true;
+    ramp.userData = {
+        name: "Rampa de Acesso",
+        description: "Rampa inclinada para entrada e saída das galinhas."
+    };
+    this.scene.add(ramp);
+    this.interactiveObjects.push(ramp);
+
+    // --- Poleiros internos (2 barras horizontais)
+    const poleGeometry = new THREE.CylinderGeometry(0.05, 0.05, 3.5, 12);
+    const poleMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+
+    const pole1 = new THREE.Mesh(poleGeometry, poleMaterial);
+    pole1.rotation.z = Math.PI / 2;
+    pole1.position.set(10, 1.8, 8.5); // mais alto
+    this.scene.add(pole1);
+
+    const pole2 = new THREE.Mesh(poleGeometry, poleMaterial);
+    pole2.rotation.z = Math.PI / 2;
+    pole2.position.set(10, 1.4, 8.5); // mais baixo
+    this.scene.add(pole2);
+
+    // --- Piquete lateral
+    const fenceGeometry = new THREE.BoxGeometry(0.05, 1.8, 3);
     const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
     const fence1 = new THREE.Mesh(fenceGeometry, fenceMaterial);
-
-    // Posição lateral direita → X = 12 (encostado no alambrado direito), mesmo Z do galinheiro
     fence1.position.set(12, 0.9, 8.5);
-
     this.scene.add(fence1);
 
-    // Painel Solar — ajustado para novo contexto, colocado na lateral esquerda do galinheiro
+    // --- Painel solar
     const solarGeometry = new THREE.BoxGeometry(1.6, 0.1, 1.0);
     const solarMaterial = new THREE.MeshLambertMaterial({ color: 0x191970 });
     const solarPanel = new THREE.Mesh(solarGeometry, solarMaterial);
-
-    // Coloca o painel um pouco à esquerda e acima do galinheiro
     solarPanel.position.set(8.5, 3.2, 8.5);
-    solarPanel.rotation.y = Math.PI; // opcional: para alinhar com a nova orientação
+    solarPanel.rotation.y = Math.PI;
     solarPanel.userData = {
         name: "Sistema Solar",
-        description: "1-2 painéis solares para alimentar iluminação e bomba d'água"
+        description: "1-2 painéis solares para alimentar iluminação e bomba d'água."
     };
     this.scene.add(solarPanel);
     this.interactiveObjects.push(solarPanel);
 
-    // Poste do painel solar
+    // --- Poste do painel solar
     const postGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.8);
     const postMaterial = new THREE.MeshLambertMaterial({ color: 0x696969 });
     const post = new THREE.Mesh(postGeometry, postMaterial);
-
-    // Mesma posição X/Z do painel solar (no chão)
     post.position.set(8.5, 0.9, 8.5);
-
     this.scene.add(post);
 }
+
 
 createZone3Elements() {
     // NOVAS coordenadas: Tanque ao lado do galinheiro, 3 itens abaixo em linha horizontal
