@@ -506,71 +506,46 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-    const baseX = 1; // desloca tudo para não invadir
-    const baseZ = 5.5; // zona 3 no fundo
+    const baseX = 4.5, baseZ = 7.5;
+    const tankD = 2.5, clarifierD = 1.5, biofilterD = 1.0, pumpH = 0.5;
 
-    // 1. Tanque Principal
+    // Tanque principal
     const tank = new THREE.Mesh(
-        new THREE.CylinderGeometry(1, 1, 1, 32),
-        new THREE.MeshLambertMaterial({ color: 0x4682B4, transparent: true, opacity: 0.7 })
+      new THREE.CylinderGeometry(tankD/2, tankD/2, 1.2, 16),
+      new THREE.MeshLambertMaterial({ color: 0x4682B4, transparent: true, opacity: 0.7 })
     );
-    tank.position.set(baseX + 1.5, 0.5, baseZ + 2);
-    tank.userData = { name: "Tanque Principal", description: "Tanque para criação de peixes" };
-    this.scene.add(tank); this.interactiveObjects.push(tank);
+    tank.position.set(baseX, 0.6, baseZ);
+    this.scene.add(tank);
+    this.interactiveObjects.push(tank);
 
-    // Superfície da água
-    const water = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.95, 0.95, 0.05, 32),
-        new THREE.MeshLambertMaterial({ color: 0x1E90FF, transparent: true, opacity: 0.8 })
-    );
-    water.position.set(baseX + 1.5, 1 - 0.025, baseZ + 2);
-    this.scene.add(water);
-
-    // 2. Clarificador
+    // Clarificador (decantador)
     const clarifier = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.3, 0.3, 0.9, 16),
-        new THREE.MeshLambertMaterial({ color: 0x708090, transparent: true, opacity: 0.5 })
+      new THREE.CylinderGeometry(clarifierD/2, clarifierD/2, 0.8, 16),
+      new THREE.MeshLambertMaterial({ color: 0x87CEEB, transparent: true, opacity: 0.6 })
     );
-    clarifier.position.set(baseX + 4.5, 0.45, baseZ + 1);
-    clarifier.userData = { name: "Clarificador", description: "Remove sólidos grossos (~50%)" };
-    this.scene.add(clarifier); this.interactiveObjects.push(clarifier);
+    clarifier.position.set(baseX + 2.0, 0.4, baseZ);
+    this.scene.add(clarifier);
+    this.interactiveObjects.push(clarifier);
 
-    // 3. Filtro fino / Biofiltro
-    const filter = new THREE.Mesh(
-        new THREE.BoxGeometry(0.6, 0.8, 0.6),
-        new THREE.MeshLambertMaterial({ color: 0x556B2F })
+    // Biofiltro (ao lado do clarificador)
+    const biof = new THREE.Mesh(
+      new THREE.CylinderGeometry(biofilterD/2, biofilterD/2, 1.2, 12),
+      new THREE.MeshLambertMaterial({ color: 0x556B2F })
     );
-    filter.position.set(baseX + 0.8, 0.4, baseZ + 4);
-    filter.userData = { name: "Filtro Fino / Biofiltro", description: "Remove sólidos finos com substrato" };
-    this.scene.add(filter); this.interactiveObjects.push(filter);
+    biof.position.set(baseX + 2.0, 0.6, baseZ + 1.8);
+    this.scene.add(biof);
+    this.interactiveObjects.push(biof);
 
-    // 4. Sump (reserva)
-    const sump = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.25, 0.25, 0.6, 16),
-        new THREE.MeshLambertMaterial({ color: 0x2F4F4F })
-    );
-    sump.position.set(baseX + 4.5, 0.3, baseZ + 3.5);
-    sump.userData = { name: "Sump (reserva)", description: "Tanque para coleta final e bomba" };
-    this.scene.add(sump); this.interactiveObjects.push(sump);
-
-    // 5. Bomba
+    // Bomba / motor para transferência
     const pump = new THREE.Mesh(
-        new THREE.BoxGeometry(0.4, 0.4, 0.4),
-        new THREE.MeshLambertMaterial({ color: 0x000000 })
+      new THREE.CylinderGeometry(0.3, 0.3, pumpH, 12),
+      new THREE.MeshLambertMaterial({ color: 0x333333 })
     );
-    pump.position.set(baseX + 4.5, 0.2, baseZ + 4.5);
-    pump.userData = { name: "Bomba de Recirculação", description: "Circula água de volta ao tanque" };
-    this.scene.add(pump); this.interactiveObjects.push(pump);
-
-    // 6. Telhado captação de chuva
-    const roof = new THREE.Mesh(
-        new THREE.BoxGeometry(2.5, 0.2, 1.0),
-        new THREE.MeshLambertMaterial({ color: 0xB22222 })
-    );
-    roof.position.set(baseX + 2.5, 1.8, baseZ + 5.2);
-    roof.userData = { name: "Telhado de Captação", description: "Coleta água da chuva para o sistema" };
-    this.scene.add(roof); this.interactiveObjects.push(roof);
+    pump.position.set(baseX + 1.0, pumpH/2, baseZ + 0.6);
+    this.scene.add(pump);
+    this.interactiveObjects.push(pump);
 }
+
  
     setupEventListeners() {
         // Mouse events
