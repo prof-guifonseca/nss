@@ -387,17 +387,14 @@ for (let i = 0; i < 3; i++) {
         description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
     };
 
-    // Adiciona cada barril individualmente aos objetos interativos
     this.interactiveObjects.push(barrelMesh);
-
-    // Adiciona o barril no grupo (para organização visual)
     bokashiGroup.add(barrelMesh);
 }
 
-// Define a posição do grupo todo
-bokashiGroup.position.set(5.5, 0, 1);
+// Define a posição do grupo todo (AJUSTADO!)
+bokashiGroup.position.set(4.5, 0, 1); // ---> Mais próximo da Composteira (antes era 5.5)
 
-// Opcional: manter userData no grupo (não interfere, pode deixar)
+// Mantém userData no grupo (ok)
 bokashiGroup.userData = {
     name: "Sistema Bokashi",
     description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
@@ -405,7 +402,6 @@ bokashiGroup.userData = {
 
 // Adiciona o grupo à cena
 this.scene.add(bokashiGroup);
-
 
         // Horta Horizontal (canteiros elevados)
         const gardenGeometry = new THREE.BoxGeometry(3, 0.3, 3);
