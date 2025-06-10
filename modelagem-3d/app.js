@@ -506,8 +506,8 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-    const baseX = 10; // CENTRAL da zona 3 (lado direito)
-    const baseZ = 6.5; // LEVE deslocamento p/ centro da zona
+    const baseX = 11.25; // CENTRAL da zona 3 (lado direito)
+    const baseZ = 5;     // CENTRAL vertical da zona
 
     const tankD = 2.5, clarifierD = 1.5, biofilterD = 1.0, pumpH = 0.5;
     const spacingZ = 1.0; // pequeno espaçamento entre elementos em Z
