@@ -505,113 +505,63 @@ createZone2Elements() {
     this.scene.add(post);
 }
 
-createZone3Elements(baseZ = 8.0) {
-    // ZONA 3: Piscicultura Integrada (40m²)
-    const baseX = 3.5;
+createZone3Elements() {
+  const baseX = 3.5, baseZ = 8;
+  
+  // 1. Tank (Tanque Principal)
+  const tank = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.25,1.25,1.2,16),
+    new THREE.MeshLambertMaterial({color:0x4682B4, transparent:true, opacity:0.7})
+  );
+  tank.position.set(baseX,0.6,baseZ);
+  tank.userData = {name:"Tanque Principal", description:"Relação água-piscicultura"};
+  this.scene.add(tank); this.interactiveObjects.push(tank);
 
-    // === 1. TANQUE PRINCIPAL ===
-    const tankHeight = 1.2;
-    const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, tankHeight, 16);
-    const tankMaterial = new THREE.MeshLambertMaterial({ 
-        color: 0x4682B4,
-        transparent: true,
-        opacity: 0.7
-    });
-    const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(baseX, tankHeight / 2, baseZ);
-    tank.castShadow = true;
-    tank.userData = {
-        name: "Tanque Principal",
-        description: "Tanque 1000-3000L com geomembrana para criação de tilápias"
-    };
-    this.scene.add(tank);
-    this.interactiveObjects.push(tank);
+  // 2. Clarificador (simplificado)
+  const clarHeight=1, clar=Math.min(0.6, clarHeight);
+  const clarifier = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.8,0.8,clarHeight,12),
+    new THREE.MeshLambertMaterial({color:0x708090, transparent:true, opacity:0.5})
+  );
+  clarifier.position.set(baseX+2,clarHeight/2,baseZ);
+  clarifier.userData={name:"Clarificador", description:"Remove sólidos grossos (~50%)"};
+  this.scene.add(clarifier); this.interactiveObjects.push(clarifier);
 
-    // === 2. SUPERFÍCIE DA ÁGUA ===
-    const waterHeight = 0.05;
-    const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, waterHeight, 16);
-    const waterMaterial = new THREE.MeshLambertMaterial({ 
-        color: 0x1E90FF,
-        transparent: true,
-        opacity: 0.8
-    });
-    const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(baseX, tankHeight - (waterHeight / 2), baseZ);
-    this.scene.add(water);
+  // 3. Filtro fino / Biofiltro
+  const filter = new THREE.Mesh(
+    new THREE.BoxGeometry(0.8,1.0,0.8),
+    new THREE.MeshLambertMaterial({color:0x556B2F})
+  );
+  filter.position.set(baseX+2,0.5,baseZ+2);
+  filter.userData={name:"Filtro Fino/Biofiltro", description:"Remove sólidos finos via substrato"};
+  this.scene.add(filter); this.interactiveObjects.push(filter);
 
-    // === 3. SISTEMA BIOFILTRO ===
-    const biofilterHeight = 1.5;
-    const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, biofilterHeight, 8);
-    const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
-    const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(baseX - 1.25 - 0.35, biofilterHeight / 2, baseZ);
-    biofilter.castShadow = true;
-    biofilter.userData = {
-        name: "Sistema Biofiltro",
-        description: "Filtro com brita + carvão + areia para filtração biológica da água"
-    };
-    this.scene.add(biofilter);
-    this.interactiveObjects.push(biofilter);
+  // 4. Sump + Bomba (com conexão visual)
+  const sump = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.6,0.6,0.6,12),
+    new THREE.MeshLambertMaterial({color:0x2F4F4F})
+  );
+  sump.position.set(baseX,0.3,baseZ+2);
+  sump.userData={name:"Sump (Reserva)", description:"Coleta final e recirculação via bomba"};
+  this.scene.add(sump); this.interactiveObjects.push(sump);
 
-    // === 4. TANQUE DE RESERVA ===
-    const reserveHeight = 0.8;
-    const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, reserveHeight, 12);
-    const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
-    const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(baseX + 2.5, reserveHeight / 2, baseZ);
-    reserve.castShadow = true;
-    reserve.userData = {
-        name: "Tanque Reserva",
-        description: "Tanque auxiliar de decantação e reserva de água tratada"
-    };
-    this.scene.add(reserve);
-    this.interactiveObjects.push(reserve);
+  // 5. Bomba (motor)
+  const pump = new THREE.Mesh(
+    new THREE.BoxGeometry(0.4,0.4,0.4),
+    new THREE.MeshLambertMaterial({color:0x000000})
+  );
+  pump.position.set(baseX-0.6,0.3,baseZ+2);
+  pump.userData={name:"Bomba de Recirculação", description:"Define fluxo de água pro tanque principal"};
+  this.scene.add(pump); this.interactiveObjects.push(pump);
 
-    // === 5. TELHADO DE CAPTAÇÃO ===
-    const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
-    const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
-    const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-
-    // Recuado em Z e inclinado em X
-    roofCatch.position.set(baseX + 2.5, reserveHeight + 1.2, baseZ - 0.5);
-    roofCatch.rotation.x = -Math.PI / 10; // ~18 graus de inclinação
-
-    roofCatch.userData = {
-        name: "Captação de Chuva",
-        description: "Telhado inclinado para coleta de água da chuva direcionada ao sistema"
-    };
-    this.scene.add(roofCatch);
-    this.interactiveObjects.push(roofCatch);
-
-    // === 6. CALHA DE CONDUÇÃO ===
-    const gutterGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.6, 8);
-    const gutterMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-    const gutter = new THREE.Mesh(gutterGeometry, gutterMaterial);
-
-    // Posição: ponta do telhado para cima do tanque reserva
-    gutter.position.set(baseX + 2.5 + 1.2, reserveHeight + 0.6, baseZ - 0.5);
-    gutter.rotation.z = Math.PI / 2; // Horizontal
-
-    gutter.userData = {
-        name: "Calha de Captação",
-        description: "Calha conduzindo água do telhado para o tanque reserva"
-    };
-    this.scene.add(gutter);
-    this.interactiveObjects.push(gutter);
-
-    // === 7. POSTES DE SUPORTE DO TELHADO ===
-    const postHeight = reserveHeight + 1.2;
-    const postGeometry = new THREE.CylinderGeometry(0.05, 0.05, postHeight, 8);
-    const postMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-
-    // Postes nas extremidades da frente do telhado
-    const postLeft = new THREE.Mesh(postGeometry, postMaterial);
-    postLeft.position.set(baseX + 2.5 - (2.5 / 2), postHeight / 2, baseZ - 0.5 + (1.5 / 2));
-    this.scene.add(postLeft);
-
-    const postRight = new THREE.Mesh(postGeometry, postMaterial);
-    postRight.position.set(baseX + 2.5 + (2.5 / 2), postHeight / 2, baseZ - 0.5 + (1.5 / 2));
-    this.scene.add(postRight);
+  // 6. Telhado + conexão chuva > sump
+  const roof = new THREE.Mesh(
+    new THREE.BoxGeometry(3,0.2,1.5),
+    new THREE.MeshLambertMaterial({color:0xB22222})
+  );
+  roof.position.set(baseX,1.8,baseZ+2);
+  roof.userData={name:"Telhado Captação", description:"Coleta água da chuva para manter nível do sump"};
+  this.scene.add(roof); this.interactiveObjects.push(roof);
 }
  
     setupEventListeners() {
