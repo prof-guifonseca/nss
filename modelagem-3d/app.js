@@ -185,6 +185,7 @@ createWireScreen() {
     const terrainHeight = 10;
     const screenHeight = 1.8;
     const gridSpacing = 0.3;
+    const offset = 0.05; // recuo para não sobrepor o poste
 
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -215,28 +216,32 @@ createWireScreen() {
 
     // Frente (Z = 0)
     const front = createGridMesh(terrainWidth, screenHeight);
-    front.position.set(0, 0, 0); // canto inferior esquerdo
-    front.position.x += 0;
-    front.position.y += 0;
-    front.position.z += 0;
-
-    front.position.set(terrainWidth / 2, screenHeight / 2, 0); // CENTRO da parede
+    front.position.set(0, 0, 0); // origem no canto
+    front.position.set(0, 0, 0 + offset); // aplicar offset
+    front.position.x += 0; // tela já começa em X = 0
+    front.position.y += screenHeight / 2;
     this.scene.add(front);
 
     // Trás (Z = terrainHeight)
     const back = createGridMesh(terrainWidth, screenHeight);
-    back.position.set(terrainWidth / 2, screenHeight / 2, terrainHeight);
+    back.position.set(0, 0, terrainHeight - offset);
+    back.position.x += 0;
+    back.position.y += screenHeight / 2;
     this.scene.add(back);
 
-    // Esquerda (X = 0), parede virada para o eixo Z
+    // Esquerda (X = 0), parede em Z, com rotação em Y
     const left = createGridMesh(terrainHeight, screenHeight);
-    left.position.set(0, screenHeight / 2, terrainHeight / 2);
+    left.position.set(0 + offset, 0, 0);
+    left.position.z += 0;
+    left.position.y += screenHeight / 2;
     left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
-    // Direita (X = terrainWidth), parede virada para o eixo Z
+    // Direita (X = terrainWidth)
     const right = createGridMesh(terrainHeight, screenHeight);
-    right.position.set(terrainWidth, screenHeight / 2, terrainHeight / 2);
+    right.position.set(terrainWidth - offset, 0, 0);
+    right.position.z += 0;
+    right.position.y += screenHeight / 2;
     right.rotation.y = Math.PI / 2;
     this.scene.add(right);
 }
