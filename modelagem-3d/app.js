@@ -142,9 +142,8 @@ class SisteminhaApp {
         // Wire screen (tela de arame)
         this.createWireScreen();
 
-        // Cerca transversal:
-        this.createTransversalFence(4.5);
-
+        // Tela divisória ZONA 1+3 vs ZONA 2
+        this.createVerticalDivisionFence(7);
 
         console.log('Terrain created');
     }
@@ -241,22 +240,22 @@ createWireScreen() {
     this.scene.add(right);
 }
 
-createTransversalFence(zPosition = 4.5) {
+createVerticalDivisionFence(xPosition = 7) {
     const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
     const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
 
-    const terrainWidth = 15;
-    const postSpacing = 1.5; // distância entre os postes
+    const terrainHeight = 10;
+    const postSpacing = 1.5;
 
-    // Cria os postes ao longo de X
-    for (let x = 0; x <= terrainWidth; x += postSpacing) {
+    // Cria os postes ao longo de Z
+    for (let z = 0; z <= terrainHeight; z += postSpacing) {
         const post = new THREE.Mesh(postGeometry, fenceMaterial);
-        post.position.set(x, 0.9, zPosition);
+        post.position.set(xPosition, 0.9, z);
         post.castShadow = true;
         this.scene.add(post);
     }
 
-    // Cria a tela (horizontal)
+    // Cria a tela
     const screenHeight = 1.8;
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -269,37 +268,29 @@ createTransversalFence(zPosition = 4.5) {
     const vertices = [];
 
     const height = screenHeight;
-    const width = terrainWidth;
+    const width = terrainHeight; // no eixo Z
 
-    // Linhas verticais (em X)
-    for (let x = -width / 2; x <= width / 2; x += gridSpacing) {
-        vertices.push(x, 0, 0);
-        vertices.push(x, height, 0);
+    // Linhas verticais (em Z)
+    for (let z = -width / 2; z <= width / 2; z += gridSpacing) {
+        vertices.push(0, 0, z);
+        vertices.push(0, height, z);
     }
 
     // Linhas horizontais (em Y)
     for (let y = 0; y <= height; y += gridSpacing) {
-        vertices.push(-width / 2, y, 0);
-        vertices.push(width / 2, y, 0);
+        vertices.push(0, y, -width / 2);
+        vertices.push(0, y, width / 2);
     }
 
     gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
     const screen = new THREE.LineSegments(gridGeometry, screenMaterial);
 
-    // Posiciona no eixo Z desejado
-    screen.position.set(terrainWidth / 2, 0, zPosition);
+    // Posiciona no eixo X desejado
+    screen.position.set(xPosition, 0, terrainHeight / 2);
 
     this.scene.add(screen);
 }
-
-    createSystemElements() {
-        this.createZone1Elements();
-        this.createZone2Elements();
-        this.createZone3Elements();
-        this.createEducationalSigns();
-        console.log('System elements created');
-    }
 
     createZone1Elements() {
         // ZONA 1: Produção de Insumos + Horta (50m²)
