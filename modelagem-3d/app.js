@@ -533,6 +533,32 @@ createZone2Elements() {
     const post = new THREE.Mesh(postGeometry, postMaterial);
     post.position.set(8.5, 0.9, 8.5);
     this.scene.add(post);
+    // Piquete (piso de verde escuro) na Zona 2
+const piqueteGeometry = new THREE.PlaneGeometry(7.5, 10);
+const piqueteMaterial = new THREE.MeshLambertMaterial({ 
+    color: 0x006400, // verde escuro
+    transparent: true,
+    opacity: 0.7
+});
+const piquete = new THREE.Mesh(piqueteGeometry, piqueteMaterial);
+piquete.rotation.x = -Math.PI / 2;
+piquete.receiveShadow = true;
+
+// Posição no centro da Zona 2
+piquete.position.set(11.25, 0.02, 5);
+
+// Adiciona userData para interatividade
+piquete.userData = {
+    name: "Zona de Piquete",
+    description: "Espaço de circulação livre das galinhas, integrado ao galinheiro."
+};
+
+// Adiciona ao cenário
+this.scene.add(piquete);
+
+// Adiciona como objeto interativo (para hover/click)
+this.interactiveObjects.push(piquete);
+
 }
 
 
