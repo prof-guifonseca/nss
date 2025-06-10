@@ -376,33 +376,36 @@ createZone1Elements() {
     this.interactiveObjects.push(composter);
 
     // Sistema Bokashi (bombonas azuis/pretas) - colado à composteira
-    const bokashiGroup = new THREE.Group();
-    for (let i = 0; i < 3; i++) {
-        const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
-        const barrelMaterial = new THREE.MeshLambertMaterial({ 
-            color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
-        });
-        const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
-        barrelMesh.position.set(i * 0.4, 0.6, 0);
-        barrelMesh.castShadow = true;
+const bokashiGroup = new THREE.Group();
+for (let i = 0; i < 3; i++) {
+    const barrel = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8);
+    const barrelMaterial = new THREE.MeshLambertMaterial({ 
+        color: i % 2 === 0 ? 0x0066CC : 0x2F2F2F 
+    });
+    const barrelMesh = new THREE.Mesh(barrel, barrelMaterial);
 
-        // UserData para cada barril
-        barrelMesh.userData = {
-            name: "Sistema Bokashi",
-            description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
-        };
+    // CORRIGIDO: espaçamento horizontal adequado (≈ 0.7 entre barris)
+    barrelMesh.position.set(i * 0.7, 0.6, 0); 
 
-        this.interactiveObjects.push(barrelMesh);
-        bokashiGroup.add(barrelMesh);
-    }
+    barrelMesh.castShadow = true;
 
-    // Colado à composteira (um pouco à direita dela)
-    bokashiGroup.position.set(4.5, 0, 1);
-    bokashiGroup.userData = {
+    // UserData para cada barril
+    barrelMesh.userData = {
         name: "Sistema Bokashi",
         description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
     };
-    this.scene.add(bokashiGroup);
+
+    this.interactiveObjects.push(barrelMesh);
+    bokashiGroup.add(barrelMesh);
+}
+
+// Colado à composteira (um pouco à direita dela)
+bokashiGroup.position.set(4.5, 0, 1);
+bokashiGroup.userData = {
+    name: "Sistema Bokashi",
+    description: "2-3 bombonas azuis/pretas para fermentação anaeróbica"
+};
+this.scene.add(bokashiGroup);
 
     // Horta Horizontal (canteiros elevados) - com corredor + expandida
     const gardenGeometry = new THREE.BoxGeometry(5.2, 0.3, 3); // largura levemente reduzida para abrir corredor
