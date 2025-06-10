@@ -506,14 +506,15 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-    const tankX = 10.5;  // posição X do tanque
-    const tankZ = 6.5;   // posição Z do tanque
+    // Posição ajustada conforme sua imagem MOVA AQUI.png
+    const tankX = 11.25;  // X da zona 3 (lado direito)
+    const tankZ = 7.0;    // Z um pouco acima da linha central, como no seu desenho
 
-    const lineZ = 5.0;   // Z da linha dos componentes
+    const lineZ = 5.0;    // Z da linha dos componentes Clarificador + Biofiltro + Bomba (como no seu desenho)
 
-    const clarifierX = tankX - 1.5; // clarificador à esquerda
-    const biofilterX = tankX;       // biofiltro centralizado
-    const pumpX = tankX + 1.5;      // bomba à direita
+    const clarifierX = tankX - 1.5; // clarificador à esquerda do tanque
+    const biofilterX = tankX;       // biofiltro alinhado com tanque
+    const pumpX = tankX + 1.5;      // bomba à direita do tanque
 
     const tankD = 2.5, clarifierD = 1.5, biofilterD = 1.0, pumpH = 0.5;
 
