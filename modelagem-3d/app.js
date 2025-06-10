@@ -430,56 +430,75 @@ createZone1Elements() {
     this.interactiveObjects.push(verticalGarden);
 }
 
-    createZone2Elements() {
-        // ZONA 2: Galinheiro + Energia Solar (40m²)
-        
-        // Galinheiro Principal
-        const coopGeometry = new THREE.BoxGeometry(3, 2.5, 4);
-        const coopMaterial = new THREE.MeshLambertMaterial({ color: 0xDEB887 });
-        const coop = new THREE.Mesh(coopGeometry, coopMaterial);
-        coop.position.set(10, 1.25, 3);
-        coop.castShadow = true;
-        coop.userData = {
-            name: "Galinheiro Principal",
-            description: "Estrutura de madeira/bambu com telhado metálico para 12-15 galinhas poedeiras"
-        };
-        this.scene.add(coop);
-        this.interactiveObjects.push(coop);
+createZone2Elements() {
+    // ZONA 2: Galinheiro + Energia Solar (40m²)
+    
+    // Galinheiro Principal — ROTACIONADO
+    const coopGeometry = new THREE.BoxGeometry(4, 2.5, 3); // INVERTEMOS largura e profundidade
+    const coopMaterial = new THREE.MeshLambertMaterial({ color: 0xDEB887 });
+    const coop = new THREE.Mesh(coopGeometry, coopMaterial);
 
-        // Telhado
-        const roofGeometry = new THREE.BoxGeometry(3.5, 0.15, 4.5);
-        const roofMaterial = new THREE.MeshLambertMaterial({ color: 0x708090 });
-        const roof = new THREE.Mesh(roofGeometry, roofMaterial);
-        roof.position.set(10, 2.6, 3);
-        roof.castShadow = true;
-        this.scene.add(roof);
+    // Encostado no alambrado de cima → Z = 8.5
+    coop.position.set(10, 1.25, 8.5);
 
-        // Piquete Externo (cerca)
-        const fenceGeometry = new THREE.BoxGeometry(0.05, 1.8, 4);
-        const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-        const fence1 = new THREE.Mesh(fenceGeometry, fenceMaterial);
-        fence1.position.set(12, 0.9, 3);
-        this.scene.add(fence1);
+    // Rotacionado para que a frente fique para baixo
+    coop.rotation.y = Math.PI;
 
-        // Painel Solar
-        const solarGeometry = new THREE.BoxGeometry(1.6, 0.1, 1.0);
-        const solarMaterial = new THREE.MeshLambertMaterial({ color: 0x191970 });
-        const solarPanel = new THREE.Mesh(solarGeometry, solarMaterial);
-        solarPanel.position.set(10, 3.2, 3);
-        solarPanel.userData = {
-            name: "Sistema Solar",
-            description: "1-2 painéis solares para alimentar iluminação e bomba d'água"
-        };
-        this.scene.add(solarPanel);
-        this.interactiveObjects.push(solarPanel);
+    coop.castShadow = true;
+    coop.userData = {
+        name: "Galinheiro Principal",
+        description: "Estrutura de madeira/bambu com telhado metálico para 12-15 galinhas poedeiras"
+    };
+    this.scene.add(coop);
+    this.interactiveObjects.push(coop);
 
-        // Poste do painel solar
-        const postGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.8);
-        const postMaterial = new THREE.MeshLambertMaterial({ color: 0x696969 });
-        const post = new THREE.Mesh(postGeometry, postMaterial);
-        post.position.set(10, 0.9, 3);
-        this.scene.add(post);
-    }
+    // Telhado — ROTACIONADO
+    const roofGeometry = new THREE.BoxGeometry(4.5, 0.15, 3.5); // invertido
+    const roofMaterial = new THREE.MeshLambertMaterial({ color: 0x708090 });
+    const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+
+    // Mesmo centro do galinheiro
+    roof.position.set(10, 2.6, 8.5);
+    roof.rotation.y = Math.PI; // igual ao galinheiro
+
+    roof.castShadow = true;
+    this.scene.add(roof);
+
+    // Piquete Externo (cerca) — posicionado na lateral direita do galinheiro
+    const fenceGeometry = new THREE.BoxGeometry(0.05, 1.8, 3); // altura = 1.8, profundidade nova = 3
+    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const fence1 = new THREE.Mesh(fenceGeometry, fenceMaterial);
+
+    // Posição lateral direita → X = 12 (encostado no alambrado direito), mesmo Z do galinheiro
+    fence1.position.set(12, 0.9, 8.5);
+
+    this.scene.add(fence1);
+
+    // Painel Solar — ajustado para novo contexto, colocado na lateral esquerda do galinheiro
+    const solarGeometry = new THREE.BoxGeometry(1.6, 0.1, 1.0);
+    const solarMaterial = new THREE.MeshLambertMaterial({ color: 0x191970 });
+    const solarPanel = new THREE.Mesh(solarGeometry, solarMaterial);
+
+    // Coloca o painel um pouco à esquerda e acima do galinheiro
+    solarPanel.position.set(8.5, 3.2, 8.5);
+    solarPanel.rotation.y = Math.PI; // opcional: para alinhar com a nova orientação
+    solarPanel.userData = {
+        name: "Sistema Solar",
+        description: "1-2 painéis solares para alimentar iluminação e bomba d'água"
+    };
+    this.scene.add(solarPanel);
+    this.interactiveObjects.push(solarPanel);
+
+    // Poste do painel solar
+    const postGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.8);
+    const postMaterial = new THREE.MeshLambertMaterial({ color: 0x696969 });
+    const post = new THREE.Mesh(postGeometry, postMaterial);
+
+    // Mesma posição X/Z do painel solar (no chão)
+    post.position.set(8.5, 0.9, 8.5);
+
+    this.scene.add(post);
+}
 
 createZone3Elements(baseZ = 8.0) {
     // ZONA 3: Piscicultura Integrada (40m²)
