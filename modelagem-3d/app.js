@@ -23,34 +23,35 @@ class SisteminhaApp {
         this.init();
     }
 
-    init() {
-        console.log('Initializing Sisteminha 3D...');
-        
-        // Check if THREE.js is loaded
-        if (typeof THREE === 'undefined') {
-            console.error('THREE.js not loaded');
-            this.showError('Erro ao carregar bibliotecas 3D');
-            return;
-        }
-        
-try {
-    this.setupScene();
-    this.setupLighting();
-    this.setupControls();
-    this.createTerrain();
-    this.createSystemElements();
+init() {
+    console.log('Initializing Sisteminha 3D...');
 
-    // Adiciona a cerca divisória entre ZONA 1+3 e ZONA 2
-    this.createVerticalDivisionFence(7.5 + 0.05); // ajuste fino para não colidir com os postes
+    if (typeof THREE === 'undefined') {
+        console.error('THREE.js not loaded');
+        this.showError('Erro ao carregar bibliotecas 3D');
+        return;
+    }
 
-    this.setupEventListeners();
-    this.animate();
-    this.hideLoading();
-    console.log('3D Scene initialized successfully');
-} catch (error) {
-    console.error('Error initializing 3D scene:', error);
-    this.showError('Erro ao inicializar cena 3D');
+    try {
+        this.setupScene();
+        this.setupLighting();
+        this.setupControls();
+        this.createTerrain();
+        this.createSystemElements();
+
+        // Adiciona a cerca divisória entre ZONA 1+3 e ZONA 2
+        this.createVerticalDivisionFence(7.5 + 0.05);
+
+        this.setupEventListeners();
+        this.animate();
+        this.hideLoading();
+        console.log('3D Scene initialized successfully');
+    } catch (error) {
+        console.error('Error initializing 3D scene:', error);
+        this.showError('Erro ao inicializar cena 3D');
+    } // <--- FECHA a função init() corretamente aqui.
 }
+
 
 
     setupScene() {
