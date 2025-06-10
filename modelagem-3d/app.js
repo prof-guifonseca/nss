@@ -507,11 +507,9 @@ createZone2Elements() {
 
 createZone3Elements(baseZ = 8.0) {
     // ZONA 3: Piscicultura Integrada (40m²)
-    // baseZ → passado como parâmetro → define posição central Z dos elementos
+    const baseX = 3.5;
 
-    const baseX = 3.5; // MAIS À ESQUERDA
-
-    // Tanque Principal (circular elevado)
+    // === 1. TANQUE PRINCIPAL ===
     const tankHeight = 1.2;
     const tankGeometry = new THREE.CylinderGeometry(1.25, 1.25, tankHeight, 16);
     const tankMaterial = new THREE.MeshLambertMaterial({ 
@@ -520,7 +518,7 @@ createZone3Elements(baseZ = 8.0) {
         opacity: 0.7
     });
     const tank = new THREE.Mesh(tankGeometry, tankMaterial);
-    tank.position.set(baseX, tankHeight / 2, baseZ); // base no chão
+    tank.position.set(baseX, tankHeight / 2, baseZ);
     tank.castShadow = true;
     tank.userData = {
         name: "Tanque Principal",
@@ -529,7 +527,7 @@ createZone3Elements(baseZ = 8.0) {
     this.scene.add(tank);
     this.interactiveObjects.push(tank);
 
-    // Superfície da água
+    // === 2. SUPERFÍCIE DA ÁGUA ===
     const waterHeight = 0.05;
     const waterGeometry = new THREE.CylinderGeometry(1.2, 1.2, waterHeight, 16);
     const waterMaterial = new THREE.MeshLambertMaterial({ 
@@ -538,16 +536,15 @@ createZone3Elements(baseZ = 8.0) {
         opacity: 0.8
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    // Coloca a superfície da água no topo do tanque
     water.position.set(baseX, tankHeight - (waterHeight / 2), baseZ);
     this.scene.add(water);
 
-    // Sistema Biofiltro — ACOPLADO NA ESQUERDA do tanque
+    // === 3. SISTEMA BIOFILTRO ===
     const biofilterHeight = 1.5;
     const biofilterGeometry = new THREE.CylinderGeometry(0.3, 0.3, biofilterHeight, 8);
     const biofilterMaterial = new THREE.MeshLambertMaterial({ color: 0x556B2F });
     const biofilter = new THREE.Mesh(biofilterGeometry, biofilterMaterial);
-    biofilter.position.set(baseX - 1.25 - 0.35, biofilterHeight / 2, baseZ); // base no chão
+    biofilter.position.set(baseX - 1.25 - 0.35, biofilterHeight / 2, baseZ);
     biofilter.castShadow = true;
     biofilter.userData = {
         name: "Sistema Biofiltro",
@@ -556,12 +553,12 @@ createZone3Elements(baseZ = 8.0) {
     this.scene.add(biofilter);
     this.interactiveObjects.push(biofilter);
 
-    // Tanque de Reserva — À DIREITA do tanque principal
+    // === 4. TANQUE DE RESERVA ===
     const reserveHeight = 0.8;
     const reserveGeometry = new THREE.CylinderGeometry(0.75, 0.75, reserveHeight, 12);
     const reserveMaterial = new THREE.MeshLambertMaterial({ color: 0x2F4F4F });
     const reserve = new THREE.Mesh(reserveGeometry, reserveMaterial);
-    reserve.position.set(baseX + 2.5, reserveHeight / 2, baseZ); // base no chão
+    reserve.position.set(baseX + 2.5, reserveHeight / 2, baseZ);
     reserve.castShadow = true;
     reserve.userData = {
         name: "Tanque Reserva",
@@ -570,18 +567,51 @@ createZone3Elements(baseZ = 8.0) {
     this.scene.add(reserve);
     this.interactiveObjects.push(reserve);
 
-    // Sistema de Captação de Chuva — telhado sobre o tanque reserva
+    // === 5. TELHADO DE CAPTAÇÃO ===
     const roofCatchGeometry = new THREE.BoxGeometry(2.5, 0.2, 1.5);
     const roofCatchMaterial = new THREE.MeshLambertMaterial({ color: 0xB22222 });
     const roofCatch = new THREE.Mesh(roofCatchGeometry, roofCatchMaterial);
-    // Posiciona o telhado ACIMA do tanque reserva
-    roofCatch.position.set(baseX + 2.5, reserveHeight + 1.2, baseZ); // altura ajustada
+
+    // Recuado em Z e inclinado em X
+    roofCatch.position.set(baseX + 2.5, reserveHeight + 1.2, baseZ - 0.5);
+    roofCatch.rotation.x = -Math.PI / 10; // ~18 graus de inclinação
+
     roofCatch.userData = {
         name: "Captação de Chuva",
-        description: "Telhado para coleta de água da chuva direcionada ao sistema"
+        description: "Telhado inclinado para coleta de água da chuva direcionada ao sistema"
     };
     this.scene.add(roofCatch);
     this.interactiveObjects.push(roofCatch);
+
+    // === 6. CALHA DE CONDUÇÃO ===
+    const gutterGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.6, 8);
+    const gutterMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const gutter = new THREE.Mesh(gutterGeometry, gutterMaterial);
+
+    // Posição: ponta do telhado para cima do tanque reserva
+    gutter.position.set(baseX + 2.5 + 1.2, reserveHeight + 0.6, baseZ - 0.5);
+    gutter.rotation.z = Math.PI / 2; // Horizontal
+
+    gutter.userData = {
+        name: "Calha de Captação",
+        description: "Calha conduzindo água do telhado para o tanque reserva"
+    };
+    this.scene.add(gutter);
+    this.interactiveObjects.push(gutter);
+
+    // === 7. POSTES DE SUPORTE DO TELHADO ===
+    const postHeight = reserveHeight + 1.2;
+    const postGeometry = new THREE.CylinderGeometry(0.05, 0.05, postHeight, 8);
+    const postMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+
+    // Postes nas extremidades da frente do telhado
+    const postLeft = new THREE.Mesh(postGeometry, postMaterial);
+    postLeft.position.set(baseX + 2.5 - (2.5 / 2), postHeight / 2, baseZ - 0.5 + (1.5 / 2));
+    this.scene.add(postLeft);
+
+    const postRight = new THREE.Mesh(postGeometry, postMaterial);
+    postRight.position.set(baseX + 2.5 + (2.5 / 2), postHeight / 2, baseZ - 0.5 + (1.5 / 2));
+    this.scene.add(postRight);
 }
  
     setupEventListeners() {
