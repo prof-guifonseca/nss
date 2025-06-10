@@ -160,17 +160,20 @@ createTerrain() {
 }
 
 
-  createPaths() {
+createPaths() {
     const pathMaterial = new THREE.MeshLambertMaterial({ color: 0xD2B48C });
 
-    // Horizontal path — mantém normal
-    const pathHorizontal = new THREE.PlaneGeometry(15, 1);
-    const pathH = new THREE.Mesh(pathHorizontal, pathMaterial);
-    pathH.rotation.x = -Math.PI / 2;
-    pathH.position.set(7.5, 0.01, 5.5);
-    this.scene.add(pathH);
+    // Horizontal path — DIVIDIDO em duas faixas
+    // Faixa esquerda (de X=0 até X=7.5)
+    const pathHorizontalLeft = new THREE.PlaneGeometry(7.5, 1);
+    const pathHLeft = new THREE.Mesh(pathHorizontalLeft, pathMaterial);
+    pathHLeft.rotation.x = -Math.PI / 2;
+    pathHLeft.position.set(3.75, 0.01, 5.5); // centro da faixa esquerda
+    this.scene.add(pathHLeft);
 
-    // Vertical path — dividido em DOIS blocos
+    // NÃO adiciona faixa da direita → suprimimos o caminho que entrava na Zona 2
+
+    // Vertical path — DIVIDIDO em dois blocos
     // Primeiro bloco (de Z=0 até Z=5)
     const pathVertical1 = new THREE.PlaneGeometry(1, 5);
     const pathV1 = new THREE.Mesh(pathVertical1, pathMaterial);
@@ -178,7 +181,7 @@ createTerrain() {
     pathV1.position.set(7, 0.01, 2.5); // centro do primeiro bloco em Z=2.5
     this.scene.add(pathV1);
 
-    // NÃO adiciona o bloco superior → isso suprime a estrada na área do galinheiro (Z>5)
+    // NÃO adiciona o bloco superior → suprimimos a estrada na Zona 2
 }
 
     createFence() {
