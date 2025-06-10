@@ -506,17 +506,20 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-    // Base positions — ajustados conforme imagem
-    const tankX = 13.5;  // tanque mais à direita da zona 3
-    const tankZ = 6.5;   // tanque mais próximo da parte superior
+    // ======= PARÂMETROS EDITÁVEIS =======
+    const tankX = 10.5;  // posição X do tanque (horizontal, esquerda-direita)
+    const tankZ = 6.5;   // posição Z do tanque (vertical, cima-baixo)
 
-    const lineZ = 5;     // linha dos demais componentes (clarificador + biofiltro + bomba)
+    const lineZ = 5.0;   // Z da linha dos componentes (Clarificador + Biofiltro + Bomba)
 
-    const clarifierX = tankX - 1.2; // à esquerda do tanque
-    const biofilterX = tankX;       // centralizado com o tanque
-    const pumpX = tankX + 1.2;      // à direita do tanque
+    const clarifierOffsetX = -1.5; // deslocamento X relativo ao tanque (Clarificador)
+    const biofilterOffsetX = 0.0;  // deslocamento X relativo ao tanque (Biofiltro)
+    const pumpOffsetX = +1.5;      // deslocamento X relativo ao tanque (Bomba)
 
+    // ======= DIMENSÕES FIXAS =======
     const tankD = 2.5, clarifierD = 1.5, biofilterD = 1.0, pumpH = 0.5;
+
+    // ======= CRIAÇÃO DOS ELEMENTOS =======
 
     // Tanque principal
     const tank = new THREE.Mesh(
@@ -536,7 +539,7 @@ createZone3Elements() {
       new THREE.CylinderGeometry(clarifierD/2, clarifierD/2, 0.8, 16),
       new THREE.MeshLambertMaterial({ color: 0x87CEEB, transparent: true, opacity: 0.6 })
     );
-    clarifier.position.set(clarifierX, 0.4, lineZ);
+    clarifier.position.set(tankX + clarifierOffsetX, 0.4, lineZ);
     clarifier.userData = {
         name: "Clarificador (Decantador)",
         description: "Remove sólidos em suspensão antes da filtragem biológica."
@@ -549,7 +552,7 @@ createZone3Elements() {
       new THREE.CylinderGeometry(biofilterD/2, biofilterD/2, 1.2, 12),
       new THREE.MeshLambertMaterial({ color: 0x556B2F })
     );
-    biof.position.set(biofilterX, 0.6, lineZ);
+    biof.position.set(tankX + biofilterOffsetX, 0.6, lineZ);
     biof.userData = {
         name: "Biofiltro",
         description: "Filtro biológico com mídias filtrantes (bactérias nitrificantes)."
@@ -562,7 +565,7 @@ createZone3Elements() {
       new THREE.CylinderGeometry(0.3, 0.3, pumpH, 12),
       new THREE.MeshLambertMaterial({ color: 0x333333 })
     );
-    pump.position.set(pumpX, pumpH/2, lineZ);
+    pump.position.set(tankX + pumpOffsetX, pumpH/2, lineZ);
     pump.userData = {
         name: "Bomba de Circulação",
         description: "Bomba de água que conecta e circula entre os módulos."
