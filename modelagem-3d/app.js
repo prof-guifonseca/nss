@@ -208,126 +208,139 @@ createWireScreen() {
         opacity: 0.5
     });
 
-    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
-    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
-
     const createGridMesh = (width, height, openRanges = [], axis = 'x') => {
         const gridGeometry = new THREE.BufferGeometry();
         const vertices = [];
 
+        // Linhas verticais
         for (let x = -width / 2; x <= width / 2; x += gridSpacing) {
-            const worldX = x + width / 2;
-            const isInOpenRange = openRanges.some(range => worldX >= range[0] && worldX <= range[1]);
+            const inOpenRange = openRanges.some(([start, end]) => x >= start - width/2 && x <= end - width/2);
+            if (inOpenRange) continue;
 
-            if (!isInOpenRange) {
-                vertices.push(x, 0, 0);
-                vertices.push(x, height, 0);
-            }
+            vertices.push(x, 0, 0);
+            vertices.push(x, height, 0);
         }
 
+        // Linhas horizontais
         for (let y = 0; y <= height; y += gridSpacing) {
             vertices.push(-width / 2, y, 0);
             vertices.push(width / 2, y, 0);
         }
 
         gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        return new THREE.LineSegments(gridGeometry, screenMaterial);
+
+        const mesh = new THREE.LineSegments(gridGeometry, screenMaterial);
+        if (axis === 'z') {
+            mesh.rotation.y = Math.PI / 2;
+        }
+
+        return mesh;
     };
 
-    // ====== PORTA FRONTAL: abertura X=4.5 a 6 ======
-    const frontOpenRange = [4.5, 6];
+    // Posições das portas
+    const frontOpenRange = [[6.5, 7.5]]; // para alinhar com a estradinha da frente
+    const backOpenRange = []; // sem porta
+    const leftOpenRange = []; // sem porta
+    const rightOpenRange = []; // sem porta
 
-    const front = createGridMesh(terrainWidth, screenHeight, [frontOpenRange]);
+    // Frente (Z = 0)
+    const front = createGridMesh(terrainWidth, screenHeight, frontOpenRange, 'x');
     front.position.set(terrainWidth / 2, 0, 0 + offset);
     this.scene.add(front);
 
-    // POSTES nas extremidades da porta frontal
-    const postPositionsFront = [frontOpenRange[0], frontOpenRange[1]];
-    postPositionsFront.forEach(x => {
-        const post = new THREE.Mesh(postGeometry, fenceMaterial);
-        post.position.set(x, 0.9, 0 + offset);
-        post.castShadow = true;
-        this.scene.add(post);
-    });
-
-    // ====== RESTANTE ====
-
-    // Trás
-    const back = createGridMesh(terrainWidth, screenHeight);
+    // Trás (Z = terrainHeight)
+    const back = createGridMesh(terrainWidth, screenHeight, backOpenRange, 'x');
     back.position.set(terrainWidth / 2, 0, terrainHeight - offset);
     this.scene.add(back);
 
-    // Esquerda
-    const left = createGridMesh(terrainHeight, screenHeight);
+    // Esquerda (X = 0)
+    const left = createGridMesh(terrainHeight, screenHeight, leftOpenRange, 'z');
     left.position.set(0 + offset, 0, terrainHeight / 2);
-    left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
-    // Direita
-    const right = createGridMesh(terrainHeight, screenHeight);
+    // Direita (X = terrainWidth)
+    const right = createGridMesh(terrainHeight, screenHeight, rightOpenRange, 'z');
     right.position.set(terrainWidth - offset, 0, terrainHeight / 2);
-    right.rotation.y = Math.PI / 2;
     this.scene.add(right);
+
+    // Poste da porta da frente (duas extremidades)
+    const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const postGeometry = new THREE.BoxGeometry(0.1, screenHeight, 0.1);
+
+    // Poste esquerdo da porta da frente
+    const postLeft = new THREE.Mesh(postGeometry, fenceMaterial);
+    postLeft.position.set(frontOpenRange[0][0], screenHeight / 2, 0);
+    this.scene.add(postLeft);
+
+    // Poste direito da porta da frente
+    const postRight = new THREE.Mesh(postGeometry, fenceMaterial);
+    postRight.position.set(frontOpenRange[0][1], screenHeight / 2, 0);
+    this.scene.add(postRight);
 }
 
-createVerticalDivisionFence(xPosition = 7.5) {
-    const screenHeight = 1.8;
-    const gridSpacing = 0.3;
-    const terrainHeight = 10;
-    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
+createVerticalDivisionFence(xPosition = 7) {
     const fenceMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+    const postGeometry = new THREE.BoxGeometry(0.1, 1.8, 0.1);
 
-    // POSTS nas pontas
-    [0, terrainHeight].forEach(z => {
+    const terrainHeight = 10;
+    const postPositionsZ = [0, terrainHeight];
+
+    // POSTES nas extremidades (topo e base)
+    postPositionsZ.forEach(z => {
         const post = new THREE.Mesh(postGeometry, fenceMaterial);
         post.position.set(xPosition, 0.9, z);
         post.castShadow = true;
         this.scene.add(post);
     });
 
-    // ====== Porta para o galinheiro: abertura Z=2 a 4 ======
-    const openRange = [2, 4];
-
-    const gridGeometry = new THREE.BufferGeometry();
-    const vertices = [];
-
-    for (let z = -terrainHeight / 2; z <= terrainHeight / 2; z += gridSpacing) {
-        const worldZ = z + terrainHeight / 2;
-        const isInOpenRange = worldZ >= openRange[0] && worldZ <= openRange[1];
-
-        if (!isInOpenRange) {
-            vertices.push(0, 0, z);
-            vertices.push(0, screenHeight, z);
-        }
-    }
-
-    for (let y = 0; y <= screenHeight; y += gridSpacing) {
-        vertices.push(0, y, -terrainHeight / 2);
-        vertices.push(0, y, terrainHeight / 2);
-    }
-
-    gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
+    // Cria a tela
+    const screenHeight = 1.8;
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
         transparent: true,
         opacity: 0.5
     });
 
+    const gridSpacing = 0.3;
+    const gridGeometry = new THREE.BufferGeometry();
+    const vertices = [];
+
+    const height = screenHeight;
+    const width = terrainHeight;
+
+    const openRange = [5, 6]; // posição da porta no galinheiro (alinhada com a estradinha horizontal)
+
+    // Linhas verticais (em Z)
+    for (let z = -width / 2; z <= width / 2; z += gridSpacing) {
+        const worldZ = z + width / 2;
+        if (worldZ >= openRange[0] && worldZ <= openRange[1]) continue;
+
+        vertices.push(0, 0, z);
+        vertices.push(0, height, z);
+    }
+
+    // Linhas horizontais (em Y)
+    for (let y = 0; y <= height; y += gridSpacing) {
+        vertices.push(0, y, -width / 2);
+        vertices.push(0, y, width / 2);
+    }
+
+    gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
     const screen = new THREE.LineSegments(gridGeometry, screenMaterial);
     screen.position.set(xPosition, 0, terrainHeight / 2);
     this.scene.add(screen);
 
-    // POSTES nas extremidades da porta do galinheiro
-    const postPositionsDoor = [openRange[0], openRange[1]];
-    postPositionsDoor.forEach(zWorld => {
-        const post = new THREE.Mesh(postGeometry, fenceMaterial);
-        post.position.set(xPosition, 0.9, zWorld);
-        post.castShadow = true;
-        this.scene.add(post);
-    });
-}
+    // POSTES da porta do galinheiro (duas extremidades)
+    const postLeft = new THREE.Mesh(postGeometry, fenceMaterial);
+    postLeft.position.set(xPosition, screenHeight / 2, openRange[0]);
+    this.scene.add(postLeft);
 
+    const postRight = new THREE.Mesh(postGeometry, fenceMaterial);
+    postRight.position.set(xPosition, screenHeight / 2, openRange[1]);
+    this.scene.add(postRight);
+}
+    
     createZone1Elements() {
         // ZONA 1: Produção de Insumos + Horta (50m²)
         
