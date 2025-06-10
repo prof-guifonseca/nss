@@ -37,6 +37,8 @@ init() {
         this.setupLighting();
         this.setupControls();
         this.createTerrain();
+
+        // Cria todos os elementos do sisteminha
         this.createSystemElements();
 
         // Adiciona a cerca divisória entre ZONA 1+3 e ZONA 2
@@ -49,10 +51,17 @@ init() {
     } catch (error) {
         console.error('Error initializing 3D scene:', error);
         this.showError('Erro ao inicializar cena 3D');
-    } // <--- FECHA a função init() corretamente aqui.
+    }
 }
 
-
+createSystemElements() {
+    console.log('Creating system elements...');
+    this.createZone1Elements();
+    this.createZone2Elements();
+    this.createZone3Elements();
+    this.createEducationalSigns();
+    console.log('System elements created');
+}
 
     setupScene() {
         // Scene
