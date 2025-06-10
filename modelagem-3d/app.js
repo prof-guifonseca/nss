@@ -506,62 +506,70 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-  const baseX = 3.5, baseZ = 8;
-  
-  // 1. Tank (Tanque Principal)
-  const tank = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.25,1.25,1.2,16),
-    new THREE.MeshLambertMaterial({color:0x4682B4, transparent:true, opacity:0.7})
-  );
-  tank.position.set(baseX,0.6,baseZ);
-  tank.userData = {name:"Tanque Principal", description:"Relação água-piscicultura"};
-  this.scene.add(tank); this.interactiveObjects.push(tank);
+    const baseX = 1; // desloca tudo para não invadir
+    const baseZ = 5.5; // zona 3 no fundo
 
-  // 2. Clarificador (simplificado)
-  const clarHeight=1, clar=Math.min(0.6, clarHeight);
-  const clarifier = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.8,0.8,clarHeight,12),
-    new THREE.MeshLambertMaterial({color:0x708090, transparent:true, opacity:0.5})
-  );
-  clarifier.position.set(baseX+2,clarHeight/2,baseZ);
-  clarifier.userData={name:"Clarificador", description:"Remove sólidos grossos (~50%)"};
-  this.scene.add(clarifier); this.interactiveObjects.push(clarifier);
+    // 1. Tanque Principal
+    const tank = new THREE.Mesh(
+        new THREE.CylinderGeometry(1, 1, 1, 32),
+        new THREE.MeshLambertMaterial({ color: 0x4682B4, transparent: true, opacity: 0.7 })
+    );
+    tank.position.set(baseX + 1.5, 0.5, baseZ + 2);
+    tank.userData = { name: "Tanque Principal", description: "Tanque para criação de peixes" };
+    this.scene.add(tank); this.interactiveObjects.push(tank);
 
-  // 3. Filtro fino / Biofiltro
-  const filter = new THREE.Mesh(
-    new THREE.BoxGeometry(0.8,1.0,0.8),
-    new THREE.MeshLambertMaterial({color:0x556B2F})
-  );
-  filter.position.set(baseX+2,0.5,baseZ+2);
-  filter.userData={name:"Filtro Fino/Biofiltro", description:"Remove sólidos finos via substrato"};
-  this.scene.add(filter); this.interactiveObjects.push(filter);
+    // Superfície da água
+    const water = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.95, 0.95, 0.05, 32),
+        new THREE.MeshLambertMaterial({ color: 0x1E90FF, transparent: true, opacity: 0.8 })
+    );
+    water.position.set(baseX + 1.5, 1 - 0.025, baseZ + 2);
+    this.scene.add(water);
 
-  // 4. Sump + Bomba (com conexão visual)
-  const sump = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.6,0.6,0.6,12),
-    new THREE.MeshLambertMaterial({color:0x2F4F4F})
-  );
-  sump.position.set(baseX,0.3,baseZ+2);
-  sump.userData={name:"Sump (Reserva)", description:"Coleta final e recirculação via bomba"};
-  this.scene.add(sump); this.interactiveObjects.push(sump);
+    // 2. Clarificador
+    const clarifier = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.3, 0.3, 0.9, 16),
+        new THREE.MeshLambertMaterial({ color: 0x708090, transparent: true, opacity: 0.5 })
+    );
+    clarifier.position.set(baseX + 4.5, 0.45, baseZ + 1);
+    clarifier.userData = { name: "Clarificador", description: "Remove sólidos grossos (~50%)" };
+    this.scene.add(clarifier); this.interactiveObjects.push(clarifier);
 
-  // 5. Bomba (motor)
-  const pump = new THREE.Mesh(
-    new THREE.BoxGeometry(0.4,0.4,0.4),
-    new THREE.MeshLambertMaterial({color:0x000000})
-  );
-  pump.position.set(baseX-0.6,0.3,baseZ+2);
-  pump.userData={name:"Bomba de Recirculação", description:"Define fluxo de água pro tanque principal"};
-  this.scene.add(pump); this.interactiveObjects.push(pump);
+    // 3. Filtro fino / Biofiltro
+    const filter = new THREE.Mesh(
+        new THREE.BoxGeometry(0.6, 0.8, 0.6),
+        new THREE.MeshLambertMaterial({ color: 0x556B2F })
+    );
+    filter.position.set(baseX + 0.8, 0.4, baseZ + 4);
+    filter.userData = { name: "Filtro Fino / Biofiltro", description: "Remove sólidos finos com substrato" };
+    this.scene.add(filter); this.interactiveObjects.push(filter);
 
-  // 6. Telhado + conexão chuva > sump
-  const roof = new THREE.Mesh(
-    new THREE.BoxGeometry(3,0.2,1.5),
-    new THREE.MeshLambertMaterial({color:0xB22222})
-  );
-  roof.position.set(baseX,1.8,baseZ+2);
-  roof.userData={name:"Telhado Captação", description:"Coleta água da chuva para manter nível do sump"};
-  this.scene.add(roof); this.interactiveObjects.push(roof);
+    // 4. Sump (reserva)
+    const sump = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.25, 0.25, 0.6, 16),
+        new THREE.MeshLambertMaterial({ color: 0x2F4F4F })
+    );
+    sump.position.set(baseX + 4.5, 0.3, baseZ + 3.5);
+    sump.userData = { name: "Sump (reserva)", description: "Tanque para coleta final e bomba" };
+    this.scene.add(sump); this.interactiveObjects.push(sump);
+
+    // 5. Bomba
+    const pump = new THREE.Mesh(
+        new THREE.BoxGeometry(0.4, 0.4, 0.4),
+        new THREE.MeshLambertMaterial({ color: 0x000000 })
+    );
+    pump.position.set(baseX + 4.5, 0.2, baseZ + 4.5);
+    pump.userData = { name: "Bomba de Recirculação", description: "Circula água de volta ao tanque" };
+    this.scene.add(pump); this.interactiveObjects.push(pump);
+
+    // 6. Telhado captação de chuva
+    const roof = new THREE.Mesh(
+        new THREE.BoxGeometry(2.5, 0.2, 1.0),
+        new THREE.MeshLambertMaterial({ color: 0xB22222 })
+    );
+    roof.position.set(baseX + 2.5, 1.8, baseZ + 5.2);
+    roof.userData = { name: "Telhado de Captação", description: "Coleta água da chuva para o sistema" };
+    this.scene.add(roof); this.interactiveObjects.push(roof);
 }
  
     setupEventListeners() {
