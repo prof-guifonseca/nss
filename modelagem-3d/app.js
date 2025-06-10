@@ -583,16 +583,7 @@ createZone3Elements(baseZ = 8.0) {
     this.scene.add(roofCatch);
     this.interactiveObjects.push(roofCatch);
 }
-
-        signBoard.userData = {
-            name: `Placa: ${sign.name}`,
-            description: `Placa educativa indicando ${sign.name}`
-        };
-        this.scene.add(signBoard);
-        this.interactiveObjects.push(signBoard);
-    });
-}
-    
+ 
     setupEventListeners() {
         // Mouse events
         if (this.renderer && this.renderer.domElement) {
