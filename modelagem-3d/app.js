@@ -181,47 +181,67 @@ class SisteminhaApp {
     }
 
 createWireScreen() {
-    const textureLoader = new THREE.TextureLoader();
-    const wireTexture = textureLoader.load('textures/fence-wire.png'); // caminho da imagem de textura da tela
-
-    wireTexture.wrapS = THREE.RepeatWrapping;
-    wireTexture.wrapT = THREE.RepeatWrapping;
-    wireTexture.repeat.set(8, 2); // ajuste para repetir no plano
-
-    const screenMaterial = new THREE.MeshBasicMaterial({
-        map: wireTexture,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-
     const terrainWidth = 15;
     const terrainHeight = 10;
     const screenHeight = 1.8;
 
+    const gridSpacing = 0.3; // tamanho da "malha" da tela
+
+    const screenMaterial = new THREE.LineBasicMaterial({
+        color: 0xAAAAAA,
+        transparent: true,
+        opacity: 0.5
+    });
+
+    // Função para criar um grid de linhas para um lado
+    const createGridMesh = (width, height) => {
+        const gridGeometry = new THREE.BufferGeometry();
+        const vertices = [];
+
+        // Linhas verticais
+        for (let x = 0; x <= width; x += gridSpacing) {
+            vertices.push(x, 0, 0);
+            vertices.push(x, height, 0);
+        }
+
+        // Linhas horizontais
+        for (let y = 0; y <= height; y += gridSpacing) {
+            vertices.push(0, y, 0);
+            vertices.push(width, y, 0);
+        }
+
+        gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+        return new THREE.LineSegments(gridGeometry, screenMaterial);
+    };
+
     // Frente
-    const front = new THREE.Mesh(new THREE.PlaneGeometry(terrainWidth, screenHeight), screenMaterial);
-    front.position.set(terrainWidth / 2, screenHeight / 2, 0);
-    front.rotation.y = 0;
+    const front = createGridMesh(terrainWidth, screenHeight);
+    front.position.set(terrainWidth / 2, 0, 0);
+    front.rotation.x = Math.PI / 2;
+    front.position.y = screenHeight / 2;
     this.scene.add(front);
 
     // Trás
-    const back = new THREE.Mesh(new THREE.PlaneGeometry(terrainWidth, screenHeight), screenMaterial);
-    back.position.set(terrainWidth / 2, screenHeight / 2, terrainHeight);
-    back.rotation.y = 0;
+    const back = createGridMesh(terrainWidth, screenHeight);
+    back.position.set(terrainWidth / 2, 0, terrainHeight);
+    back.rotation.x = Math.PI / 2;
+    back.position.y = screenHeight / 2;
     this.scene.add(back);
 
     // Esquerda
-    const left = new THREE.Mesh(new THREE.PlaneGeometry(terrainHeight, screenHeight), screenMaterial);
+    const left = createGridMesh(terrainHeight, screenHeight);
     left.position.set(0, screenHeight / 2, terrainHeight / 2);
     left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
     // Direita
-    const right = new THREE.Mesh(new THREE.PlaneGeometry(terrainHeight, screenHeight), screenMaterial);
+    const right = createGridMesh(terrainHeight, screenHeight);
     right.position.set(terrainWidth, screenHeight / 2, terrainHeight / 2);
     right.rotation.y = Math.PI / 2;
     this.scene.add(right);
 }
+
 
     createSystemElements() {
         this.createZone1Elements();
