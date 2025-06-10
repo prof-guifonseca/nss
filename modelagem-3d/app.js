@@ -180,19 +180,23 @@ class SisteminhaApp {
         });
     }
 
-    createWireScreen() {
+createWireScreen() {
+    const textureLoader = new THREE.TextureLoader();
+    const wireTexture = textureLoader.load('textures/fence-wire.png'); // caminho da imagem de textura da tela
+
+    wireTexture.wrapS = THREE.RepeatWrapping;
+    wireTexture.wrapT = THREE.RepeatWrapping;
+    wireTexture.repeat.set(8, 2); // ajuste para repetir no plano
+
     const screenMaterial = new THREE.MeshBasicMaterial({
-        color: 0xAAAAAA,
-        wireframe: true, // fica só as linhas
+        map: wireTexture,
         transparent: true,
-        opacity: 0.4, // ajuste conforme quiser
         side: THREE.DoubleSide
     });
 
-    // Dimensões do terreno
     const terrainWidth = 15;
     const terrainHeight = 10;
-    const screenHeight = 1.8; // altura da tela, igual aos postes
+    const screenHeight = 1.8;
 
     // Frente
     const front = new THREE.Mesh(new THREE.PlaneGeometry(terrainWidth, screenHeight), screenMaterial);
