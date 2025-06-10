@@ -138,6 +138,9 @@ class SisteminhaApp {
         
         // Simple fence posts
         this.createFence();
+
+    // Wire screen (tela de arame)
+    this.createWireScreen();        
         
         console.log('Terrain created');
     }
@@ -176,6 +179,45 @@ class SisteminhaApp {
             this.scene.add(post);
         });
     }
+
+    createWireScreen() {
+    const screenMaterial = new THREE.MeshBasicMaterial({
+        color: 0xAAAAAA,
+        wireframe: true, // fica só as linhas
+        transparent: true,
+        opacity: 0.4, // ajuste conforme quiser
+        side: THREE.DoubleSide
+    });
+
+    // Dimensões do terreno
+    const terrainWidth = 15;
+    const terrainHeight = 10;
+    const screenHeight = 1.8; // altura da tela, igual aos postes
+
+    // Frente
+    const front = new THREE.Mesh(new THREE.PlaneGeometry(terrainWidth, screenHeight), screenMaterial);
+    front.position.set(terrainWidth / 2, screenHeight / 2, 0);
+    front.rotation.y = 0;
+    this.scene.add(front);
+
+    // Trás
+    const back = new THREE.Mesh(new THREE.PlaneGeometry(terrainWidth, screenHeight), screenMaterial);
+    back.position.set(terrainWidth / 2, screenHeight / 2, terrainHeight);
+    back.rotation.y = 0;
+    this.scene.add(back);
+
+    // Esquerda
+    const left = new THREE.Mesh(new THREE.PlaneGeometry(terrainHeight, screenHeight), screenMaterial);
+    left.position.set(0, screenHeight / 2, terrainHeight / 2);
+    left.rotation.y = Math.PI / 2;
+    this.scene.add(left);
+
+    // Direita
+    const right = new THREE.Mesh(new THREE.PlaneGeometry(terrainHeight, screenHeight), screenMaterial);
+    right.position.set(terrainWidth, screenHeight / 2, terrainHeight / 2);
+    right.rotation.y = Math.PI / 2;
+    this.scene.add(right);
+}
 
     createSystemElements() {
         this.createZone1Elements();
