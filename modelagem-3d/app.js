@@ -184,8 +184,7 @@ createWireScreen() {
     const terrainWidth = 15;
     const terrainHeight = 10;
     const screenHeight = 1.8;
-
-    const gridSpacing = 0.3; // tamanho da "malha" da tela
+    const gridSpacing = 0.3;
 
     const screenMaterial = new THREE.LineBasicMaterial({
         color: 0xAAAAAA,
@@ -193,7 +192,6 @@ createWireScreen() {
         opacity: 0.5
     });
 
-    // Função para criar um grid de linhas para um lado
     const createGridMesh = (width, height) => {
         const gridGeometry = new THREE.BufferGeometry();
         const vertices = [];
@@ -215,33 +213,33 @@ createWireScreen() {
         return new THREE.LineSegments(gridGeometry, screenMaterial);
     };
 
-    // Frente
+    // Frente (Z = 0)
     const front = createGridMesh(terrainWidth, screenHeight);
-    front.position.set(terrainWidth / 2, 0, 0);
-    front.rotation.x = Math.PI / 2;
-    front.position.y = screenHeight / 2;
+    front.position.set(0, 0, 0); // canto inferior esquerdo
+    front.position.x += 0;
+    front.position.y += 0;
+    front.position.z += 0;
+
+    front.position.set(terrainWidth / 2, screenHeight / 2, 0); // CENTRO da parede
     this.scene.add(front);
 
-    // Trás
+    // Trás (Z = terrainHeight)
     const back = createGridMesh(terrainWidth, screenHeight);
-    back.position.set(terrainWidth / 2, 0, terrainHeight);
-    back.rotation.x = Math.PI / 2;
-    back.position.y = screenHeight / 2;
+    back.position.set(terrainWidth / 2, screenHeight / 2, terrainHeight);
     this.scene.add(back);
 
-    // Esquerda
+    // Esquerda (X = 0), parede virada para o eixo Z
     const left = createGridMesh(terrainHeight, screenHeight);
     left.position.set(0, screenHeight / 2, terrainHeight / 2);
     left.rotation.y = Math.PI / 2;
     this.scene.add(left);
 
-    // Direita
+    // Direita (X = terrainWidth), parede virada para o eixo Z
     const right = createGridMesh(terrainHeight, screenHeight);
     right.position.set(terrainWidth, screenHeight / 2, terrainHeight / 2);
     right.rotation.y = Math.PI / 2;
     this.scene.add(right);
 }
-
 
     createSystemElements() {
         this.createZone1Elements();
