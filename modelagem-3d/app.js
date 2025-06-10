@@ -515,37 +515,52 @@ createZone3Elements() {
       new THREE.MeshLambertMaterial({ color: 0x4682B4, transparent: true, opacity: 0.7 })
     );
     tank.position.set(baseX, 0.6, baseZ);
+    tank.userData = {
+        name: "Tanque Principal",
+        description: "Tanque de criação de peixes (1000-3000L) com geomembrana."
+    };
     this.scene.add(tank);
     this.interactiveObjects.push(tank);
 
-    // Clarificador (decantador)
+    // Clarificador (decantador) — um pouco à frente do tanque
     const clarifier = new THREE.Mesh(
       new THREE.CylinderGeometry(clarifierD/2, clarifierD/2, 0.8, 16),
       new THREE.MeshLambertMaterial({ color: 0x87CEEB, transparent: true, opacity: 0.6 })
     );
-    clarifier.position.set(baseX + 2.0, 0.4, baseZ);
+    clarifier.position.set(baseX + 1.5, 0.4, baseZ);
+    clarifier.userData = {
+        name: "Clarificador (Decantador)",
+        description: "Remove sólidos em suspensão antes da filtragem biológica."
+    };
     this.scene.add(clarifier);
     this.interactiveObjects.push(clarifier);
 
-    // Biofiltro (ao lado do clarificador)
+    // Biofiltro — à direita do clarificador
     const biof = new THREE.Mesh(
       new THREE.CylinderGeometry(biofilterD/2, biofilterD/2, 1.2, 12),
       new THREE.MeshLambertMaterial({ color: 0x556B2F })
     );
-    biof.position.set(baseX + 2.0, 0.6, baseZ + 1.8);
+    biof.position.set(baseX + 3.0, 0.6, baseZ);
+    biof.userData = {
+        name: "Biofiltro",
+        description: "Filtro biológico com mídias filtrantes (bactérias nitrificantes)."
+    };
     this.scene.add(biof);
     this.interactiveObjects.push(biof);
 
-    // Bomba / motor para transferência
+    // Bomba — ao lado do biofiltro
     const pump = new THREE.Mesh(
       new THREE.CylinderGeometry(0.3, 0.3, pumpH, 12),
       new THREE.MeshLambertMaterial({ color: 0x333333 })
     );
-    pump.position.set(baseX + 1.0, pumpH/2, baseZ + 0.6);
+    pump.position.set(baseX + 3.5, pumpH/2, baseZ);
+    pump.userData = {
+        name: "Bomba de Circulação",
+        description: "Bomba de água que conecta e circula entre os módulos."
+    };
     this.scene.add(pump);
     this.interactiveObjects.push(pump);
 }
-
  
     setupEventListeners() {
         // Mouse events
