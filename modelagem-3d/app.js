@@ -506,11 +506,11 @@ createZone2Elements() {
 }
 
 createZone3Elements() {
-    // NOVAS coordenadas com base no "MOVA AQUI"
-    const tankX = 3.5;    // aproximadamente centro da área "MOVA AQUI"
-    const tankZ = 2.5;    // centro vertical da área "MOVA AQUI"
+    // NOVAS coordenadas: ao lado do galinheiro
+    const tankX = 3.5;    // lateral esquerda (ok)
+    const tankZ = 8.5;    // mesmo Z do galinheiro
 
-    const lineZ = 1.5;    // linha inferior para clarificador + biofiltro + bomba
+    const lineZ = 8.5;    // linha dos elementos -> mesmo Z do galinheiro
 
     const clarifierX = tankX - 1.5;
     const biofilterX = tankX;
